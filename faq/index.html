@@ -11,6 +11,103 @@
   <link rel="stylesheet" href="../assets/css/main.css">
   <link rel="stylesheet" href="../assets/css/components.css">
   <link rel="stylesheet" href="../assets/css/docs.css">
+
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is Kanri really offline?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Kanri's core ledger, SMS parser, notification listener, budget calculators, and analytics run 100% locally on your device with no remote servers or telemetry. The only network feature is an optional client-side encrypted backup to your own personal Google Drive (scoped strictly to drive.file) and an in-app GitHub release update check."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does it read my OTPs?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Kanri explicitly detects and discards OTP and authentication messages in memory. OTPs are never logged, parsed, or stored in the database."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which banks work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Kanri has tested regex patterns for 15+ major Indian banks: SBI, HDFC, ICICI, Axis, Kotak, BOB, PNB, Canara, Union Bank, BOI, IDFC FIRST, IndusInd, Federal, Yes Bank, IDBI, and more. It also supports payment notifications from GPay, PhonePe, Paytm, CRED, FamPay, and BHIM."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How are cards and ATM withdrawals handled?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Card transactions are parsed automatically from transactional SMS. ATM cash withdrawals are recognized and handled as internal transfers from your Online Wallet to your Cash Wallet, ensuring your monthly expenses aren't falsely inflated."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does a sideloaded app need \"restricted settings\"?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Starting in Android 13, Google applies a security safeguard to sideloaded applications that require Notification Listener or Accessibility services. Because Kanri is downloaded directly from GitHub rather than Google Play, you simply tap \"Allow restricted settings\" in your phone's Settings > Apps > Kanri to enable notification capture."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I back up and move to a new phone?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You can export a password-protected encrypted backup file (kanri_backup.enc) under Settings > Backup & Restore, or use the optional Google Drive sync. On your new phone, install Kanri, choose \"Restore from Backup\", enter your password, and your entire history is restored in seconds."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is my data encrypted?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Kanri's SQLite database is encrypted with SQLCipher AES-256 with keys securely stored in the Android Keystore. Exported backup files are encrypted with PBKDF2 (65,536 iterations) and AES-GCM encryption."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does it work without SMS permission?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. If you decline SMS access, Kanri operates seamlessly as a full-featured manual ledger. You can manually enter expenses, configure budgets, split bills, track lent money, and view all 18+ visualizers and widgets."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I export my data?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. You can export your full transaction history anytime in standard open formats: CSV spreadsheets, raw structured JSON dumps, or monthly PDF statements."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is it free? Is it open source?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Kanri is 100% free and open-source software licensed under GNU General Public License v3.0 (GPL-3.0). There are zero ads, zero paywalls, and zero tracking SDKs."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I report a bug or request a bank?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You can report bugs or submit sanitized sample SMS formats for unlisted banks directly on our GitHub Issue Tracker."
+      }
+    }
+  ]
+}
+  </script>
 </head>
 <body>
   <a href="#main-content" class="skip-link">Skip to main content</a>
