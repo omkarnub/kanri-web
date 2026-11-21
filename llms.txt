@@ -9,7 +9,7 @@
 - **Current Version**: 1.19.8 (Build 75)
 - **Author**: Omkar Singh (@omkarnub)
 - **Official Repository**: https://github.com/omkarnub/Kanri
-- **Website**: https://omkarnub.github.io/kanri-web/
+- **Website**: https://getkanri.vercel.app/
 - **Latest APK Download**: https://github.com/omkarnub/Kanri/releases/latest
 - **Distribution**: GitHub Releases & Orion Store (Not on Google Play Store)
 

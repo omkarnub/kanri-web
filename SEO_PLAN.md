@@ -28,7 +28,7 @@ This document outlines the keyword architecture, on-page optimization, and index
    - Suggested text:
      > *Offline-first personal finance ledger for Android. Parses Indian bank SMS and UPI notifications on your phone with zero ads, zero analytics, and local encryption.*
 2. **Repository Website Link:**
-   - Link: `https://omkarnub.github.io/kanri-web/`
+   - Link: `https://getkanri.vercel.app/`
 3. **Repository Topics (Tags):**
    - Recommended tags: `android`, `expense-tracker`, `kotlin`, `jetpack-compose`, `privacy`, `offline-first`, `upi`, `finance`, `sqlcipher`, `material-design-3`, `open-source`, `gplv3`
 4. **Social Preview Image:**
@@ -39,8 +39,8 @@ This document outlines the keyword architecture, on-page optimization, and index
 ## 3. Search Engine Indexing & Launch Checklist
 
 - [ ] **Google Search Console Setup:**
-  - Verify property for `https://omkarnub.github.io/kanri-web/` using the HTML verification meta tag.
-  - Submit sitemap: `https://omkarnub.github.io/kanri-web/sitemap.xml`.
+  - Verify property for `https://getkanri.vercel.app/` using the HTML verification meta tag.
+  - Submit sitemap: `https://getkanri.vercel.app/sitemap.xml`.
   - Request indexing for `/` and `/download/`.
 - [ ] **Bing Webmaster Tools:**
   - Import verified property from Google Search Console.
@@ -51,6 +51,6 @@ This document outlines the keyword architecture, on-page optimization, and index
 - [ ] **Structured Data Testing:**
   - Validate `SoftwareApplication`, `FAQPage`, and `BreadcrumbList` JSON-LD schemas.
 - [ ] **Factual LLM Manifest (`llms.txt`):**
-  - Verify `https://omkarnub.github.io/kanri-web/llms.txt` is accessible for AI search scrapers.
+  - Verify `https://getkanri.vercel.app/llms.txt` is accessible for AI search scrapers.
 - [ ] **Directories:**
   - Submit to open-source software directories: F-Droid / IzzyOnDroid (if applicable), AlternativeTo (tagged: "Offline", "Open Source", "No Accounts").

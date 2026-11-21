@@ -88,9 +88,12 @@ def check_file_exists(base_file, target_link):
     if not clean_target:
         return True # anchor-only link on same page
 
-    # Handle github.io base prefix if present in link
+    # Handle github.io or getkanri base prefix if present in link
     if clean_target.startswith('https://omkarnub.github.io/kanri-web/'):
         rel_path = clean_target.replace('https://omkarnub.github.io/kanri-web/', '')
+        abs_target = os.path.join(ROOT_DIR, rel_path)
+    elif clean_target.startswith('https://getkanri.vercel.app/'):
+        rel_path = clean_target.replace('https://getkanri.vercel.app/', '')
         abs_target = os.path.join(ROOT_DIR, rel_path)
     elif clean_target.startswith('/kanri-web/'):
         rel_path = clean_target.replace('/kanri-web/', '')
@@ -151,7 +154,7 @@ def main():
         # Check internal links
         for link in parser.links:
             if link.startswith(('http://', 'https://', 'mailto:', 'tel:', 'javascript:')):
-                if not link.startswith('https://omkarnub.github.io/kanri-web/'):
+                if not link.startswith(('https://omkarnub.github.io/kanri-web/', 'https://getkanri.vercel.app/')):
                     continue
             if link.startswith('#'):
                 continue

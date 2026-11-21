@@ -2,7 +2,7 @@
 
 Official website for **Kanri**, an offline-first personal finance app for Android.
 
-Hosted at: [https://omkarnub.github.io/kanri-web/](https://omkarnub.github.io/kanri-web/)
+Hosted at: [https://getkanri.vercel.app/](https://getkanri.vercel.app/)
 
 ---
 
