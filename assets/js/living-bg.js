@@ -37,7 +37,8 @@
   let theme = 'light';
   let speed = 2.8; // Fast, lively painting speed
   const reduced = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const isMobile = window.innerWidth < 768 || (window.matchMedia && window.matchMedia('(max-width: 768px)').matches);
+  const checkMobile = () => window.innerWidth < 768 || (window.matchMedia && window.matchMedia('(max-width: 768px)').matches);
+  let isMobile = checkMobile();
 
   // ---------------------------------------------------------------- palettes
   const PAL = {
@@ -201,6 +202,7 @@
 
   // ---------------------------------------------------------------- build
   function build() {
+    isMobile = checkMobile();
     const isWeakDevice = (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4) ||
       (navigator.deviceMemory && navigator.deviceMemory <= 4) ||
       (navigator.connection && navigator.connection.saveData);
@@ -230,6 +232,13 @@
     const pal = PAL[theme];
     bgContainer.classList.toggle('dark', theme === 'dark');
     bgContainer.style.background = pal.paperMid;
+
+    if (!isMobile) {
+      ['wet', 'mist', 'dyn', 'grain'].forEach(k => {
+        if (cvs[k]) cvs[k].style.display = '';
+      });
+      if (landEl) landEl.style.display = '';
+    }
 
     paintPaper(pal);
     bakeScenery(pal);
@@ -839,21 +848,40 @@
     dc.restore();
   }
 
+  // ---------------------------------------------------------------- mobile single-pass baking
+  function bakeMobileComposite() {
+    if (!isMobile || !pc) return;
+    // Composite all layers cleanly into the single base #paper canvas
+    if (cvs.wet) pc.drawImage(cvs.wet, 0, 0);
+    if (cvs.mist) pc.drawImage(cvs.mist, 0, 0, W, H);
+    if (cvs.dyn) pc.drawImage(cvs.dyn, 0, 0);
+    if (cvs.landBase) pc.drawImage(cvs.landBase, 0, 0);
+    if (cvs.landFx) pc.drawImage(cvs.landFx, 0, 0);
+    if (cvs.grain) {
+      pc.save();
+      pc.globalAlpha = 0.35;
+      pc.drawImage(cvs.grain, 0, 0);
+      pc.restore();
+    }
+
+    // Hide extra canvas layers on mobile so the GPU only manages 1 single canvas (#paper)
+    ['wet', 'mist', 'dyn', 'grain'].forEach(k => {
+      if (cvs[k]) {
+        cvs[k].style.display = 'none';
+        if (ctx[k]) ctx[k].clearRect(0, 0, cvs[k].width, cvs[k].height);
+      }
+    });
+    if (landEl) landEl.style.display = 'none';
+  }
+
   // ---------------------------------------------------------------- main animation loop
   let lastMobileTs = 0;
   function frame(ts, still) {
     if (t0 === null) { t0 = ts; last = ts; }
-    if (isMobile && !still) {
-      if (lastMobileTs && (ts - lastMobileTs) < 32) {
-        rafId = requestAnimationFrame(frame);
-        return;
-      }
-      lastMobileTs = ts;
-    }
     const dt = Math.min(.05, (ts - last) / 1000); last = ts;
     const real = (ts - t0) / 1000;
-    T = still ? 4 : real + 3;
-    tp = still ? 99 : real * speed;
+    T = (still || isMobile) ? 4 : real + 3;
+    tp = (still || isMobile) ? 99 : real * speed;
     const pal = PAL[theme];
 
     if (!wetFrozen) { drawWet(); if (tp >= 9.3) wetFrozen = true; }
@@ -892,14 +920,20 @@
       applyScroll();
     }
 
-    if (!still && isVisibleOnScreen && !document.hidden) rafId = requestAnimationFrame(frame); else rafId = null;
+    if (!still && isVisibleOnScreen && !document.hidden && !isMobile) rafId = requestAnimationFrame(frame); else rafId = null;
   }
 
   let isVisibleOnScreen = true;
 
   function start() {
     cancelAnimationFrame(rafId); t0 = null;
-    if (reduced) { requestAnimationFrame(ts => frame(ts, true)); return; }
+    if (reduced || isMobile) {
+      requestAnimationFrame(ts => {
+        frame(ts, true);
+        bakeMobileComposite();
+      });
+      return;
+    }
     if (!isVisibleOnScreen || document.hidden) { rafId = null; return; }
     rafId = requestAnimationFrame(frame);
   }
@@ -907,7 +941,7 @@
   if (bgContainer && 'IntersectionObserver' in window) {
     const bgObs = new IntersectionObserver(([entry]) => {
       isVisibleOnScreen = entry.isIntersecting;
-      if (isVisibleOnScreen && !document.hidden && !reduced) {
+      if (isVisibleOnScreen && !document.hidden && !reduced && !isMobile) {
         if (!rafId) start();
       } else {
         cancelAnimationFrame(rafId);
@@ -921,14 +955,14 @@
     if (document.hidden) {
       cancelAnimationFrame(rafId);
       rafId = null;
-    } else if (isVisibleOnScreen && !reduced) {
+    } else if (isVisibleOnScreen && !reduced && !isMobile) {
       start();
     }
   });
 
   // ---------------------------------------------------------------- parallax transforms
   function applyScroll() {
-    if (window.disableInternalBgParallax) return;
+    if (window.disableInternalBgParallax || isMobile) return;
     const ps = clamp(scrollCur, 0, 1.5), h = innerHeight;
     const ty = k => `translate3d(0,${(-ps * k * h).toFixed(2)}px,0)`;
     if (cvs.wet) cvs.wet.style.transform = ty(depth.scene);
@@ -938,6 +972,7 @@
   }
 
   function onScroll() {
+    if (isMobile) return;
     scrollTarget = Math.max(0, (window.scrollY || document.documentElement.scrollTop || 0) / innerHeight);
     if (reduced) { scrollCur = scrollTarget; applyScroll(); }
   }
@@ -957,7 +992,7 @@
     rz = setTimeout(() => {
       const keepT = t0 === null ? null : performance.now() - t0;
       build();
-      if (reduced) start(); else if (keepT !== null) t0 = performance.now() - keepT;
+      if (reduced || isMobile) start(); else if (keepT !== null) t0 = performance.now() - keepT;
     }, 180);
   });
 

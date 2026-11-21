@@ -34,12 +34,24 @@
     const heroH = heroSection.offsetHeight || (window.innerHeight || 800);
     const progress = Math.min(1.25, Math.max(0, y / heroH));
 
-    if (prefersReduced) {
-      if (emblemEl) { emblemEl.style.transform = ''; emblemEl.style.opacity = ''; }
+    const isMobile = window.innerWidth < 768 || (window.matchMedia && window.matchMedia('(max-width: 768px)').matches);
+
+    // On mobile screens or reduced-motion mode, eliminate multi-layer canvas transforms
+    // allowing native hardware-accelerated 60/120fps touch scrolling without compositor lag
+    if (prefersReduced || isMobile) {
+      if (emblemEl) { emblemEl.style.transform = ''; emblemEl.style.opacity = '1'; }
       if (wetCvs) wetCvs.style.transform = '';
       if (mistCvs) mistCvs.style.transform = '';
       if (dynCvs) dynCvs.style.transform = '';
       if (landEl) landEl.style.transform = '';
+
+      if (topStarLink) {
+        if (y > heroH - 80) {
+          topStarLink.classList.add('on-dark');
+        } else {
+          topStarLink.classList.remove('on-dark');
+        }
+      }
       return;
     }
 

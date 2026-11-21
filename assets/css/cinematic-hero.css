@@ -982,3 +982,36 @@
   line-height: 0.95;
   user-select: none;
 }
+
+/* --------------------------------------------------------------------------
+   Mobile Hardware Acceleration & Fill-Rate Optimizations
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  /* Eliminate high-overhead SVG feTurbulence film grain filter and mix-blend-mode */
+  .film-grain {
+    display: none !important;
+  }
+
+  /* Simplify radial mask grid to prevent per-frame GPU re-rasterization during touch scroll */
+  .bg-grid-theme {
+    mask-image: none !important;
+    -webkit-mask-image: none !important;
+    opacity: 0.12 !important;
+  }
+
+  /* Optimize card box shadows for mobile GPU fill rate */
+  .premium-depth-card {
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.7) !important;
+    will-change: transform !important;
+  }
+
+  /* Optimize phone chassis shadows */
+  .iphone-bezel {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8) !important;
+    will-change: transform !important;
+  }
+
+  .card-sheen {
+    display: none !important;
+  }
+}

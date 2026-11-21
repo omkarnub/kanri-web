@@ -89,9 +89,9 @@
         scrollTrigger: {
           trigger: container,
           start: 'top top',
-          end: isMobile ? '+=950' : '+=1250',
+          end: isMobile ? '+=750' : '+=1250',
           pin: true,
-          scrub: 1,
+          scrub: isMobile ? 0.3 : 1,
           anticipatePin: 1,
           onEnter: () => triggerLiveSimulation(),
           onUpdate: (self) => {
@@ -112,9 +112,9 @@
         // 2. Obsidian card glides smoothly into center with pure GPU translation
         .to('.main-card', { y: 0, scale: 1, ease: 'power2.out', duration: 1.5 }, 0)
 
-        // 3. Mockup plunges in smoothly from 3D depth into dead center
+        // 3. Mockup plunges in smoothly from 3D depth into dead center (2D on mobile for GPU speed)
         .fromTo('.mockup-scroll-wrapper',
-          { y: 120, z: -300, rotationX: 25, rotationY: -15, autoAlpha: 0, scale: 0.8 },
+          { y: isMobile ? 60 : 120, z: isMobile ? 0 : -300, rotationX: isMobile ? 0 : 25, rotationY: isMobile ? 0 : -15, autoAlpha: 0, scale: isMobile ? 0.9 : 0.8 },
           { y: 0, z: 0, rotationX: 0, rotationY: 0, autoAlpha: 1, scale: 1, ease: 'power3.out', duration: 1.6 }, '-=0.5'
         )
 
