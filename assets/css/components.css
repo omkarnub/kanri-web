@@ -148,7 +148,7 @@
 .hero-section {
   position: relative;
   width: 100%;
-  min-height: 92vh;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -163,10 +163,10 @@
   bottom: 0;
   left: 0;
   right: 0;
-  height: 120px;
+  height: 200px;
   background: linear-gradient(to bottom, transparent, var(--canvas));
   pointer-events: none;
-  z-index: 2;
+  z-index: 15;
 }
 
 #bg {
@@ -201,6 +201,7 @@
   height: 130%;
   pointer-events: none;
   will-change: transform;
+  z-index: 12;
 }
 
 #landBase {

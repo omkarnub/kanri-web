@@ -862,6 +862,7 @@
 
   // ---------------------------------------------------------------- parallax transforms
   function applyScroll() {
+    if (window.disableInternalBgParallax) return;
     const ps = clamp(scrollCur, 0, 1.5), h = innerHeight;
     const ty = k => `translate3d(0,${(-ps * k * h).toFixed(2)}px,0)`;
     if (cvs.wet) cvs.wet.style.transform = ty(depth.scene);

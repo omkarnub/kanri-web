@@ -1,48 +1,80 @@
 /**
- * Parallax Engine for Kanri
- * Coordinates differential 3D depth layers without hijacking native browser scroll:
- *  - Layer 1: Living Landscape Ink Wash (InkBackground)
- *  - Layer 2: Centered KANRI Emblem & Brand Title (-30% differential rate)
- *  - Layer 3: Foreground Land & Mist
+ * Multi-Layer Differential Parallax Engine for Kanri
+ * Inspired by GSAP ScrollTrigger & Lenis multi-depth scrubbed architecture.
+ * Orchestrates spatial depth planes without hijacking native browser scroll:
+ *  - Layer 1: Sky & Paper Canvas (Fixed bedrock anchor, 0% travel)
+ *  - Layer 2: Far Ink Wash Mountains & Mist (+260px drift / 65% depth retention)
+ *  - Layer 3: KANRI Brand Centerpiece (+190px float with optical 3D scale & fade)
+ *  - Layer 4: Dynamic River, Gliding Boat & Birds (+110px travel)
+ *  - Layer 5: Foreground Land, Boulders & Swaying Reeds (-130px rise into view)
  * Native scrolling remains 100% natural and fluid with zero resistance.
  */
 (() => {
   'use strict';
 
-  let currentY = window.scrollY || document.documentElement.scrollTop || 0;
-  let targetY = currentY;
-  let isTicking = false;
-  const ease = 0.12; // Snappy, responsive interpolation for visual layers
+  // Inform living background that parallax engine handles canvas transforms
+  window.disableInternalBgParallax = true;
 
+  // DOM Elements
+  const heroSection = document.querySelector('.hero-section');
   const emblemEl = document.getElementById('hero-brand-centerpiece') || document.getElementById('hero-bg-emblem');
+  const wetCvs = document.getElementById('wet');
+  const mistCvs = document.getElementById('mist');
+  const dynCvs = document.getElementById('dyn');
+  const landEl = document.getElementById('land');
+
+  // Check prefers-reduced-motion
   const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  function updateParallax(y) {
-    const vh = window.innerHeight || 800;
-    const progress = y / vh;
+  // Scroll interpolation state
+  let targetY = window.scrollY || document.documentElement.scrollTop || 0;
+  let currentY = targetY;
+  let isTicking = false;
+  const lerpFactor = 0.12;
 
-    // 1. Update living ink wash canvas depth
-    if (window.InkBackground && typeof window.InkBackground.setScroll === 'function') {
-      window.InkBackground.setScroll(progress);
+  function updateParallax(y) {
+    if (!heroSection) return;
+    const heroH = heroSection.offsetHeight || (window.innerHeight || 800);
+    const progress = Math.min(1.25, Math.max(0, y / heroH));
+
+    if (prefersReduced) {
+      if (emblemEl) { emblemEl.style.transform = ''; emblemEl.style.opacity = ''; }
+      if (wetCvs) wetCvs.style.transform = '';
+      if (mistCvs) mistCvs.style.transform = '';
+      if (dynCvs) dynCvs.style.transform = '';
+      if (landEl) landEl.style.transform = '';
+      return;
     }
 
-    // 2. KANRI Emblem & Brand Centerpiece Parallax (Differential travel with smooth scale & fade)
-    if (emblemEl) {
-      if (prefersReduced) {
-        emblemEl.style.transform = '';
-        emblemEl.style.opacity = '';
-      } else {
-        const emblemTravel = -y * 0.30;
-        const emblemScale = Math.max(0.85, 1 - progress * 0.08);
-        const emblemOpacity = Math.max(0, 1 - progress * 1.2);
+    // 1. Far Mountains & Mist (Drifts down relative to hero, appearing distant in 3D)
+    const mtY = progress * 260;
+    if (wetCvs) wetCvs.style.transform = `translate3d(0, ${mtY.toFixed(2)}px, 0)`;
+    if (mistCvs) mistCvs.style.transform = `translate3d(0, ${mtY.toFixed(2)}px, 0)`;
 
-        emblemEl.style.transform = `translate3d(0, ${emblemTravel.toFixed(2)}px, 0) scale(${emblemScale.toFixed(3)})`;
-        emblemEl.style.opacity = emblemOpacity.toFixed(3);
-      }
+    // 2. KANRI Brand Centerpiece (Floats mid-depth with subtle 3D scale and gentle fade)
+    if (emblemEl) {
+      const emblemY = progress * 190;
+      const emblemScale = Math.max(0.86, 1 - progress * 0.08);
+      const emblemOpacity = Math.max(0, 1 - progress * 1.18);
+
+      emblemEl.style.transform = `translate3d(0, ${emblemY.toFixed(2)}px, 0) scale(${emblemScale.toFixed(3)})`;
+      emblemEl.style.opacity = emblemOpacity.toFixed(3);
+    }
+
+    // 3. Dynamic River, Gliding Sampan Boat & Swallows
+    if (dynCvs) {
+      const dynY = progress * 110;
+      dynCvs.style.transform = `translate3d(0, ${dynY.toFixed(2)}px, 0)`;
+    }
+
+    // 4. Foreground Land, Boulders & Swaying Reeds (Rises upward into view from the bottom)
+    if (landEl) {
+      const landY = -progress * 130;
+      landEl.style.transform = `translate3d(0, ${landY.toFixed(2)}px, 0)`;
     }
   }
 
-  // Animation frame interpolation loop
+  // Smooth sub-pixel animation frame loop
   function tick() {
     if (prefersReduced) {
       updateParallax(window.scrollY || 0);
@@ -51,8 +83,8 @@
     }
 
     const diff = targetY - currentY;
-    if (Math.abs(diff) > 0.2) {
-      currentY += diff * ease;
+    if (Math.abs(diff) > 0.1) {
+      currentY += diff * lerpFactor;
       updateParallax(currentY);
       requestAnimationFrame(tick);
     } else {
@@ -70,7 +102,7 @@
     }
   }
 
-  // Native passive scroll listener — zero resistance, full native performance
+  // Passive native scroll listener — zero resistance, full 120 FPS device performance
   window.addEventListener('scroll', onScroll, { passive: true });
 
   // Sync with Kanri Theme Switcher
