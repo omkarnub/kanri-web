@@ -2,10 +2,12 @@
 <html lang="en" data-theme="dark">
 
 <head>
+  <base href="/">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>404 — Page Not Found | Kanri</title>
   <meta name="description" content="The page you are looking for does not exist on Kanri.">
+
   <!-- Favicon & Touch Icons -->
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/kanri_app_icon_dark.png">
@@ -24,9 +26,10 @@
   <meta name="twitter:description" content="The page you are looking for does not exist on Kanri.">
   <meta name="twitter:image" content="https://getkanri.vercel.app/og-image.png">
 
-  <link rel="stylesheet" href="assets/css/typography.css">
-  <link rel="stylesheet" href="assets/css/main.css">
-  <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="/assets/css/typography.css">
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="stylesheet" href="/assets/css/components.css">
+
   <!-- Vercel Web Analytics -->
   <script>
     window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
@@ -37,7 +40,7 @@
 <body style="justify-content:center; align-items:center; text-align:center;">
   <div class="container container-narrow" style="padding:64px 24px;">
     <div style="margin-bottom:24px;">
-      <img src="assets/images/kanri_app_icon_dark.png" alt="Kanri logo"
+      <img src="/assets/images/kanri_app_icon_dark.png" alt="Kanri logo"
         style="width:64px; height:64px; border-radius:16px;">
     </div>
 
@@ -52,25 +55,25 @@
     </p>
 
     <div style="display:flex; justify-content:center; gap:16px; flex-wrap:wrap;">
-      <a href="index.html" class="btn btn-primary btn-md">
+      <a href="/" class="btn btn-primary btn-md">
         Return to Home
       </a>
-      <a href="docs/index.html" class="btn btn-secondary btn-md">
+      <a href="/docs/" class="btn btn-secondary btn-md">
         Browse Documentation
       </a>
-      <a href="download/index.html" class="btn btn-outline btn-md">
+      <a href="/download/" class="btn btn-outline btn-md">
         Download APK
       </a>
     </div>
   </div>
 
-  <script src="assets/js/theme.js"></script>
+  <script src="/assets/js/theme.js"></script>
   <footer class="site-footer">
     <div class="container">
       <div class="footer-grid">
         <div class="footer-col">
           <div style="display:flex; align-items:center; gap:10px; margin-bottom:14px;">
-            <img src="assets/images/kanri_app_icon_dark.png" alt="Kanri logo"
+            <img src="/assets/images/kanri_app_icon_dark.png" alt="Kanri logo"
               style="width:28px; height:28px; border-radius:6px;" width="28" height="28" loading="lazy">
             <span class="brand-logotype" style="font-size:1.125rem;">KANRI</span>
             <span style="font-size:0.8125rem; color:var(--muted);">管理</span>
@@ -85,11 +88,11 @@
             style="font-size:0.875rem; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:14px; color:var(--text);">
             Product</h3>
           <ul class="footer-links">
-            <li><a href="index.html#features">Features</a></li>
-            <li><a href="index.html#widgets">Widgets</a></li>
-            <li><a href="download/index.html">Download APK</a></li>
-            <li><a href="releases/index.html">Releases</a></li>
-            <li><a href="press/index.html">Press Kit</a></li>
+            <li><a href="/#features">Features</a></li>
+            <li><a href="/#widgets">Widgets</a></li>
+            <li><a href="/download/">Download APK</a></li>
+            <li><a href="/releases/">Releases</a></li>
+            <li><a href="/press/">Press Kit</a></li>
           </ul>
         </div>
 
@@ -98,12 +101,12 @@
             style="font-size:0.875rem; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:14px; color:var(--text);">
             Documentation</h3>
           <ul class="footer-links">
-            <li><a href="docs/index.html">Docs Overview</a></li>
-            <li><a href="docs/getting-started/index.html">Getting Started</a></li>
-            <li><a href="docs/capture-dedupe/index.html">Capture &amp; Dedupe</a></li>
-            <li><a href="docs/security-model/index.html">Security Model</a></li>
-            <li><a href="docs/troubleshooting/index.html">Troubleshooting</a></li>
-            <li><a href="faq/index.html">FAQ</a></li>
+            <li><a href="/docs/">Docs Overview</a></li>
+            <li><a href="/docs/getting-started/">Getting Started</a></li>
+            <li><a href="/docs/capture-dedupe/">Capture &amp; Dedupe</a></li>
+            <li><a href="/docs/security-model/">Security Model</a></li>
+            <li><a href="/docs/troubleshooting/">Troubleshooting</a></li>
+            <li><a href="/faq/">FAQ</a></li>
           </ul>
         </div>
 
@@ -112,9 +115,9 @@
             style="font-size:0.875rem; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:14px; color:var(--text);">
             Legal &amp; Security</h3>
           <ul class="footer-links">
-            <li><a href="privacy/index.html">Privacy Policy</a></li>
-            <li><a href="terms/index.html">Terms of Use</a></li>
-            <li><a href="security/index.html">Security Model</a></li>
+            <li><a href="/privacy/">Privacy Policy</a></li>
+            <li><a href="/terms/">Terms of Use</a></li>
+            <li><a href="/security/">Security Model</a></li>
             <li><a href="https://github.com/omkarnub/Kanri/issues" target="_blank" rel="noopener noreferrer">Contact
                 &amp; Issues</a></li>
             <li><a href="https://github.com/omkarnub/Kanri" target="_blank" rel="noopener noreferrer">GitHub Repo</a>
