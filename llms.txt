@@ -1,6 +1,6 @@
 # Kanri (管理)
 
-> Kanri is an offline-first, privacy-first personal finance ledger for Android (8.0+). It automatically parses Indian bank SMS and payment app notifications on-device, logs transactions into a local SQLCipher AES-256 encrypted database, and sends zero personal data to remote servers.
+> Kanri is an offline-first personal finance ledger for Android (8.0+). It parses Indian bank SMS and payment app notifications on your phone, logs transactions into a local encrypted database, and sends zero personal data to remote servers.
 
 ## Core Facts
 - **Application ID**: com.omkarnub.kanri
@@ -14,31 +14,31 @@
 - **Distribution**: GitHub Releases & Orion Store (Not on Google Play Store)
 
 ## Key Technical Features
-1. **Dual Capture (SMS & Notifications)**:
-   - Ingests transactional SMS from 15+ Indian banks (SBI, HDFC, ICICI, Axis, Kotak, BOB, PNB, Canara, Union Bank, IDFC FIRST, IndusInd, Federal, etc.).
-   - Captures incoming UPI notifications from payment apps (Google Pay, PhonePe, Paytm, CRED, FamPay, BHIM).
-   - Bi-directional 5-minute sliding-window deduplication merges SMS and notification alerts using UTR references.
-   - OTP and verification messages are detected and explicitly discarded without logging.
-2. **Dual-Wallet Ledger**:
-   - Separates Online banking/UPI balances from physical Cash wallet balances.
-   - Smart ATM withdrawal mode transfers money from Online to Cash without double-counting as an expense.
-3. **P2P Lend & Borrow**:
-   - Tracks receivables and payables with partial repayment history.
-   - Generates one-tap WhatsApp payment reminders and pre-filled upi://pay deep links.
+1. **SMS & Notification Capture**:
+   - Reads transactional SMS from 15+ Indian banks (SBI, HDFC, ICICI, Axis, Kotak, BOB, PNB, Canara, Union Bank, IDFC FIRST, IndusInd, Federal, etc.).
+   - Reads incoming UPI notifications from payment apps (Google Pay, PhonePe, Paytm, CRED, FamPay, BHIM).
+   - 5-minute sliding-window deduplication merges SMS and notification alerts using UTR reference numbers.
+   - OTP and verification messages are detected and discarded without logging.
+2. **Cash and Bank Balances**:
+   - Separates bank accounts and physical cash balances.
+   - ATM withdrawal mode transfers money from bank to cash without double-counting as an expense.
+3. **Money Owed and Borrowed**:
+   - Tracks amounts owed to you and amounts you owe with repayment records.
+   - Generates WhatsApp reminders and pre-filled UPI payment links.
    - Bill splitting for 2 to 20 people (equal or custom shares).
 4. **Salary-Synced Budgets**:
    - Custom budget cycle start day (1st to 28th of the month) matching salary dates.
-   - Real-time Safe-to-Spend daily allowance: (Remaining Budget) / (Days Remaining).
-   - Savings goals with pacing and quick steppers (+₹500, +₹1,000, +₹2,000, +₹5,000).
-5. **18+ Visualizers & Health Score**:
-   - GitHub-style spending heatmaps, 365-day matrix, burn-rate projections.
-   - 0–100 Financial Health Score based on 4 pillars of 25 points each (Savings Rate, Budget Adherence, Velocity vs. Calendar, Debt Ratio).
+   - Daily allowance calculation: (Remaining Budget) / (Days Remaining).
+   - Savings goals with pacing and quick step buttons (+₹500, +₹1,000, +₹2,000, +₹5,000).
+5. **Charts & Money Health Score**:
+   - Spending charts, heatmaps, and burn-rate projections.
+   - 0–100 money health score based on 4 pillars of 25 points each (Savings Rate, Budget Adherence, Velocity vs. Calendar, Debt Ratio).
 6. **12 Pixel DotTiles Widgets**:
-   - Tactile dot-matrix widgets rendered via shared Canvas renderer using Ndot57 font.
-   - Midnight resets via WorkManager with zero battery drain.
+   - Dot-matrix widgets rendered using Ndot57 font.
+   - Midnight resets via WorkManager.
 7. **Security & Privacy**:
-   - SQLCipher AES-256 database at rest, master key stored in Android Keystore (TEE/StrongBox).
-   - BiometricPrompt hardware lock with screen-off auto-lock.
-   - PBKDF2 (65,536 iterations) + AES-GCM encrypted backup exports (.enc).
-   - Optional Google Drive backup using strictly restricted drive.file scope (client-side encrypted before upload).
+   - SQLCipher AES-256 database at rest, master key stored in Android Keystore hardware protection.
+   - Biometric lock with screen-off auto-lock.
+   - Password-protected encrypted backup exports (.enc) using PBKDF2 (65,536 iterations) and AES-GCM.
+   - Optional Google Drive backup using restricted drive.file scope (encrypted on device before upload).
    - Zero analytics, zero telemetry SDKs, zero ads.

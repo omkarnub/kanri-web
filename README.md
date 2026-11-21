@@ -1,62 +1,86 @@
 # Kanri Official Website
 
-This directory contains the official website for **Kanri**, an offline-first personal finance ledger for Android.
+Official website for **Kanri**, an offline-first personal finance app for Android.
+
+Hosted at: [https://omkarnub.github.io/kanri-web/](https://omkarnub.github.io/kanri-web/)
+
+---
 
 ## Architecture & Principles
-- **100% Zero External Dependencies:** No external tracking scripts, no Google Fonts CDN calls, no third-party cookies, no analytics pixels. All fonts, styles, scripts, and media are self-hosted locally in `assets/`.
-- **Progressive Enhancement:** Fully readable and usable with JavaScript disabled. Pure Vanilla ES6 JavaScript powers the client-side parser demo, interactive calculators, theme switcher, and instant search.
-- **Static Hosting Ready:** Can be served directly by GitHub Pages, Cloudflare Pages, Netlify, Vercel, Nginx, or Apache.
+
+- **Zero External Dependencies:** No external tracking scripts, no CDN font requests, no third-party cookies, and no analytics pixels. All fonts, styles, scripts, and media are self-hosted locally in `assets/`. The only permitted network request is the optional GitHub release lookup, which fails gracefully to static defaults.
+- **Progressive Enhancement:** Fully readable and functional with JavaScript disabled. Plain modern JavaScript powers the client-side parser demo, calculators, theme switcher, and instant search.
+- **Static Hosting:** Pure static files ready for GitHub Pages, Cloudflare Pages, Netlify, Nginx, or Apache.
+
+---
 
 ## Local Previewing
 
-You can run any local static file server from within this directory:
+Run any static file server from the repository root:
 
 ### Python 3:
 ```bash
-python -m http.server 8080 --directory .
+python -m http.server 8080
 ```
-Then open `http://localhost:8080` in your web browser.
+Open `http://localhost:8080` in your browser.
 
-### Node.js (`npx serve`):
+### Node.js:
 ```bash
 npx serve .
 ```
 
+---
+
 ## Directory Structure
+
 ```
-website/
+.
 ├── index.html                  # Landing page
-├── privacy/index.html          # Privacy policy
-├── terms/index.html            # Terms of use
-├── docs/                       # Documentation Hub (11 chapters)
-├── changelog/index.html        # Release changelog (v1.19.8 down to v1.19.0)
-├── download/index.html         # Canonical download page with verified SHA-256
+├── download/index.html         # Official download page with SHA-256 verification
+├── docs/                       # Documentation hub (11 chapters)
+│   ├── getting-started/
+│   ├── capture-dedupe/
+│   ├── wallets/
+│   ├── lend-borrow/
+│   ├── budgets-goals/
+│   ├── insights-health-score/
+│   ├── widgets/
+│   ├── themes/
+│   ├── backup-restore/
+│   ├── security-model/
+│   └── troubleshooting/
 ├── faq/index.html              # Searchable FAQ accordion
-├── security/index.html         # Security architecture & responsible disclosure
-├── press/index.html            # Press kit & brand assets
-├── 404.html                    # On-brand 404 error page
-├── sitemap.xml                 # XML sitemap with 20 canonical endpoints
-├── robots.txt                  # Search indexing directives
-├── llms.txt                    # Factual AI search manifest
-├── SEO_PLAN.md                 # Discoverability strategy & keyword map
-├── REPORT.md                   # Verification audit & facts report
-├── src/                        # Modular React / GSAP UI component templates
-│   └── components/ui/
-│       ├── cinematic-hero.tsx  # 3D skeuomorphic ScrollTrigger hero with card tilt & phone mockup
-│       ├── component.tsx       # Multi-layer Lenis smooth-scroll + GSAP parallax component
-│       ├── parallax.css        # Layout & layer styles for ParallaxComponent
-│       └── index.ts            # Component exports
-└── assets/
-    ├── css/                    # Main styles, typography, components, docs
-    ├── js/                     # Config, theme, parser demo, calculators, search
-    ├── fonts/                  # Self-hosted Panchang Bold, Google Sans, Ndot57
-    ├── images/                 # App icons, screenshots, widget previews
-    ├── media/                  # 1440 loop video, webm, poster
-    └── backdrops/              # Authentic animated HTML canvas artwork
+├── privacy/index.html          # Privacy policy
+├── security/index.html         # Security model & vulnerability reporting
+├── terms/index.html            # Plain-language terms of use
+├── changelog/index.html        # Release changelog (v1.19.8 down to v1.19.0)
+├── press/index.html            # Press kit & brand assets (with responsive WebPs)
+├── 404.html                    # 404 error page
+├── sitemap.xml                 # XML sitemap
+├── robots.txt                  # Search crawler directives
+├── llms.txt                    # Plain text summary for search engines
+├── release.json                # Static fallback metadata for latest release (v1.19.8)
+├── assets/
+│   ├── css/                    # Stylesheets (main, typography, components, docs)
+│   ├── js/                     # Scripts (config, theme, parser demo, calculators, search)
+│   ├── fonts/                  # Self-hosted fonts (Panchang Bold, Google Sans, Ndot57)
+│   ├── images/                 # App icons, screenshots, widget previews
+│   ├── media/                  # Video loops, poster, social share image (1200x630)
+│   └── backdrops/              # Animated canvas artwork for themes
+└── .github/workflows/          # GitHub Actions deployment & validation workflow
 ```
 
+---
+
 ## Configuration
-Edit `assets/js/config.js` to customize:
+
+Edit `assets/js/config.js` to update:
 - `CONTACT_EMAIL`: Set your official contact email when domain email is configured.
-- `PLAY_STORE_URL`: Set the Play Store URL once the app is live on Google Play.
-- `VERSION`, `APK_SIZE`, `APK_SHA256`: Updated with new releases.
+- `PLAY_STORE_URL`: Set the Play Store URL if the app is published to Google Play.
+- `VERSION`, `APK_SIZE`, `APK_SHA256`: Updated for new releases (mirrored in `release.json`).
+
+---
+
+## License
+
+This website and its documentation are open-source under the [GPL-3.0 License](https://github.com/omkarnub/Kanri/blob/main/LICENSE).
