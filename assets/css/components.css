@@ -158,30 +158,28 @@
   background: var(--canvas);
 }
 
+.hero-section {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 80px 24px;
+  background: #ECE6DA; /* Shan Shui Xuan paper bedrock */
+}
+
 .hero-section::after {
   content: '';
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  height: 180px;
-  background: linear-gradient(to bottom, transparent 0%, rgba(18, 18, 18, 0.4) 40%, #121212 100%);
+  height: 220px;
+  background: linear-gradient(to bottom, transparent 0%, rgba(18, 18, 18, 0.35) 30%, rgba(18, 18, 18, 0.82) 65%, #121212 100%);
   pointer-events: none;
   z-index: 15;
-}
-
-.hero-black-extension {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 100%;
-  background: linear-gradient(to top, #121212 50%, rgba(18, 18, 18, 0.95) 75%, transparent 100%);
-  pointer-events: none;
-  z-index: 14;
-  transform-origin: bottom center;
-  transform: scaleY(0);
-  will-change: transform;
 }
 
 #bg {
@@ -190,7 +188,7 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background: var(--canvas);
+  background: #ECE6DA;
   z-index: 0;
   pointer-events: none;
 }
@@ -251,7 +249,7 @@
 }
 
 /* --------------------------------------------------------------------------
-   3. Hero Brand Centerpiece: Big KANRI Text Logo with Emblem
+   3. Hero Brand Centerpiece: Big KANRI Text Logo with Emblem in One Line
    -------------------------------------------------------------------------- */
 .hero-brand-centerpiece {
   position: relative;
@@ -263,99 +261,77 @@
   text-align: center;
   padding: 40px 20px;
   user-select: none;
-  will-change: transform;
+  will-change: transform, opacity;
+  max-width: 100%;
 }
 
-.hero-brand-crest-wrap {
-  margin-bottom: 24px;
+.hero-brand-row {
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
+  gap: clamp(16px, 3.5vw, 48px);
+  width: 100%;
+  flex-wrap: nowrap;
 }
 
 .hero-brand-crest {
-  width: clamp(160px, 22vw, 260px);
-  height: clamp(160px, 22vw, 260px);
-  fill: #14171B;
-  filter: drop-shadow(0 16px 36px rgba(20, 23, 27, 0.14));
-  transition: fill 0.3s ease, filter 0.3s ease;
-}
-
-[data-theme="light"] .hero-brand-crest {
-  fill: #14171B;
-  filter: drop-shadow(0 16px 36px rgba(20, 23, 27, 0.14));
-}
-
-[data-theme="dark"] .hero-brand-crest {
-  fill: #F2F2F2;
-  filter: drop-shadow(0 0 60px rgba(255, 255, 255, 0.18));
-}
-
-[data-theme="amoled"] .hero-brand-crest {
-  fill: #FFFFFF;
-  filter: drop-shadow(0 0 60px rgba(255, 255, 255, 0.24));
+  width: clamp(64px, 13vw, 210px);
+  height: clamp(64px, 13vw, 210px);
+  fill: #14171B !important; /* Authentic pitch-black sumi ink on light painting */
+  filter: drop-shadow(0 14px 32px rgba(20, 23, 27, 0.16));
+  flex-shrink: 0;
 }
 
 .hero-brand-title {
   font-family: var(--font-brand);
-  font-size: clamp(3.8rem, 12.5vw, 9rem);
+  font-size: clamp(3.4rem, 14vw, 12rem);
   font-weight: 800;
-  letter-spacing: 0.18em;
-  text-indent: 0.18em;
-  line-height: 1;
+  letter-spacing: 0.12em;
+  text-indent: 0.12em;
+  line-height: 0.92;
   margin: 0;
-  color: #14171B;
+  color: #14171B !important; /* Authentic pitch-black sumi ink on light painting */
   text-transform: uppercase;
-  transition: color 0.3s ease;
+  white-space: nowrap;
+  text-shadow: 0 4px 20px rgba(20, 23, 27, 0.08);
 }
 
-[data-theme="light"] .hero-brand-title {
-  color: #14171B;
-  text-shadow: 0 4px 24px rgba(20, 23, 27, 0.08);
-}
-
-[data-theme="dark"] .hero-brand-title {
-  color: #F2F2F2;
-  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.7);
-}
-
-[data-theme="amoled"] .hero-brand-title {
-  color: #FFFFFF;
-  text-shadow: 0 0 45px rgba(255, 255, 255, 0.28);
+.hero-brand-meta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(10px, 2vw, 20px);
+  margin-top: clamp(14px, 2.5vw, 28px);
 }
 
 .hero-brand-kanji {
-  font-size: clamp(1.5rem, 3.8vw, 2.6rem);
-  letter-spacing: 0.45em;
-  text-indent: 0.45em;
-  color: var(--muted);
+  font-size: clamp(1.2rem, 3.2vw, 2.4rem);
+  letter-spacing: 0.4em;
+  text-indent: 0.4em;
+  color: #383E48 !important;
   font-weight: 600;
-  margin-top: 16px;
   line-height: 1;
   font-family: var(--font-sans);
-  transition: color 0.3s ease;
-  opacity: 0.85;
+  opacity: 0.9;
 }
 
-[data-theme="light"] .hero-brand-kanji {
-  color: #555555;
-}
-
-[data-theme="dark"] .hero-brand-kanji,
-[data-theme="amoled"] .hero-brand-kanji {
-  color: #CCCCCC;
+.hero-brand-bullet {
+  color: #6C7480 !important;
+  font-size: clamp(0.9rem, 2vw, 1.4rem);
+  line-height: 1;
 }
 
 .hero-brand-tagline {
   font-family: var(--font-sans);
-  font-size: clamp(0.75rem, 1.4vw, 0.9375rem);
+  font-size: clamp(0.7rem, 1.3vw, 1.05rem);
   font-weight: 700;
   letter-spacing: 0.35em;
   text-indent: 0.35em;
-  color: var(--muted);
-  margin-top: 20px;
-  opacity: 0.8;
+  color: #4A5260 !important;
   text-transform: uppercase;
+  line-height: 1;
+  opacity: 0.9;
 }
 
 .hero-grid {

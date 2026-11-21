@@ -29,13 +29,12 @@
   }
   const pc = ctx.paper, wc = ctx.wet, mc = ctx.mist, dc = ctx.dyn, gc = ctx.grain, lb = ctx.landBase, lf = ctx.landFx;
 
-  // Determine initial theme based on HTML data-theme
+  // Living Shan Shui painting stays permanently in light mode (Xuan paper sumi-e)
   function getCurrentTheme() {
-    const dt = document.documentElement.getAttribute('data-theme');
-    return (dt === 'light') ? 'light' : 'dark';
+    return 'light';
   }
 
-  let theme = getCurrentTheme();
+  let theme = 'light';
   let speed = 2.8; // Fast, lively painting speed
   const reduced = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -911,11 +910,8 @@
       start(); 
     },
     setTheme(n) { 
-      if (n !== 'light' && n !== 'dark') return; 
-      theme = n; 
-      const keep = performance.now() - (t0 ?? performance.now()); 
-      build(); 
-      if (reduced) start(); else t0 = performance.now() - keep; 
+      // Hero painting is strictly light mode; ignore dark theme requests
+      return; 
     },
     setSpeed(n) { 
       const keep = tp / speed; 

@@ -1,57 +1,51 @@
 /**
  * Kanri Theme Engine
- * Manages Light (Cream), Dark (Ink), and AMOLED themes with system synchronization.
+ * Whole site below hero is dark themed permanently (Dark Ink or AMOLED).
+ * Hero Shan Shui painting stays isolated in authentic light mode.
  */
 (function() {
   const STORAGE_KEY = 'kanri_theme_preference';
   
   function getSystemPreference() {
-    return 'light';
+    return 'dark';
   }
   
   function getSavedTheme() {
     try {
-      return localStorage.getItem(STORAGE_KEY) || 'light';
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved === 'amoled') return 'amoled';
+      return 'dark';
     } catch (e) {
-      return 'light';
+      return 'dark';
     }
   }
   
   function applyTheme(theme) {
-    const active = theme === 'system' ? getSystemPreference() : theme;
+    const active = (theme === 'amoled') ? 'amoled' : 'dark';
     document.documentElement.setAttribute('data-theme', active);
     
     // Update active button indicator if present
     document.querySelectorAll('[data-theme-value]').forEach(btn => {
-      btn.classList.toggle('active', btn.getAttribute('data-theme-value') === theme);
+      btn.classList.toggle('active', btn.getAttribute('data-theme-value') === active);
     });
   }
   
-  // Initialize theme immediately to prevent flash of wrong theme
+  // Initialize dark theme immediately
   const initialTheme = getSavedTheme();
   applyTheme(initialTheme);
   
-  // Listen for system theme changes if set to system
-  if (window.matchMedia) {
-    window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', () => {
-      if (getSavedTheme() === 'system') {
-        applyTheme('system');
-      }
-    });
-  }
-  
-  // Public theme toggler
+  // Public theme toggler (Dark / AMOLED)
   window.KanriTheme = {
     set: function(theme) {
+      const target = (theme === 'amoled') ? 'amoled' : 'dark';
       try {
-        localStorage.setItem(STORAGE_KEY, theme);
+        localStorage.setItem(STORAGE_KEY, target);
       } catch (e) {}
-      applyTheme(theme);
+      applyTheme(target);
     },
     cycle: function() {
       const current = getSavedTheme();
-      const themes = ['dark', 'light', 'amoled', 'system'];
-      const next = themes[(themes.indexOf(current) + 1) % themes.length];
+      const next = current === 'amoled' ? 'dark' : 'amoled';
       this.set(next);
       return next;
     },
