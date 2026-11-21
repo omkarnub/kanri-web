@@ -785,11 +785,21 @@ void main(){
     if (isInView && !document.hidden) rafId = requestAnimationFrame(frame);
   }
 
-  // Auto mount on document load
+  // Lazy mount on viewport approach (400px ahead of scroll)
   function init() {
     const el = document.getElementById("warp-carousel-root");
     if (el) {
-      initWarpCarousel(el);
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries) => {
+          if (entries[0].isIntersecting) {
+            observer.disconnect();
+            initWarpCarousel(el);
+          }
+        }, { rootMargin: '400px' });
+        observer.observe(el);
+      } else {
+        initWarpCarousel(el);
+      }
     }
   }
 

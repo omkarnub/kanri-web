@@ -870,7 +870,7 @@
     rafId = requestAnimationFrame(frame);
   }
 
-  if (wrap && 'IntersectionObserver' in window) {
+  if (bgContainer && 'IntersectionObserver' in window) {
     const bgObs = new IntersectionObserver(([entry]) => {
       isVisibleOnScreen = entry.isIntersecting;
       if (isVisibleOnScreen && !document.hidden && !reduced) {
@@ -880,7 +880,7 @@
         rafId = null;
       }
     }, { threshold: 0 });
-    bgObs.observe(wrap);
+    bgObs.observe(bgContainer);
   }
 
   document.addEventListener('visibilitychange', () => {
@@ -909,8 +909,10 @@
   }
 
   // ---------------------------------------------------------------- init & public API
-  build(); 
-  start();
+  requestAnimationFrame(() => {
+    build();
+    start();
+  });
 
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();

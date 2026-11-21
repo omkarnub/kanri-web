@@ -8,9 +8,56 @@
   // =========================================================================
   // 1. SPLIT BILL VIDEO MOTION GRAPHICS SIMULATION
   // =========================================================================
+  
+  function bindVisibleLoop(targetEl, loopStep) {
+    if (!targetEl) return;
+    let isVisible = false;
+    let rafId = null;
+
+    function tick(timestamp) {
+      if (!isVisible || document.hidden) {
+        rafId = null;
+        return;
+      }
+      loopStep(timestamp);
+      rafId = requestAnimationFrame(tick);
+    }
+
+    function start() {
+      if (!rafId && isVisible && !document.hidden) {
+        rafId = requestAnimationFrame(tick);
+      }
+    }
+
+    function stop() {
+      if (rafId) {
+        cancelAnimationFrame(rafId);
+        rafId = null;
+      }
+    }
+
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        isVisible = entries[0].isIntersecting;
+        if (isVisible) start();
+        else stop();
+      }, { rootMargin: '100px' });
+      observer.observe(targetEl);
+    } else {
+      isVisible = true;
+      start();
+    }
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) stop();
+      else if (isVisible) start();
+    });
+  }
+
   function initSplitBillMotion() {
     const stage = document.getElementById('motion-split-bill');
     if (!stage) return;
+    bindVisibleLoop(stage, animate);
 
     const fillBar = stage.querySelector('.split-progress-bar-fill');
     const progText = stage.querySelector('.split-progress-text');
@@ -33,7 +80,7 @@
     const CYCLE = 8.0; // 8 second complete video loop
 
     function animate(now) {
-      requestAnimationFrame(animate);
+      // loop handled by bindVisibleLoop
       const dt = 0.016;
       t = (t + dt) % CYCLE;
 
@@ -131,7 +178,7 @@
       });
     }
 
-    requestAnimationFrame(animate);
+    // loop handled by bindVisibleLoop
   }
 
   // =========================================================================
@@ -140,6 +187,7 @@
   function initAtmWalletsMotion() {
     const stage = document.getElementById('motion-wallets-atm');
     if (!stage) return;
+    bindVisibleLoop(stage, animate);
 
     const onlineAmt = stage.querySelector('#atm-online-val');
     const cashAmt = stage.querySelector('#atm-cash-val');
@@ -153,7 +201,7 @@
     const CYCLE = 6.0;
 
     function animate() {
-      requestAnimationFrame(animate);
+      // loop handled by bindVisibleLoop
       t = (t + 0.016) % CYCLE;
 
       // Phase 1 (0-1.5s): Rest balance (Online: 24,850, Cash: 3,400)
@@ -184,7 +232,7 @@
       if (deltaCash) deltaCash.style.opacity = progress > 0.1 ? '1' : '0.2';
     }
 
-    requestAnimationFrame(animate);
+    // loop handled by bindVisibleLoop
   }
 
   // =========================================================================
@@ -224,7 +272,7 @@
     let t = 0;
 
     function animate() {
-      requestAnimationFrame(animate);
+      // loop handled by bindVisibleLoop
       t += 0.02;
 
       // Animate heatmap wave
@@ -330,7 +378,7 @@
       ctx.restore();
     }
 
-    requestAnimationFrame(animate);
+    // loop handled by bindVisibleLoop
   }
 
   function init() {

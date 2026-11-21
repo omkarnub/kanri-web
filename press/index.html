@@ -7,6 +7,8 @@
   <meta name="description" content="Official press kit for Kanri: logotypes, brand assets, color palette, typography guidelines, screenshots, and honest boilerplate copy.">
   <link rel="canonical" href="https://omkarnub.github.io/kanri-web/press/">
   <link rel="icon" type="image/png" href="../assets/images/kanri_app_icon_dark.png">
+    <link rel="preload" href="../assets/fonts/panchang_bold.otf" as="font" type="font/otf" crossorigin>
+  <link rel="preload" href="../assets/fonts/google_sans_bold.ttf" as="font" type="font/ttf" crossorigin>
   <link rel="stylesheet" href="../assets/css/typography.css">
   <link rel="stylesheet" href="../assets/css/main.css">
   <link rel="stylesheet" href="../assets/css/components.css">
@@ -80,7 +82,7 @@
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:24px; margin:24px 0;">
           <div class="card" style="text-align:center; padding:32px;">
             <img src="../assets/images/kanri_app_icon_dark.png" alt="Kanri Dark Icon" style="width:100px; height:100px; border-radius:22px; margin-bottom:16px; box-shadow:var(--shadow-sm);">
-            <h4 style="font-size:1rem; margin-bottom:4px;">Official App Icon</h4>
+            <h3 style="font-size:1rem; margin-bottom:4px;">Official App Icon</h3>
             <span style="font-size:0.8125rem; color:var(--muted);">512x512 PNG · Dark Canvas</span>
             <div style="margin-top:16px;">
               <a href="../assets/images/kanri_app_icon_dark.png" download class="btn btn-outline btn-sm">Download PNG</a>
@@ -91,7 +93,7 @@
             <div style="width:100px; height:100px; border-radius:22px; background:#FAF9F5; display:flex; align-items:center; justify-content:center; margin:0 auto 16px auto; border:1px solid #E5DFD3;">
               <span class="brand-logotype" style="color:#121212; font-size:1.25rem;">KANRI</span>
             </div>
-            <h4 style="font-size:1rem; margin-bottom:4px;">Logotype Wordmark</h4>
+            <h3 style="font-size:1rem; margin-bottom:4px;">Logotype Wordmark</h3>
             <span style="font-size:0.8125rem; color:var(--muted);">Panchang Bold · Text Vector</span>
             <div style="margin-top:16px;">
               <span class="badge badge-accent">Panchang Bold</span>
@@ -101,21 +103,33 @@
 
         <h2>Brand Color Palette</h2>
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:16px; margin:24px 0;">
-          <div style="background:#FAF9F5; color:#121212; padding:20px; border-radius:14px; border:1px solid #E5DFD3;">
-            <strong>Cream Canvas</strong>
-            <div class="text-mono" style="font-size:0.875rem; margin-top:4px;">#FAF9F5</div>
+          <div style="border-radius:14px; border:1px solid var(--border); overflow:hidden; background:var(--surface);">
+            <div style="height:56px; background:#FAF9F5; border-bottom:1px solid var(--border);"></div>
+            <div style="padding:14px 16px;">
+              <strong style="color:var(--text); font-size:0.9375rem;">Cream Canvas</strong>
+              <div class="text-mono" style="font-size:0.8125rem; margin-top:4px; color:var(--text-secondary);">#FAF9F5</div>
+            </div>
           </div>
-          <div style="background:#121212; color:#F2F2F2; padding:20px; border-radius:14px; border:1px solid #2A2A2A;">
-            <strong>Ink Surface</strong>
-            <div class="text-mono" style="font-size:0.875rem; margin-top:4px;">#121212</div>
+          <div style="border-radius:14px; border:1px solid var(--border); overflow:hidden; background:var(--surface);">
+            <div style="height:56px; background:#121212; border-bottom:1px solid var(--border);"></div>
+            <div style="padding:14px 16px;">
+              <strong style="color:var(--text); font-size:0.9375rem;">Ink Surface</strong>
+              <div class="text-mono" style="font-size:0.8125rem; margin-top:4px; color:var(--text-secondary);">#121212</div>
+            </div>
           </div>
-          <div style="background:#30A46C; color:#FFFFFF; padding:20px; border-radius:14px;">
-            <strong>Accent Green</strong>
-            <div class="text-mono" style="font-size:0.875rem; margin-top:4px;">#30A46C</div>
+          <div style="border-radius:14px; border:1px solid var(--border); overflow:hidden; background:var(--surface);">
+            <div style="height:56px; background:#30A46C;"></div>
+            <div style="padding:14px 16px;">
+              <strong style="color:var(--text); font-size:0.9375rem;">Accent Green</strong>
+              <div class="text-mono" style="font-size:0.8125rem; margin-top:4px; color:var(--text-secondary);">#30A46C</div>
+            </div>
           </div>
-          <div style="background:#E5484D; color:#FFFFFF; padding:20px; border-radius:14px;">
-            <strong>Expense Red</strong>
-            <div class="text-mono" style="font-size:0.875rem; margin-top:4px;">#E5484D</div>
+          <div style="border-radius:14px; border:1px solid var(--border); overflow:hidden; background:var(--surface);">
+            <div style="height:56px; background:#E5484D;"></div>
+            <div style="padding:14px 16px;">
+              <strong style="color:var(--text); font-size:0.9375rem;">Expense Red</strong>
+              <div class="text-mono" style="font-size:0.8125rem; margin-top:4px; color:var(--text-secondary);">#E5484D</div>
+            </div>
           </div>
         </div>
 

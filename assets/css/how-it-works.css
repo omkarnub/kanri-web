@@ -163,7 +163,7 @@
   border-radius: 50%;
   background: var(--surface, #181818);
   border: 1px solid rgba(255, 255, 255, 0.16);
-  color: var(--dim, #666666);
+  color: #A1A1AA;
   font-family: var(--font-mono);
   font-size: 0.75rem;
   font-weight: 500;
