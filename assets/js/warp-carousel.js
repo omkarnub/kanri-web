@@ -520,7 +520,10 @@ void main(){
     });
 
     // Pre-render 12 card offscreen canvases
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const isWeakDevice = (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4) ||
+                           (navigator.deviceMemory && navigator.deviceMemory <= 4) ||
+                           (navigator.connection && navigator.connection.saveData);
+      const dpr = isWeakDevice ? 1 : Math.min(window.devicePixelRatio || 1, 2);
     const cardCanvases = cards.map((c) => {
       const cv = document.createElement("canvas");
       cv.width = Math.round(CW * dpr * 1.5);
@@ -635,7 +638,10 @@ void main(){
       const rect = container.getBoundingClientRect();
       const w = Math.max(320, rect.width);
       const h = Math.max(380, rect.height || 480);
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const isWeakDevice = (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4) ||
+                           (navigator.deviceMemory && navigator.deviceMemory <= 4) ||
+                           (navigator.connection && navigator.connection.saveData);
+      const dpr = isWeakDevice ? 1 : Math.min(window.devicePixelRatio || 1, 2);
       canvas.width = Math.round(w * dpr);
       canvas.height = Math.round(h * dpr);
       if (glState) {
@@ -671,9 +677,38 @@ void main(){
     canvas.addEventListener("pointerup", endDrag);
     canvas.addEventListener("pointercancel", endDrag);
 
+    let isInView = true;
+    let rafId = null;
+
+    if ('IntersectionObserver' in window) {
+      const warpObs = new IntersectionObserver(([entry]) => {
+        isInView = entry.isIntersecting;
+        if (isInView && !document.hidden) {
+          if (!rafId) rafId = requestAnimationFrame(frame);
+        } else {
+          cancelAnimationFrame(rafId);
+          rafId = null;
+        }
+      }, { rootMargin: '100px 0px' });
+      warpObs.observe(container);
+    }
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        cancelAnimationFrame(rafId);
+        rafId = null;
+      } else if (isInView) {
+        if (!rafId) rafId = requestAnimationFrame(frame);
+      }
+    });
+
     // Render loop
     function frame(now) {
-      requestAnimationFrame(frame);
+      if (!isInView || document.hidden) {
+        rafId = null;
+        return;
+      }
+      rafId = requestAnimationFrame(frame);
       const elapsedSec = (now - startTime) / 1000;
       const baseProgress = autoplayProgress(elapsedSec, 0, step, interval);
       const currentProgress = baseProgress + manualOffset;
@@ -682,7 +717,7 @@ void main(){
       const h = canvas.height;
       if (w <= 0 || h <= 0) return;
 
-      const unit = Math.min(w / 720, h / 450);
+      const unit = (w < 600) ? Math.max(0.68, Math.min(w / 480, h / 450)) : Math.min(w / 720, h / 450);
 
       // Generalized poseSet for N = 12 Kanri Widgets
       const ids = Array.from({ length: N }, (_, c) => {
@@ -747,7 +782,7 @@ void main(){
       }
     }
 
-    requestAnimationFrame(frame);
+    if (isInView && !document.hidden) rafId = requestAnimationFrame(frame);
   }
 
   // Auto mount on document load

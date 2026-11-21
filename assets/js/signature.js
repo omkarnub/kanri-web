@@ -7,17 +7,17 @@
 (function () {
   'use strict';
 
-  function initSignature() {
-    const signatureSvgs = document.querySelectorAll('.signature-svg');
+  function initSignature(root) {
+    const scope = root || document;
+    const signatureSvgs = scope.querySelectorAll('.signature-svg');
     if (!signatureSvgs.length) return;
 
     signatureSvgs.forEach((svg) => {
-      // Calculate total length for each path if browser needs explicit stroke-dasharray
       const strokePaths = svg.querySelectorAll('.sig-stroke-path');
       const maskPaths = svg.querySelectorAll('.sig-mask-path');
 
       function setupPaths() {
-        strokePaths.forEach((path, i) => {
+        strokePaths.forEach((path) => {
           try {
             const len = path.getTotalLength();
             if (len > 0) {
@@ -28,7 +28,7 @@
           }
         });
 
-        maskPaths.forEach((path, i) => {
+        maskPaths.forEach((path) => {
           try {
             const len = path.getTotalLength();
             if (len > 0) {
@@ -42,24 +42,19 @@
 
       setupPaths();
 
-      // Trigger animation function
       function triggerAnimation() {
         svg.classList.remove('animate');
-        // Force reflow
         void svg.offsetWidth;
         svg.classList.add('animate');
       }
 
-      // Replay functionality on click
       const wrapper = svg.closest('.creator-signature-card') || svg.parentElement;
       if (wrapper) {
-        wrapper.addEventListener('click', (e) => {
-          // If click was not directly following an active click
+        wrapper.addEventListener('click', () => {
           triggerAnimation();
         });
       }
 
-      // IntersectionObserver to animate when scrolled into view
       if ('IntersectionObserver' in window) {
         const observer = new IntersectionObserver(
           (entries) => {
@@ -78,19 +73,57 @@
 
         observer.observe(svg);
       } else {
-        // Fallback for browsers without IntersectionObserver
         setTimeout(triggerAnimation, 500);
       }
     });
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initSignature);
-  } else {
-    initSignature();
+  function loadLazySignature() {
+    const placeholder = document.getElementById('creator-signature-placeholder');
+    if (!placeholder) {
+      initSignature();
+      return;
+    }
+
+    function fetchAndMount() {
+      fetch('assets/signature-omkarnub.svg')
+        .then((res) => {
+          if (!res.ok) throw new Error('Failed to load signature SVG');
+          return res.text();
+        })
+        .then((svgText) => {
+          placeholder.innerHTML = svgText;
+          initSignature(placeholder);
+        })
+        .catch(() => {
+          // If fetch fails, keep noscript fallback visible
+          const fallback = placeholder.querySelector('noscript');
+          if (fallback) placeholder.innerHTML = fallback.innerHTML;
+        });
+    }
+
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          if (entries[0].isIntersecting) {
+            observer.disconnect();
+            fetchAndMount();
+          }
+        },
+        { rootMargin: '300px 0px' }
+      );
+      observer.observe(placeholder);
+    } else {
+      fetchAndMount();
+    }
   }
 
-  // Global helper to replay signature
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadLazySignature);
+  } else {
+    loadLazySignature();
+  }
+
   window.replaySignature = function () {
     const signatureSvgs = document.querySelectorAll('.signature-svg');
     signatureSvgs.forEach((svg) => {

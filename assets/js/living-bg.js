@@ -200,7 +200,10 @@
 
   // ---------------------------------------------------------------- build
   function build() {
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const isWeakDevice = (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4) ||
+                         (navigator.deviceMemory && navigator.deviceMemory <= 4) ||
+                         (navigator.connection && navigator.connection.saveData);
+    const dpr = isWeakDevice ? 1 : Math.min(window.devicePixelRatio || 1, 2);
     const bgEl = document.getElementById('bg');
     const cw = bgEl ? (bgEl.clientWidth || innerWidth) : innerWidth;
     const ch = bgEl ? (bgEl.clientHeight || innerHeight) : innerHeight;
@@ -855,14 +858,39 @@
       applyScroll(); 
     }
 
-    if (!still) rafId = requestAnimationFrame(frame);
+    if (!still && isVisibleOnScreen && !document.hidden) rafId = requestAnimationFrame(frame); else rafId = null;
   }
+
+  let isVisibleOnScreen = true;
 
   function start() {
     cancelAnimationFrame(rafId); t0 = null;
     if (reduced) { requestAnimationFrame(ts => frame(ts, true)); return; }
+    if (!isVisibleOnScreen || document.hidden) { rafId = null; return; }
     rafId = requestAnimationFrame(frame);
   }
+
+  if (wrap && 'IntersectionObserver' in window) {
+    const bgObs = new IntersectionObserver(([entry]) => {
+      isVisibleOnScreen = entry.isIntersecting;
+      if (isVisibleOnScreen && !document.hidden && !reduced) {
+        if (!rafId) start();
+      } else {
+        cancelAnimationFrame(rafId);
+        rafId = null;
+      }
+    }, { threshold: 0 });
+    bgObs.observe(wrap);
+  }
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      cancelAnimationFrame(rafId);
+      rafId = null;
+    } else if (isVisibleOnScreen && !reduced) {
+      start();
+    }
+  });
 
   // ---------------------------------------------------------------- parallax transforms
   function applyScroll() {
