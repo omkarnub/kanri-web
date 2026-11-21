@@ -9,21 +9,21 @@
   const $ = id => document.getElementById(id);
   const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 
-  const cvs = { 
-    paper: $('paper'), 
-    wet: $('wet'), 
-    mist: $('mist'), 
-    dyn: $('dyn'), 
-    landBase: $('landBase'), 
-    landFx: $('landFx'), 
-    grain: $('grain') 
+  const cvs = {
+    paper: $('paper'),
+    wet: $('wet'),
+    mist: $('mist'),
+    dyn: $('dyn'),
+    landBase: $('landBase'),
+    landFx: $('landFx'),
+    grain: $('grain')
   };
   const landEl = $('land');
   const bgContainer = $('bg');
 
   if (!cvs.paper || !bgContainer) return;
 
-  const ctx = {}; 
+  const ctx = {};
   for (const k in cvs) {
     if (cvs[k]) ctx[k] = cvs[k].getContext('2d');
   }
@@ -201,26 +201,26 @@
   // ---------------------------------------------------------------- build
   function build() {
     const isWeakDevice = (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4) ||
-                         (navigator.deviceMemory && navigator.deviceMemory <= 4) ||
-                         (navigator.connection && navigator.connection.saveData);
+      (navigator.deviceMemory && navigator.deviceMemory <= 4) ||
+      (navigator.connection && navigator.connection.saveData);
     const dpr = isWeakDevice ? 1 : Math.min(window.devicePixelRatio || 1, 2);
     const bgEl = document.getElementById('bg');
     const cw = bgEl ? (bgEl.clientWidth || innerWidth) : innerWidth;
     const ch = bgEl ? (bgEl.clientHeight || innerHeight) : innerHeight;
     const k = Math.min(1, 2200 / (Math.max(cw, ch) * dpr));
-    W = Math.max(2, Math.round(cw * dpr * k)); 
+    W = Math.max(2, Math.round(cw * dpr * k));
     H = Math.max(2, Math.round(ch * dpr * k));
     portrait = H > W; S = portrait ? W / 1080 : H / 1080;
     wy = H * (portrait ? .715 : .70);
 
     LH = Math.round(H * 1.3);
-    for (const key of ['paper', 'wet', 'dyn', 'grain']) { 
+    for (const key of ['paper', 'wet', 'dyn', 'grain']) {
       if (cvs[key]) { cvs[key].width = W; cvs[key].height = H; }
     }
     if (cvs.landBase) { cvs.landBase.width = W; cvs.landBase.height = LH; }
     if (cvs.landFx) { cvs.landFx.width = W; cvs.landFx.height = LH; }
     if (cvs.mist) { cvs.mist.width = Math.round(W / 2); cvs.mist.height = Math.round(H / 2); }
-    
+
     for (const o of [farC, midC, nearC]) { o.c.width = W; o.c.height = H; }
     for (const o of [landC, scratch]) { o.c.width = W; o.c.height = LH; }
 
@@ -276,17 +276,17 @@
       c.fillStyle = sg; c.beginPath(); c.arc(sx, sy, sr * 4.2, 0, TAU); c.fill();
       c.fillStyle = `rgba(${a},${b},${d},.42)`; c.beginPath(); c.arc(sx, sy, sr, 0, TAU); c.fill();
 
-      wash(c, ridge(P([[.60,.60],[.70,.46],[.79,.36],[.86,.45],[.96,.60],[1.0,.64]]), 6 * S, 9, 101), mistBot, pal.mtFarRight, pal.mtBodyLight, pap, .54, 105);
-      wash(c, ridge(P([[0,.56],[.07,.44],[.15,.50],[.24,.60],[.30,.64]]), 6 * S, 9, 111), mistBot, pal.mtFarRight, pal.mtBodyLight, pap, .48, 115);
-      wash(c, ridge(P([[.04,.64],[.12,.52],[.22,.39],[.285,.27],[.335,.15],[.375,.125],[.415,.19],[.46,.34],[.50,.45],[.55,.47],[.60,.43],[.66,.51],[.74,.59],[.84,.66]]), 5 * S, 11, 202), mistBot, pal.mtPeakDark, pal.mtBodyMid, pap, .88, 208);
-      wash(c, ridge(P([[.24,.55],[.30,.40],[.345,.26],[.37,.14]]), 6 * S, 8, 215), mistBot, pal.mtPeakDark, pal.mtBodyMid, pap, .32, 216);
+      wash(c, ridge(P([[.60, .60], [.70, .46], [.79, .36], [.86, .45], [.96, .60], [1.0, .64]]), 6 * S, 9, 101), mistBot, pal.mtFarRight, pal.mtBodyLight, pap, .54, 105);
+      wash(c, ridge(P([[0, .56], [.07, .44], [.15, .50], [.24, .60], [.30, .64]]), 6 * S, 9, 111), mistBot, pal.mtFarRight, pal.mtBodyLight, pap, .48, 115);
+      wash(c, ridge(P([[.04, .64], [.12, .52], [.22, .39], [.285, .27], [.335, .15], [.375, .125], [.415, .19], [.46, .34], [.50, .45], [.55, .47], [.60, .43], [.66, .51], [.74, .59], [.84, .66]]), 5 * S, 11, 202), mistBot, pal.mtPeakDark, pal.mtBodyMid, pap, .88, 208);
+      wash(c, ridge(P([[.24, .55], [.30, .40], [.345, .26], [.37, .14]]), 6 * S, 8, 215), mistBot, pal.mtPeakDark, pal.mtBodyMid, pap, .32, 216);
     }
 
     // ---- mid layer: misty hills + far-bank
     {
       const c = midC.x, bot = H * .765;
-      wash(c, ridge(P([[.12,.69],[.22,.635],[.31,.605],[.40,.575],[.47,.55],[.54,.585],[.62,.625],[.72,.665],[.84,.70]]), 5 * S, 9, 301), bot, pal.midTreeDabs, pal.midHillWash, pap, .58, 305);
-      wash(c, ridge(P([[.86,.70],[.91,.63],[.96,.595],[1.0,.58]]), 5 * S, 7, 360), bot, pal.midTreeDabs, pal.midHillWash, pap, .5, 365);
+      wash(c, ridge(P([[.12, .69], [.22, .635], [.31, .605], [.40, .575], [.47, .55], [.54, .585], [.62, .625], [.72, .665], [.84, .70]]), 5 * S, 9, 301), bot, pal.midTreeDabs, pal.midHillWash, pap, .58, 305);
+      wash(c, ridge(P([[.86, .70], [.91, .63], [.96, .595], [1.0, .58]]), 5 * S, 7, 360), bot, pal.midTreeDabs, pal.midHillWash, pap, .5, 365);
       [.635, .67, .70, .725].forEach((fy, i) => {
         const y = H * fy, g = c.createLinearGradient(0, y - 26 * S, 0, y + 26 * S);
         g.addColorStop(0, rgba(pap, 0)); g.addColorStop(.5, rgba(pap, .55 + i * .1)); g.addColorStop(1, rgba(pap, 0));
@@ -305,31 +305,31 @@
         c.lineWidth = rng.range(1.4, 2.8) * S; c.beginPath(); c.moveTo(W * .15, y); c.lineTo(W * .88, y + rng.range(-1.5, 1.5)); c.stroke();
       }
       const [hl] = [pal.treeHalo];
-      [[.09,.43,.07,.06,.42],[.07,.50,.08,.055,.38],[.13,.55,.075,.05,.35],[.17,.60,.06,.045,.30]].forEach(([fx, fy, rx, ry, a]) => {
+      [[.09, .43, .07, .06, .42], [.07, .50, .08, .055, .38], [.13, .55, .075, .05, .35], [.17, .60, .06, .045, .30]].forEach(([fx, fy, rx, ry, a]) => {
         const x = fx * W, y = fy * H, r = Math.max(rx * W, ry * H);
         const g = c.createRadialGradient(x, y, 6, x, y, r);
         g.addColorStop(0, rgba(hl, a)); g.addColorStop(1, rgba(hl, 0));
         c.fillStyle = g; c.beginPath(); c.ellipse(x, y, rx * W, ry * H, 0, 0, TAU); c.fill();
       });
-      const lo = P([[-.02,.78],[.035,.745],[.09,.725],[.15,.74],[.21,.765],[.28,.785],[.36,.80],[.43,.812]]).map(([x, y]) => ({ x, y }));
+      const lo = P([[-.02, .78], [.035, .745], [.09, .725], [.15, .74], [.21, .765], [.28, .785], [.36, .80], [.43, .812]]).map(([x, y]) => ({ x, y }));
       rock(c, pal, lo, H * .83, true, 404);
       bakeLand(pal);
     }
   }
 
   // ---------------------------------------------------------------- foreground land
-  const FRONT = [[-.02,.99],[.16,.978],[.36,.992],[.56,.986],[.72,.968],[.86,.95],[1.02,.934]];
+  const FRONT = [[-.02, .99], [.16, .978], [.36, .992], [.56, .986], [.72, .968], [.86, .95], [1.02, .934]];
   const frontY = x => frontPts[clamp(Math.round((x - frontPts[0].x) / frontStep), 0, frontPts.length - 1)].y;
 
   function bakeLand(pal) {
     const c = landC.x; c.clearRect(0, 0, W, LH);
     const pap = pal.paperRgb, rng = new RNG(808);
     frontStep = 5 * S;
-    const backPts = ridge(P([[-.02,.95],[.14,.935],[.3,.946],[.48,.938],[.66,.952],[.82,.94],[1.02,.944]]), frontStep, 6, 801);
+    const backPts = ridge(P([[-.02, .95], [.14, .935], [.3, .946], [.48, .938], [.66, .952], [.82, .94], [1.02, .944]]), frontStep, 6, 801);
     wash(c, backPts, H * 1.1, pal.midHillWash, pal.rockUmber, pap, .38, 805);
 
     // far bank: small dry-brush trees
-    [.12,.34,.58,.8].forEach((fx, i) => {
+    [.12, .34, .58, .8].forEach((fx, i) => {
       const x = fx * W, y = backPts[clamp(Math.round((x - backPts[0].x) / frontStep), 0, backPts.length - 1)].y + 3 * S;
       const h = rng.range(38, 82) * S, lean = rng.range(-6, 6) * S;
       c.strokeStyle = rgba(pal.treeMid, .6); c.lineWidth = rng.range(1.2, 2) * S; c.lineCap = 'round';
@@ -385,19 +385,19 @@
   function makeActors(pal) {
     midDabs = [];
     const rng = new RNG(333);
-    [[.28,.62,9],[.36,.60,12],[.44,.585,14],[.52,.605,12],[.61,.64,15],[.70,.67,10],[.33,.635,8]].forEach(([fx, fy, n], ci) => {
+    [[.28, .62, 9], [.36, .60, 12], [.44, .585, 14], [.52, .605, 12], [.61, .64, 15], [.70, .67, 10], [.33, .635, 8]].forEach(([fx, fy, n], ci) => {
       for (let i = 0; i < n; i++) midDabs.push({
         x: fx * W + rng.range(-38, 38) * S, y: fy * H + rng.range(-14, 14) * S,
         rw: rng.range(3, 7.5) * S, rh: rng.range(4, 12) * S, a: rng.range(.18, .44), ci, k: i / n
       });
     });
 
-    const roots = [[.085,.738,330,-8,5.2],[.118,.748,285,10,4.4],[.172,.762,200,26,3.8]];
+    const roots = [[.085, .738, 330, -8, 5.2], [.118, .748, 285, 10, 4.4], [.172, .762, 200, 26, 3.8]];
     trees = roots.map(([fx, fy, h, lean, w], i) => ({ rx: fx * W, ry: fy * H, h: h * S, lean: lean * S, w: w * S, i, blossom: i === 2 }));
     foliage = [];
     const fr = new RNG(410);
     trees.forEach(tr => {
-      [[1.0,0,22],[.86,-1,18],[.72,1,16],[.58,-1,14]].forEach(([f, side, n]) => {
+      [[1.0, 0, 22], [.86, -1, 18], [.72, 1, 16], [.58, -1, 14]].forEach(([f, side, n]) => {
         const cx = tr.rx + tr.lean * f + side * 30 * S, cy = tr.ry - tr.h * f;
         for (let i = 0; i < n; i++) {
           const y = cy + fr.range(-18, 18) * S;
@@ -419,8 +419,10 @@
       const fx = left ? rr.range(.03, .12) : rr.range(.84, 1.0);
       const x0 = fx * W, by = frontY(x0) + 5 * S;
       const len = rr.range(left ? 70 : 100, left ? 150 : 230) * S, lean = rr.range(-70, 55) * S;
-      reeds.push({ x0, y0: by, cx: x0 + lean * .25, cy: by - len * .62, x1: x0 + lean, y1: by - len,
-        w: rr.range(5, 10) * S, delay: rr.range(0, .5), ph: rr.range(0, TAU), len, dark: rr.next() > .25 });
+      reeds.push({
+        x0, y0: by, cx: x0 + lean * .25, cy: by - len * .62, x1: x0 + lean, y1: by - len,
+        w: rr.range(5, 10) * S, delay: rr.range(0, .5), ph: rr.range(0, TAU), len, dark: rr.next() > .25
+      });
     }
     grass = [];
     const gr = new RNG(707);
@@ -434,13 +436,15 @@
 
     wisps = [];
     const wr = new RNG(55);
-    [[.30,.62],[.42,.50],[.52,.40],[.60,.70],[.68,.34],[.74,.58],[.82,.46]].forEach(([fy, a], i) => wisps.push({
+    [[.30, .62], [.42, .50], [.52, .40], [.60, .70], [.68, .34], [.74, .58], [.82, .46]].forEach(([fy, a], i) => wisps.push({
       y: fy, x0: wr.range(0, 1.6), sp: (4 + i * 2.6) * S * (i % 2 ? -1 : 1), w: wr.range(.35, .6), a: a * .6, sq: wr.range(.12, .2)
     }));
     streaks = [];
-    for (let i = 0; i < 26; i++) streaks.push({ y: wy + (.04 + wr.range(0, .22)) * H, x: wr.range(0, W), len: wr.range(60, 220) * S,
-      sp: wr.range(4, 14) * S, a: wr.range(.05, .14), lw: wr.range(1, 2.2) * S, ph: wr.range(0, TAU) });
-    const bx = portrait ? [[.70,.34],[.80,.25],[.60,.22],[.86,.40]] : [[.72,.34],[.82,.22],[.66,.20],[.88,.40]];
+    for (let i = 0; i < 26; i++) streaks.push({
+      y: wy + (.04 + wr.range(0, .22)) * H, x: wr.range(0, W), len: wr.range(60, 220) * S,
+      sp: wr.range(4, 14) * S, a: wr.range(.05, .14), lw: wr.range(1, 2.2) * S, ph: wr.range(0, TAU)
+    });
+    const bx = portrait ? [[.70, .34], [.80, .25], [.60, .22], [.86, .40]] : [[.72, .34], [.82, .22], [.66, .20], [.88, .40]];
     const types = ['glider', 'banker', 'high', 'glider'], scs = [1, .68, .52, .76].map(v => v * 1.1 * S);
     birds = bx.map(([fx, fy], i) => ({ bx: fx * W, by: fy * H, sc: scs[i], type: types[i], ph: wr.range(0, 6), wph: wr.range(0, 6), alpha: 0, bank: 0, x: fx * W, y: fy * H }));
     petals = [];
@@ -451,17 +455,17 @@
   function newPetal(initial) {
     const tr = trees[2] || { rx: W * .17, ry: H * .76, h: 200 * S };
     const r = Math.random();
-    return { 
-      x: tr.rx + (Math.random() - .5) * 120 * S, 
+    return {
+      x: tr.rx + (Math.random() - .5) * 120 * S,
       y: tr.ry - tr.h * (.5 + Math.random() * .5) + (initial ? Math.random() * 300 * S : 0),
-      vx: (10 + Math.random() * 22) * S, 
-      vy: (8 + Math.random() * 14) * S, 
+      vx: (10 + Math.random() * 22) * S,
+      vy: (8 + Math.random() * 14) * S,
       r: (2.6 + Math.random() * 3) * S,
-      ang: Math.random() * TAU, 
-      spin: (Math.random() - .5) * 1.2, 
-      ph: Math.random() * TAU, 
-      life: initial ? Math.random() : 0, 
-      col: r > .4 ? 0 : 1 
+      ang: Math.random() * TAU,
+      spin: (Math.random() - .5) * 1.2,
+      ph: Math.random() * TAU,
+      life: initial ? Math.random() : 0,
+      col: r > .4 ? 0 : 1
     };
   }
 
@@ -558,13 +562,13 @@
       if (d.blossom) {
         const col = d.deep ? pal.plumRed : pal.plumBlush, a = (d.deep ? .85 : .65) * p;
         dc.fillStyle = rgba(col, a);
-        for (let k = 0; k < 4; k++) { 
-          const an = k / 4 * TAU + d.pa; 
-          dc.beginPath(); dc.arc(x + Math.cos(an) * 4.6 * S * p, y + Math.sin(an) * 4.6 * S * p, 3.6 * S * p, 0, TAU); dc.fill(); 
+        for (let k = 0; k < 4; k++) {
+          const an = k / 4 * TAU + d.pa;
+          dc.beginPath(); dc.arc(x + Math.cos(an) * 4.6 * S * p, y + Math.sin(an) * 4.6 * S * p, 3.6 * S * p, 0, TAU); dc.fill();
         }
-        if (d.deep) { 
-          dc.fillStyle = rgba(pal.treeDark, .85 * p); 
-          dc.beginPath(); dc.arc(x, y, 1.6 * S * p, 0, TAU); dc.fill(); 
+        if (d.deep) {
+          dc.fillStyle = rgba(pal.treeDark, .85 * p);
+          dc.beginPath(); dc.arc(x, y, 1.6 * S * p, 0, TAU); dc.fill();
         }
       } else {
         dc.fillStyle = rgba(d.mid ? pal.treeMid : pal.treeDark, d.a * p);
@@ -608,9 +612,9 @@
       lf.strokeStyle = rgba(pal.treeDark, .8); lf.lineWidth = 1.6 * S; lf.lineCap = 'round';
       lf.beginPath(); lf.moveTo(f.x, f.y); lf.quadraticCurveTo(f.x + sw * .3 * p, f.y - f.len * .6 * p, tx, ty); lf.stroke();
       lf.fillStyle = rgba(f.deep ? pal.plumRed : pal.plumBlush, .88 * p);
-      for (let k = 0; k < 5; k++) { 
-        const a = k / 5 * TAU + f.ph; 
-        lf.beginPath(); lf.arc(tx + Math.cos(a) * 3.6 * S * p, ty + Math.sin(a) * 3.6 * S * p, 2.8 * S * p, 0, TAU); lf.fill(); 
+      for (let k = 0; k < 5; k++) {
+        const a = k / 5 * TAU + f.ph;
+        lf.beginPath(); lf.arc(tx + Math.cos(a) * 3.6 * S * p, ty + Math.sin(a) * 3.6 * S * p, 2.8 * S * p, 0, TAU); lf.fill();
       }
       lf.fillStyle = rgba(pal.treeDark, .85 * p); lf.beginPath(); lf.arc(tx, ty, 1.5 * S * p, 0, TAU); lf.fill();
     });
@@ -680,8 +684,8 @@
     c.fillStyle = rgba(rf, .24); hull(c, false, oarPh, T);
     c.fillStyle = rgba(oc, .18); c.fillRect(10, -56, 114, 24); c.restore();
     c.strokeStyle = rgba(pr, .68);
-    for (let ry = 10; ry <= 62; ry += 6.5) { 
-      c.lineWidth = 1.8; c.beginPath(); c.moveTo(-200, ry + Math.sin(T * 1.2 + ry) * .6); c.lineTo(210, ry); c.stroke(); 
+    for (let ry = 10; ry <= 62; ry += 6.5) {
+      c.lineWidth = 1.8; c.beginPath(); c.moveTo(-200, ry + Math.sin(T * 1.2 + ry) * .6); c.lineTo(210, ry); c.stroke();
     }
     c.strokeStyle = rgba(rf, .32); c.lineWidth = 1.4; c.beginPath();
     c.moveTo(-250, 3); c.lineTo(260, 3); c.moveTo(-215, 9); c.lineTo(220, 9); c.moveTo(-170, 16); c.lineTo(180, 16); c.stroke();
@@ -705,13 +709,13 @@
   // ---- birds
   function wingBeat(t, off) {
     const cyc = 4.6, u = ((t + off) % cyc) / cyc;
-    if (u < .58) { 
-      const an = (u / .58) * Math.PI * 4, env = Math.sin((u / .58) * Math.PI); 
-      return [Math.sin(an) * env, Math.sin(an - .52) * env]; 
+    if (u < .58) {
+      const an = (u / .58) * Math.PI * 4, env = Math.sin((u / .58) * Math.PI);
+      return [Math.sin(an) * env, Math.sin(an - .52) * env];
     }
     const s = Math.sin(((u - .58) / .42) * Math.PI) * .12; return [s, s * .8];
   }
-  
+
   function drawBirds(pal, reveal, dt) {
     if (!dc || reveal <= .01) return;
     const ink = pal.inkBlack;
@@ -756,24 +760,24 @@
   // ---- Kanri Calligraphy (管理) + Monogram Seal
   // Glyphs: 管 (Kuan / Control) & 理 (Li / Logic & Ledger)
   const glyphs = [
-    (c) => { 
+    (c) => {
       // 竹字头 (Bamboo radical) + 官
-      c.lineWidth = 3.2; c.beginPath(); 
-      c.moveTo(-12,-16); c.lineTo(-4,-15); c.moveTo(-8,-16); c.lineTo(-8,-9);
-      c.moveTo(2,-16); c.lineTo(11,-15); c.moveTo(7,-16); c.lineTo(5,-9);
-      c.moveTo(-11,-8); c.lineTo(11,-8); c.moveTo(-10,-8); c.lineTo(-12,2);
-      c.moveTo(10,-8); c.lineTo(12,2); c.moveTo(-8,2); c.lineTo(8,2);
-      c.moveTo(-7,8); c.lineTo(7,8); c.moveTo(-7,8); c.lineTo(-7,15); c.moveTo(7,8); c.lineTo(7,15);
-      c.moveTo(-7,15); c.lineTo(7,15); c.stroke();
+      c.lineWidth = 3.2; c.beginPath();
+      c.moveTo(-12, -16); c.lineTo(-4, -15); c.moveTo(-8, -16); c.lineTo(-8, -9);
+      c.moveTo(2, -16); c.lineTo(11, -15); c.moveTo(7, -16); c.lineTo(5, -9);
+      c.moveTo(-11, -8); c.lineTo(11, -8); c.moveTo(-10, -8); c.lineTo(-12, 2);
+      c.moveTo(10, -8); c.lineTo(12, 2); c.moveTo(-8, 2); c.lineTo(8, 2);
+      c.moveTo(-7, 8); c.lineTo(7, 8); c.moveTo(-7, 8); c.lineTo(-7, 15); c.moveTo(7, 8); c.lineTo(7, 15);
+      c.moveTo(-7, 15); c.lineTo(7, 15); c.stroke();
     },
-    (c) => { 
+    (c) => {
       // 王 (Jade) + 里 (Ledger/Village)
-      c.lineWidth = 3.2; c.beginPath(); 
-      c.moveTo(-14,-14); c.lineTo(-4,-14); c.moveTo(-9,-14); c.lineTo(-9,13);
-      c.moveTo(-12,-2); c.lineTo(-5,-2); c.moveTo(-14,13); c.lineTo(-3,13);
-      c.moveTo(1,-14); c.lineTo(14,-14); c.moveTo(1,-14); c.lineTo(1,-3); c.moveTo(14,-14); c.lineTo(14,-3);
-      c.moveTo(1,-3); c.lineTo(14,-3); c.moveTo(7,-14); c.lineTo(7,14);
-      c.moveTo(2,5); c.lineTo(13,5); c.moveTo(0,14); c.lineTo(15,14); c.stroke();
+      c.lineWidth = 3.2; c.beginPath();
+      c.moveTo(-14, -14); c.lineTo(-4, -14); c.moveTo(-9, -14); c.lineTo(-9, 13);
+      c.moveTo(-12, -2); c.lineTo(-5, -2); c.moveTo(-14, 13); c.lineTo(-3, 13);
+      c.moveTo(1, -14); c.lineTo(14, -14); c.moveTo(1, -14); c.lineTo(1, -3); c.moveTo(14, -14); c.lineTo(14, -3);
+      c.moveTo(1, -3); c.lineTo(14, -3); c.moveTo(7, -14); c.lineTo(7, 14);
+      c.moveTo(2, 5); c.lineTo(13, 5); c.moveTo(0, 14); c.lineTo(15, 14); c.stroke();
     }
   ];
 
@@ -789,7 +793,7 @@
       dc.beginPath(); dc.rect(-20, -20, 40, 40 * gp); dc.clip();
       dc.globalAlpha = Math.min(1, gp * 1.6); fn(dc); dc.restore();
     });
-    
+
     // Kanri Mon Monogram Seal (管理)
     const sp = clamp((g - .72) / .28, 0, 1);
     if (sp > .01) {
@@ -800,9 +804,9 @@
       dc.strokeStyle = rgba(pr, .9); dc.lineWidth = 1.7 * gs; dc.strokeRect(sx + 3 * gs, sy + 3 * gs, sz - 6 * gs, sz - 6 * gs);
       // Clean 4-fold mini glyph
       dc.beginPath(); const u = gs;
-      dc.moveTo(sx + 7 * u, sy + 7 * u); dc.lineTo(sx + 7 * u, sy + sz - 7 * u); 
+      dc.moveTo(sx + 7 * u, sy + 7 * u); dc.lineTo(sx + 7 * u, sy + sz - 7 * u);
       dc.moveTo(sx + 4 * u, sy + 14 * u); dc.lineTo(sx + 14 * u, sy + 14 * u);
-      dc.moveTo(sx + 15 * u, sy + 8 * u); dc.lineTo(sx + sz - 6 * u, sy + 8 * u); 
+      dc.moveTo(sx + 15 * u, sy + 8 * u); dc.lineTo(sx + sz - 6 * u, sy + 8 * u);
       dc.moveTo(sx + 15 * u, sy + 17 * u); dc.lineTo(sx + sz - 6 * u, sy + 17 * u); dc.stroke();
       dc.restore();
       if (sp >= 1) {
@@ -838,9 +842,9 @@
       const bScale = .95 * S;
       if (T - lastRipple > 1.45 && bIn > .35) {
         lastRipple = T;
-        ripples.push({ 
-          x: bx + (Math.random() > .45 ? 135 : -135) * bScale + (Math.random() - .5) * 24 * S, 
-          y: by + 6 * S, r: 10 * S, max: 110 * S, a: .22 
+        ripples.push({
+          x: bx + (Math.random() > .45 ? 135 : -135) * bScale + (Math.random() - .5) * 24 * S,
+          y: by + 6 * S, r: 10 * S, max: 110 * S, a: .22
         });
       }
       drawBoat(pal, bx, by, bScale, ph(10.5, 13.5));
@@ -853,9 +857,9 @@
     drawLand(pal);
 
     // Smooth scroll internal interpolation
-    if (Math.abs(scrollTarget - scrollCur) > .0002) { 
-      scrollCur += (scrollTarget - scrollCur) * .12; 
-      applyScroll(); 
+    if (Math.abs(scrollTarget - scrollCur) > .0002) {
+      scrollCur += (scrollTarget - scrollCur) * .12;
+      applyScroll();
     }
 
     if (!still && isVisibleOnScreen && !document.hidden) rafId = requestAnimationFrame(frame); else rafId = null;
@@ -918,35 +922,35 @@
   onScroll();
 
   let rz = 0;
-  window.addEventListener('resize', () => { 
-    clearTimeout(rz); 
+  window.addEventListener('resize', () => {
+    clearTimeout(rz);
     rz = setTimeout(() => {
-      const keepT = t0 === null ? null : performance.now() - t0; 
+      const keepT = t0 === null ? null : performance.now() - t0;
       build();
-      if (reduced) start(); else if (keepT !== null) t0 = performance.now() - keepT; 
-    }, 180); 
+      if (reduced) start(); else if (keepT !== null) t0 = performance.now() - keepT;
+    }, 180);
   });
 
   window.InkBackground = {
     depth,
-    setScroll(p) { 
-      scrollTarget = Math.max(0, +p || 0); 
-      if (reduced) { scrollCur = scrollTarget; applyScroll(); } 
+    setScroll(p) {
+      scrollTarget = Math.max(0, +p || 0);
+      if (reduced) { scrollCur = scrollTarget; applyScroll(); }
     },
-    replay() { 
-      wetFrozen = false; landFrozen = false; 
-      birds.forEach(b => b.alpha = 0); 
-      ripples = []; 
-      start(); 
+    replay() {
+      wetFrozen = false; landFrozen = false;
+      birds.forEach(b => b.alpha = 0);
+      ripples = [];
+      start();
     },
-    setTheme(n) { 
+    setTheme(n) {
       // Hero painting is strictly light mode; ignore dark theme requests
-      return; 
+      return;
     },
-    setSpeed(n) { 
-      const keep = tp / speed; 
-      speed = clamp(+n || 1, .25, 4); 
-      t0 = performance.now() - (keep / speed) * 1000; 
+    setSpeed(n) {
+      const keep = tp / speed;
+      speed = clamp(+n || 1, .25, 4);
+      t0 = performance.now() - (keep / speed) * 1000;
     }
   };
 })();

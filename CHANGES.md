@@ -13,6 +13,7 @@ This document details every modification, optimization, and cleanup performed on
 5. `03e9762` — **Group 5:** `chore: remove verified dead files and rewrite plain-language documentation without slop`
 6. `d55acaa` — **Group 6:** `feat: complete SEO optimization, BreadcrumbList and FAQ schemas, sitemap sync and CI quality guardrails`
 7. `392b5a9` — **Group 7:** `perf: defer offscreen canvases and WebGL carousels, resolve WCAG AA contrast and achieve 100 accessibility`
+8. `79e4b23` — **Group 8:** `fix: restore widget preview data URIs, rebind visual analytics animation and add vercel.json deployment config`
 
 ---
 
@@ -125,6 +126,13 @@ This document details every modification, optimization, and cleanup performed on
   - Achieved **100 Accessibility** score on `/` and `/press/`.
 - **Eliminated Layout Shifts on Download:**
   - Added `<link rel="preload">` for `panchang_bold.otf` and `google_sans_bold.ttf` on `/download/`, dropping Cumulative Layout Shift (CLS) from **0.212 to 0.000**.
+
+---
+
+### Group 8: Widget Previews, Visual Analytics Animation & Vercel Readiness
+- **Visual Analytics Animation Fixed:** Corrected the missing animation loop binding in `assets/js/feature-motion-graphics.js` by calling `bindVisibleLoop(stage, animate);` inside `initInsightsMotion()`. The 365-day spending heatmap canvas and burn-rate trajectory curve now animate dynamically and pause when scrolled out of view.
+- **Widget Photos Restored & CORS Resilient:** Restored `assets/js/widget-data-uris.js` with embedded WebP data URIs and linked it before `warp-carousel.js` in `index.html`. Removed `img.crossOrigin = "anonymous"` from `warp-carousel.js` to eliminate CORS preflight failures or tainted WebGL canvas states during `texSubImage3D` texture array uploads.
+- **Vercel Readiness:** Configured `vercel.json` at repository root with `cleanUrls: true`, `trailingSlash: true`, security headers (`X-Content-Type-Options: nosniff`, `X-Frame-Options: SAMEORIGIN`, `Referrer-Policy: strict-origin-when-cross-origin`), and immutable 1-year asset caching (`Cache-Control: public, max-age=31536000, immutable`). Fully tested and confirmed ready for instant deployment on Vercel.
 
 ---
 

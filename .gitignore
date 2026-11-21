@@ -4,3 +4,7 @@ node_modules/
 .vscode/
 .idea/
 *.log
+screenshots/
+reference_map.json
+scratch_page_audit.json
+

@@ -178,7 +178,7 @@
       });
     }
 
-    // loop handled by bindVisibleLoop
+    bindVisibleLoop(stage, animate);
   }
 
   // =========================================================================
@@ -232,7 +232,7 @@
       if (deltaCash) deltaCash.style.opacity = progress > 0.1 ? '1' : '0.2';
     }
 
-    // loop handled by bindVisibleLoop
+    bindVisibleLoop(stage, animate);
   }
 
   // =========================================================================
@@ -378,7 +378,7 @@
       ctx.restore();
     }
 
-    // loop handled by bindVisibleLoop
+    bindVisibleLoop(stage, animate);
   }
 
   function init() {

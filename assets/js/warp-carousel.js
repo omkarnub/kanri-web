@@ -511,7 +511,6 @@ void main(){
     const widgetImages = {};
     cards.forEach((card) => {
       const img = new Image();
-      img.crossOrigin = "anonymous";
       const dataUri = (typeof window !== "undefined" && window.KANRI_WIDGET_DATA_URIS && window.KANRI_WIDGET_DATA_URIS[card.id])
         ? window.KANRI_WIDGET_DATA_URIS[card.id]
         : card.image;

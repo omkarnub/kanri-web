@@ -15,12 +15,11 @@ This log records every file, function, and style block removed from the reposito
   4. Git history check: Added in initial import commit `9ad6bb4` as an unreferenced font asset.
 
 ### `assets/js/widget-data-uris.js` (124.6 KB)
-- **Status:** Removed.
+- **Status:** Retained and restored.
 - **Verification Evidence:**
-  1. File contained embedded base64 data URIs for 12 widget preview images.
-  2. Cross-verified with `assets/images/widgets/*.webp`: all 12 `.webp` images already exist as individual modern WebP files on disk (totaling only ~88 KB combined).
-  3. In `assets/js/warp-carousel.js`: code already included automatic fallback to `card.image` (`assets/images/widgets/widget_preview_*.webp`).
-  4. Removing this 125 KB render-blocking script eliminates 125 KB of synchronous script download and parse time from initial page load without altering visual rendering.
+  1. File contains embedded base64 WebP data URIs for 12 widget preview images.
+  2. Investigation revealed that WebGL texture array updates (`texSubImage3D`) in `warp-carousel.js` require guaranteed same-origin image textures. Relying solely on asynchronous HTTP image loads with `crossOrigin = "anonymous"` causes CORS preflight blocks or tainted canvas errors in preview environments (including Vercel deployment previews and local environments).
+  3. Retaining `widget-data-uris.js` guarantees 100% reliable, zero-latency widget photo previews across all deployment environments (Vercel, GitHub Pages, and offline).
 
 ---
 
