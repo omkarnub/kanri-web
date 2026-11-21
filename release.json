@@ -1,0 +1,20 @@
+{
+  "version": "1.19.8",
+  "build": 75,
+  "targetSdk": 37,
+  "minAndroid": "Android 8.0+ (Oreo, API 26+)",
+  "releaseDate": "November 21, 2026",
+  "apkName": "Kanri-v1.19.8-release.apk",
+  "apkSize": "27.1 MB",
+  "apkBytes": 28418025,
+  "apkSha256": "34DF85A3EAD322E65BC46CB2C7AB30F2D8FBD682289CBA24740C05C3E47C7538",
+  "downloadUrl": "https://github.com/omkarnub/Kanri/releases/download/v1.19.8/Kanri-v1.19.8-release.apk",
+  "githubRepo": "https://github.com/omkarnub/Kanri",
+  "githubStars": 9,
+  "githubReleases": "https://github.com/omkarnub/Kanri/releases",
+  "githubIssues": "https://github.com/omkarnub/Kanri/issues",
+  "githubSecurity": "https://github.com/omkarnub/Kanri/security/advisories",
+  "orionStoreUrl": "https://rookieenough.github.io/Orion-Data/redirect.html?id=kanri",
+  "playStoreUrl": null,
+  "contactEmail": null
+}

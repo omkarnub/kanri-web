@@ -1,3 +1,28 @@
+/* Accessible Skip Link & Universal Focus Visibility */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 16px;
+  background: var(--text, #FAF9F5);
+  color: var(--canvas, #121212);
+  padding: 8px 16px;
+  z-index: 9999;
+  font-weight: 600;
+  border-radius: 6px;
+  font-family: var(--font-sans);
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  transition: top 0.2s ease;
+}
+.skip-link:focus {
+  top: 16px;
+}
+
+:focus-visible {
+  outline: 2px solid var(--text, #FAF9F5);
+  outline-offset: 2px;
+}
+
 /* ==========================================================================
    Kanri Website Components CSS
    ========================================================================== */
@@ -2437,7 +2462,7 @@
 
 .stat-desc {
   font-size: 0.75rem;
-  color: #71717A;
+  color: #A1A1AA;
   line-height: 1.45;
 }
 
@@ -2450,7 +2475,7 @@
   font-family: var(--font-mono, monospace);
   font-size: 0.625rem;
   letter-spacing: 0.1em;
-  color: #71717A;
+  color: #A1A1AA;
   text-transform: uppercase;
 }
 

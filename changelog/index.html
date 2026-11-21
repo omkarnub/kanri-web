@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="../assets/css/docs.css">
 </head>
 <body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
   <header class="site-header">
     <div class="container header-inner">
       <a href="../index.html" class="brand-link">
@@ -52,7 +53,7 @@
     </div>
   </header>
 
-  <main class="section">
+  <main id="main-content" class="section">
     <div class="container container-narrow">
       <div class="docs-breadcrumbs">
         <a href="../index.html">Home</a>
@@ -270,12 +271,72 @@
     </div>
   </main>
 
-  <footer class="site-footer">
-    <div class="container" style="text-align:center; font-size:0.875rem; color:var(--muted);">
-      <p>© 2026 Kanri · Licensed under GNU GPL-3.0 · <a href="../index.html" style="color:var(--text);">Home</a> · <a href="../privacy/index.html" style="color:var(--text);">Privacy Policy</a></p>
+    <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:14px;">
+            <img src="../assets/images/kanri_app_icon_dark.png" alt="Kanri logo"
+              style="width:28px; height:28px; border-radius:6px;" width="28" height="28" loading="lazy">
+            <span class="brand-logotype" style="font-size:1.125rem;">KANRI</span>
+            <span style="font-size:0.8125rem; color:var(--muted);">管理</span>
+          </div>
+          <p style="font-size:0.875rem; color:var(--muted); line-height:1.6; max-width:320px;">
+            Offline-first personal finance ledger for Android. Built with Kotlin, Jetpack Compose, and SQLCipher.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h3 class="footer-heading" style="font-size:0.875rem; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:14px; color:var(--text);">Product</h3>
+          <ul class="footer-links">
+            <li><a href="../index.html#features">Features</a></li>
+            <li><a href="../index.html#widgets">Widgets</a></li>
+            <li><a href="../download/index.html">Download APK</a></li>
+            <li><a href="../releases/index.html">Releases</a></li>
+            <li><a href="../press/index.html">Press Kit</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h3 class="footer-heading" style="font-size:0.875rem; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:14px; color:var(--text);">Documentation</h3>
+          <ul class="footer-links">
+            <li><a href="../docs/index.html">Docs Overview</a></li>
+            <li><a href="../docs/getting-started/index.html">Getting Started</a></li>
+            <li><a href="../docs/capture-dedupe/index.html">Capture &amp; Dedupe</a></li>
+            <li><a href="../docs/security-model/index.html">Security Model</a></li>
+            <li><a href="../docs/troubleshooting/index.html">Troubleshooting</a></li>
+            <li><a href="../faq/index.html">FAQ</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h3 class="footer-heading" style="font-size:0.875rem; text-transform:uppercase; letter-spacing:0.06em; margin-bottom:14px; color:var(--text);">Legal &amp; Security</h3>
+          <ul class="footer-links">
+            <li><a href="../privacy/index.html">Privacy Policy</a></li>
+            <li><a href="../terms/index.html">Terms of Use</a></li>
+            <li><a href="../security/index.html">Security Model</a></li>
+            <li><a href="https://github.com/omkarnub/Kanri/issues" target="_blank" rel="noopener noreferrer">Contact &amp; Issues</a></li>
+            <li><a href="https://github.com/omkarnub/Kanri" target="_blank" rel="noopener noreferrer">GitHub Repo</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          &copy; 2026 Omkar Singh (<a href="https://github.com/omkarnub" target="_blank" rel="noopener noreferrer" style="color:var(--text); text-decoration:none; font-weight:500;">@omkarnub</a>). Licensed under GNU GPL-3.0.
+        </div>
+        <div>
+          Zero cookies &middot; Zero analytics &middot; Zero telemetry
+        </div>
+      </div>
+
+      <p class="trademark-notice">
+        Bank and app names are trademarks of their respective owners. Kanri is not affiliated with or endorsed by any of them.
+      </p>
     </div>
   </footer>
 
+  <script src="../assets/js/config.js"></script>
   <script src="../assets/js/theme.js"></script>
   <script src="../assets/js/releases.js"></script>
 </body>
