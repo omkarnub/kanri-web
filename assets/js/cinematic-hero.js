@@ -63,10 +63,24 @@
     // 2. Smooth Cinematic Scroll Timeline via GSAP & ScrollTrigger
     // -------------------------------------------------------------------------
     const ctx = gsap.context(() => {
+    // -------------------------------------------------------------------------
+    // Reduced Motion Accessibility Guard
+    // -------------------------------------------------------------------------
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      gsap.set('.text-track', { autoAlpha: 0 });
+      gsap.set('.text-days', { autoAlpha: 0 });
+      gsap.set('.main-card', { y: 0, autoAlpha: 1, scale: 1 });
+      gsap.set(['.card-left-text', '.mockup-scroll-wrapper', '.phone-widget'], { autoAlpha: 1, y: 0, scale: 1 });
+      gsap.set('.cta-wrapper', { autoAlpha: 1, y: 0, scale: 1, pointerEvents: 'auto' });
+      const dial = document.getElementById('hero-counter-val');
+      if (dial) dial.innerHTML = metricValue;
+      return;
+    }
+
       // Set initial states - crisp, vector-sharp rendering with zero blur filters
       gsap.set('.text-track', { autoAlpha: 1, y: 0, scale: 1 });
       gsap.set('.text-days', { autoAlpha: 1 });
-      gsap.set('.main-card', { y: window.innerHeight * 0.85, autoAlpha: 1, scale: 0.96 });
+      gsap.set('.main-card', { y: isMobile ? window.innerHeight * 0.42 : window.innerHeight * 0.52, autoAlpha: 1, scale: 0.96 });
       gsap.set(['.card-left-text', '.mockup-scroll-wrapper', '.floating-badge', '.phone-widget'], { autoAlpha: 0 });
       gsap.set('.cta-wrapper', { autoAlpha: 0, scale: 0.95, y: 30 });
 
@@ -75,7 +89,7 @@
         scrollTrigger: {
           trigger: container,
           start: 'top top',
-          end: '+=2000',
+          end: isMobile ? '+=950' : '+=1250',
           pin: true,
           scrub: 1,
           anticipatePin: 1,
@@ -118,7 +132,7 @@
         .fromTo('.card-left-text', { x: -30, autoAlpha: 0 }, { x: 0, autoAlpha: 1, ease: 'power2.out', duration: 1.0 }, '-=1.0')
 
         // Hold pause for viewing showcase
-        .to({}, { duration: 1.6 })
+        .to({}, { duration: 0.7 })
 
         // 8. Mockup and showcase elements smoothly fade out with GPU transform
         .to(['.mockup-scroll-wrapper', '.floating-badge', '.card-left-text'], {

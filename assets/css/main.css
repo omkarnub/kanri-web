@@ -28,6 +28,15 @@
   --radius-lg: 22px;
   --radius-pill: 9999px;
   --transition-spring: 240ms cubic-bezier(0.16, 1, 0.3, 1);
+  /* Motion Tokens */
+  --duration-fast: 120ms;
+  --duration-base: 200ms;
+  --duration-smooth: 320ms;
+  --duration-enter: 500ms;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
 }
 
 [data-theme="light"] {
@@ -393,6 +402,46 @@ p.lead {
 }
 
 /* Respect Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Smooth Theme Transitions */
+html.theme-transitioning,
+html.theme-transitioning *,
+html.theme-transitioning *::before,
+html.theme-transitioning *::after {
+  transition: background-color var(--duration-smooth) var(--ease-out),
+              color var(--duration-smooth) var(--ease-out),
+              border-color var(--duration-smooth) var(--ease-out),
+              box-shadow var(--duration-smooth) var(--ease-out) !important;
+}
+
+/* Page-to-Page View Transitions API */
+@view-transition {
+  navigation: auto;
+}
+::view-transition-old(root) {
+  animation: 160ms var(--ease-out) both page-fade-out;
+}
+::view-transition-new(root) {
+  animation: 220ms var(--ease-out) both page-fade-in;
+}
+@keyframes page-fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+@keyframes page-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Reduced motion accessibility */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;

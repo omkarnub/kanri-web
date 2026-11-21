@@ -666,7 +666,7 @@
 .cinematic-hero-container {
   position: relative;
   width: 100%;
-  height: 100vh;
+  height: 100vh; height: 100dvh;
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -874,7 +874,11 @@
 
 @media (max-width: 768px) {
   .card-lead-desc {
-    display: none; /* Hidden on mobile to maintain clean balance */
+    display: block;
+    font-size: 0.8125rem;
+    line-height: 1.5;
+    margin-bottom: 12px;
+    opacity: 0.9;
   }
 }
 
@@ -949,7 +953,7 @@
 
 @media (max-width: 480px) {
   .mockup-scale-box {
-    transform: scale(0.62);
+    transform: scale(0.85);
   }
 }
 

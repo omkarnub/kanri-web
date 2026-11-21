@@ -495,3 +495,22 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+
+  // Universal View Transitions API for smooth inter-page navigation
+  if ('startViewTransition' in document) {
+    document.addEventListener('click', (e) => {
+      const link = e.target.closest('a');
+      if (!link || !link.href) return;
+      try {
+        const targetUrl = new URL(link.href, window.location.href);
+        if (targetUrl.origin === window.location.origin && !targetUrl.hash && !link.target && !e.ctrlKey && !e.metaKey && !e.shiftKey) {
+          if (targetUrl.pathname !== window.location.pathname) {
+            e.preventDefault();
+            document.startViewTransition(() => {
+              window.location.href = targetUrl.href;
+            });
+          }
+        }
+      } catch (_) {}
+    });
+  }
