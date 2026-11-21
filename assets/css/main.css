@@ -3,7 +3,7 @@
    ========================================================================== */
 
 :root {
-  /* Dark / Ink Theme (Default) */
+  /* Dark / Monochrome Sumi Ink Theme */
   --canvas: #121212;
   --surface: #181818;
   --surface-elevated: #222222;
@@ -13,12 +13,12 @@
   --text: #F2F2F2;
   --text-secondary: #D4D4D4;
   --muted: #A6A6A6;
-  --accent: #30A46C;
-  --accent-soft: rgba(48, 164, 108, 0.14);
-  --accent-hover: #37BD7D;
-  --expense-red: #E5484D;
-  --expense-soft: rgba(229, 72, 77, 0.12);
-  --warning-amber: #F5A623;
+  --accent: #F2F2F2;
+  --accent-soft: rgba(255, 255, 255, 0.12);
+  --accent-hover: #FFFFFF;
+  --expense-red: #888888;
+  --expense-soft: rgba(255, 255, 255, 0.08);
+  --warning-amber: #A6A6A6;
   --dot-grid: rgba(255, 255, 255, 0.05);
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.35);
   --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.45);
@@ -40,12 +40,12 @@
   --text: #121212;
   --text-secondary: #404040;
   --muted: #73726E;
-  --accent: #2B9A64;
-  --accent-soft: rgba(43, 154, 100, 0.12);
-  --accent-hover: #238354;
-  --expense-red: #E5484D;
-  --expense-soft: rgba(229, 72, 77, 0.1);
-  --warning-amber: #D97706;
+  --accent: #121212;
+  --accent-soft: rgba(18, 18, 18, 0.08);
+  --accent-hover: #000000;
+  --expense-red: #666666;
+  --expense-soft: rgba(18, 18, 18, 0.06);
+  --warning-amber: #73726E;
   --dot-grid: rgba(0, 0, 0, 0.06);
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
@@ -62,8 +62,8 @@
   --text: #FFFFFF;
   --text-secondary: #D4D4D8;
   --muted: #8E8E93;
-  --accent: #30A46C;
-  --accent-soft: rgba(48, 164, 108, 0.18);
+  --accent: #FFFFFF;
+  --accent-soft: rgba(255, 255, 255, 0.16);
   --dot-grid: rgba(255, 255, 255, 0.04);
 }
 
@@ -234,8 +234,8 @@ p.lead {
 
 .badge-accent {
   background-color: var(--accent-soft);
-  border-color: rgba(48, 164, 108, 0.3);
-  color: var(--accent);
+  border-color: var(--border);
+  color: var(--text);
 }
 
 .badge-muted {
@@ -291,7 +291,7 @@ p.lead {
 }
 
 .card:hover {
-  border-color: rgba(48, 164, 108, 0.4);
+  border-color: var(--muted);
 }
 
 /* Respect Reduced Motion */

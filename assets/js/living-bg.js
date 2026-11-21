@@ -36,7 +36,7 @@
   }
 
   let theme = getCurrentTheme();
-  let speed = 3.2; // Fast, lively painting speed
+  let speed = 2.8; // Fast, lively painting speed
   const reduced = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // ---------------------------------------------------------------- palettes
@@ -49,7 +49,7 @@
       treeDark: [26, 34, 42], treeMid: [62, 76, 89],
       boatHull: [33, 23, 18], boatMid: [70, 51, 40], canopyOchre: [158, 128, 96], canopyGlow: [222, 142, 68],
       reflection: [50, 44, 40], plumRed: [186, 56, 52], plumBlush: [212, 128, 122], sunAmber: [208, 112, 66],
-      inkBlack: [20, 23, 27], sealRed: [48, 164, 108] // Kanri emerald seal
+      inkBlack: [20, 23, 27], sealRed: [20, 23, 27] // Monochrome sumi seal
     },
     dark: {
       paperTop: '#0B0E13', paperMid: '#10151C', paperBot: '#080B0F', paperRgb: [16, 21, 28],
@@ -59,7 +59,7 @@
       treeDark: [222, 228, 234], treeMid: [148, 164, 178],
       boatHull: [232, 224, 214], boatMid: [184, 168, 152], canopyOchre: [194, 158, 116], canopyGlow: [242, 178, 88],
       reflection: [168, 176, 186], plumRed: [224, 82, 78], plumBlush: [185, 110, 108], sunAmber: [232, 136, 82],
-      inkBlack: [232, 235, 240], sealRed: [48, 164, 108] // Kanri emerald seal
+      inkBlack: [232, 235, 240], sealRed: [232, 235, 240] // Monochrome sumi seal
     }
   };
 

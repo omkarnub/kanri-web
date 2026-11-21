@@ -310,21 +310,22 @@
   font-size: clamp(1.5rem, 3.8vw, 2.6rem);
   letter-spacing: 0.45em;
   text-indent: 0.45em;
-  color: #237A4B;
+  color: var(--muted);
   font-weight: 600;
   margin-top: 16px;
   line-height: 1;
   font-family: var(--font-sans);
   transition: color 0.3s ease;
+  opacity: 0.85;
 }
 
 [data-theme="light"] .hero-brand-kanji {
-  color: #237A4B;
+  color: #555555;
 }
 
 [data-theme="dark"] .hero-brand-kanji,
 [data-theme="amoled"] .hero-brand-kanji {
-  color: #30A46C;
+  color: #CCCCCC;
 }
 
 .hero-brand-tagline {
@@ -375,8 +376,8 @@
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background-color: var(--accent);
-  box-shadow: 0 0 8px rgba(48, 164, 108, 0.6);
+  background-color: var(--text);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
 }
 
 .hero-title {
@@ -1074,7 +1075,7 @@
 }
 
 .widget-tile-card:hover {
-  border-color: #30A46C;
+  border-color: var(--text);
   transform: translateY(-2px);
 }
 
