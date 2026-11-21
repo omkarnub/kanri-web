@@ -4440,6 +4440,19 @@
   .download-card {
     padding: 28px 20px;
   }
+
+  /* Mobile Hero Performance Optimizations: eliminate heavy SVG feTurbulence filters & texture thrashing */
+  #wet,
+  #landBase {
+    filter: none !important;
+  }
+
+  #wet,
+  #mist,
+  #dyn,
+  #land {
+    will-change: auto !important;
+  }
 }
 
 /* Accessibility / Screen-reader utility */

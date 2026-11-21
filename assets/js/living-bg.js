@@ -37,6 +37,7 @@
   let theme = 'light';
   let speed = 2.8; // Fast, lively painting speed
   const reduced = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isMobile = window.innerWidth < 768 || (window.matchMedia && window.matchMedia('(max-width: 768px)').matches);
 
   // ---------------------------------------------------------------- palettes
   const PAL = {
@@ -203,11 +204,12 @@
     const isWeakDevice = (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4) ||
       (navigator.deviceMemory && navigator.deviceMemory <= 4) ||
       (navigator.connection && navigator.connection.saveData);
-    const dpr = isWeakDevice ? 1 : Math.min(window.devicePixelRatio || 1, 2);
+    const dpr = (isWeakDevice || isMobile) ? 1 : Math.min(window.devicePixelRatio || 1, 2);
     const bgEl = document.getElementById('bg');
     const cw = bgEl ? (bgEl.clientWidth || innerWidth) : innerWidth;
     const ch = bgEl ? (bgEl.clientHeight || innerHeight) : innerHeight;
-    const k = Math.min(1, 2200 / (Math.max(cw, ch) * dpr));
+    const maxDim = isMobile ? 1080 : 2200;
+    const k = Math.min(1, maxDim / (Math.max(cw, ch) * dpr));
     W = Math.max(2, Math.round(cw * dpr * k));
     H = Math.max(2, Math.round(ch * dpr * k));
     portrait = H > W; S = portrait ? W / 1080 : H / 1080;
@@ -232,7 +234,25 @@
     paintPaper(pal);
     bakeScenery(pal);
     makeActors(pal);
-    wetFrozen = false; landFrozen = false;
+
+    if (isMobile) {
+      // Instantly reveal static scenery on mobile to eliminate startup reveal lag and frame drops
+      if (wc) {
+        wc.clearRect(0, 0, W, H);
+        wc.drawImage(farC.c, 0, 0);
+        wc.drawImage(midC.c, 0, 0);
+        wc.drawImage(nearC.c, 0, 0);
+      }
+      if (lb) {
+        lb.clearRect(0, 0, W, LH);
+        lb.drawImage(landC.c, 0, 0);
+      }
+      wetFrozen = true;
+      landFrozen = true;
+    } else {
+      wetFrozen = false;
+      landFrozen = false;
+    }
   }
 
   function paintPaper(pal) {
@@ -241,7 +261,8 @@
     g.addColorStop(0, pal.paperTop); g.addColorStop(.55, pal.paperMid); g.addColorStop(1, pal.paperBot);
     pc.fillStyle = g; pc.fillRect(0, 0, W, H);
     const rng = new RNG(2026), light = theme === 'light';
-    for (let i = 0; i < 55; i++) {
+    const numGradients = isMobile ? 16 : 55;
+    for (let i = 0; i < numGradients; i++) {
       const x = rng.range(0, W), y = rng.range(0, H), r = rng.range(150, 460) * S, warm = i % 2 === 0;
       const col = light ? (warm ? 'rgba(206,188,160,.055)' : 'rgba(255,253,247,.065)') : (warm ? 'rgba(42,54,68,.05)' : 'rgba(0,0,0,.08)');
       const gg = pc.createRadialGradient(x, y, 10, x, y, r);
@@ -250,9 +271,10 @@
     }
     gc.fillStyle = light ? '#faf7f0' : '#181e26'; gc.fillRect(0, 0, W, H);
     gc.strokeStyle = light ? 'rgba(148,132,110,.065)' : 'rgba(255,255,255,.025)'; gc.lineWidth = 1;
-    for (let y = 0; y < H; y += 5) { gc.beginPath(); gc.moveTo(0, y); gc.lineTo(W, y); gc.stroke(); }
+    const lineStep = isMobile ? 12 : 5;
+    for (let y = 0; y < H; y += lineStep) { gc.beginPath(); gc.moveTo(0, y); gc.lineTo(W, y); gc.stroke(); }
     gc.lineCap = 'round';
-    const n = Math.round(1400 * (W * H) / (1080 * 1920));
+    const n = isMobile ? Math.round(180 * (W * H) / (1080 * 1920)) : Math.round(1400 * (W * H) / (1080 * 1920));
     for (let i = 0; i < n; i++) {
       const x = rng.range(0, W), y = rng.range(0, H), len = rng.range(6, 34) * S, a = rng.range(0, TAU);
       gc.strokeStyle = light ? (i % 4 === 0 ? 'rgba(255,255,255,.45)' : 'rgba(122,106,84,.085)') : (i % 4 === 0 ? 'rgba(255,255,255,.05)' : 'rgba(0,0,0,.32)');
@@ -818,8 +840,16 @@
   }
 
   // ---------------------------------------------------------------- main animation loop
+  let lastMobileTs = 0;
   function frame(ts, still) {
     if (t0 === null) { t0 = ts; last = ts; }
+    if (isMobile && !still) {
+      if (lastMobileTs && (ts - lastMobileTs) < 32) {
+        rafId = requestAnimationFrame(frame);
+        return;
+      }
+      lastMobileTs = ts;
+    }
     const dt = Math.min(.05, (ts - last) / 1000); last = ts;
     const real = (ts - t0) / 1000;
     T = still ? 4 : real + 3;

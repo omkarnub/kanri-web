@@ -172,3 +172,21 @@ html:not(.js-enabled) .reveal-fade {
     opacity: 1 !important;
   }
 }
+
+/* Mobile Hero Zero-Lag: Instantly display hero content without transition stutter */
+@media (max-width: 768px) {
+  #bg {
+    opacity: 1 !important;
+    transition: none !important;
+  }
+
+  .hero-brand-row,
+  .hero-brand-meta,
+  .hero-brand-caption,
+  .hero-brand-actions {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    will-change: auto !important;
+  }
+}

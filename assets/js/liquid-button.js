@@ -9,11 +9,12 @@
 
   const clamp = (val, min, max) => Math.min(max, Math.max(min, val));
   const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isMobile = window.innerWidth < 768 || (window.matchMedia && window.matchMedia('(max-width: 768px)').matches);
 
   let buttonCounter = 0;
 
   function initLiquidButton(btn) {
-    if (btn.hasAttribute('data-liquid-initialized')) return;
+    if (btn.hasAttribute('data-liquid-initialized') || prefersReduced || isMobile) return;
     btn.setAttribute('data-liquid-initialized', 'true');
 
     buttonCounter++;
