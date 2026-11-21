@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Kanri — Hero Section & Living Parallax Showcase</title>
+  <link rel="stylesheet" href="assets/css/typography.css">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="assets/css/components.css">
+  <style>
+    /* Showcase specific overrides */
+    body {
+      overflow-x: hidden;
+      min-height: 250vh;
+    }
+    .showcase-scroll-indicator {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      z-index: 50;
+      color: var(--muted);
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-family: var(--font-sans);
+      pointer-events: none;
+      animation: indicatorBounce 2s ease-in-out infinite;
+    }
+    .showcase-scroll-mouse {
+      width: 22px;
+      height: 36px;
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      display: flex;
+      justify-content: center;
+      padding-top: 6px;
+      background: rgba(18, 18, 18, 0.4);
+      backdrop-filter: blur(8px);
+    }
+    .showcase-scroll-wheel {
+      width: 3px;
+      height: 6px;
+      background: var(--text);
+      border-radius: 2px;
+      animation: wheelRoll 1.6s ease-in-out infinite;
+    }
+    @keyframes indicatorBounce {
+      0%, 100% { transform: translate(-50%, 0); }
+      50% { transform: translate(-50%, 6px); }
+    }
+    @keyframes wheelRoll {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(8px); opacity: 0; }
+    }
+
+    /* Second Section Preview for parallax scroll continuation */
+    .showcase-next-section {
+      position: relative;
+      z-index: 10;
+      padding: 120px 0;
+      background: linear-gradient(180deg, transparent 0%, var(--surface) 25%);
+      border-top: 1px solid var(--border-subtle);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Xuan Bleed Capillary Ink Bleed Filter -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <filter id="xuan-bleed" x="-3%" y="-3%" width="106%" height="106%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency="0.018 0.022" numOctaves="2" seed="17" result="n1"/>
+        <feTurbulence type="fractalNoise" baseFrequency="0.085 0.095" numOctaves="2" seed="42" result="n2"/>
+        <feBlend in="n1" in2="n2" mode="multiply" result="n"/>
+        <feDisplacementMap in="SourceGraphic" in2="n" scale="6" xChannelSelector="R" yChannelSelector="G" result="d"/>
+        <feGaussianBlur in="d" stdDeviation="0.45"/>
+      </filter>
+    </defs>
+  </svg>
+
+  <!-- Shan Shui Living Background Canvas Stack -->
+  <div id="bg" aria-hidden="true">
+    <canvas id="paper"></canvas>
+    <canvas id="wet"></canvas>
+    <canvas id="mist"></canvas>
+    <canvas id="dyn"></canvas>
+    <div id="land">
+      <canvas id="landBase"></canvas>
+      <canvas id="landFx"></canvas>
+    </div>
+    <canvas id="grain"></canvas>
+    <div id="vig"></div>
+  </div>
+
+  <!-- Showcase Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand-link">
+        <img src="assets/images/kanri_app_icon_dark.png" alt="Kanri Logo" class="brand-icon">
+        <span class="brand-name">KANRI</span>
+        <span class="brand-kanji">管理</span>
+      </a>
+
+      <div class="header-actions">
+        <button id="theme-toggle-btn" class="theme-toggle-btn" aria-label="Toggle theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          </svg>
+        </button>
+
+        <a href="https://github.com/omkarnub/kanri-web" class="github-btn" target="_blank" rel="noopener noreferrer">
+          <span>GitHub</span>
+        </a>
+
+        <a href="download/index.html" class="btn btn-primary btn-sm">Download APK</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Flagship Hero Section -->
+    <section class="section hero-section">
+      <!-- Huge KANRI Emblem & Watermark Background Parallax Layer -->
+      <div class="hero-bg-emblem-wrap" id="hero-bg-emblem" aria-hidden="true">
+        <div class="hero-bg-emblem-inner">
+          <svg class="hero-bg-crest" viewBox="0 0 2048 2048" width="560" height="560">
+            <path d="M914,407L1134,407L1134,933L1024,823L914,933Z M914,1641L914,1115L1024,1225L1134,1115L1134,1641Z M197,617L499,617L894,1024L499,1431L197,1431L592,1024Z M1851,617L1549,617L1154,1024L1549,1431L1851,1431L1456,1024Z"/>
+          </svg>
+          <div class="hero-bg-brand-title">KANRI</div>
+          <div class="hero-bg-kanji-watermark">管理</div>
+          <div class="hero-bg-descriptor">OFFLINE FINANCIAL LEDGER</div>
+        </div>
+      </div>
+
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <div class="hero-badge-pill">
+            <span class="hero-badge-dot"></span>
+            <span>Version 1.19.8 Available · Android 8.0+</span>
+          </div>
+
+          <h1 class="hero-title">
+            Your money, on your phone.<br>
+            <span class="hero-title-highlight">Only.</span>
+          </h1>
+          
+          <p class="hero-subhead">
+            Kanri reads your transactional bank SMS, enriches UPI merchant names, and logs every rupee automatically in memory. A 100% on-device personal finance ledger with zero trackers, zero ads, SQLCipher AES-256 encryption, and open-source sovereignty.
+          </p>
+
+          <div class="hero-ctas">
+            <a href="download/index.html" class="btn btn-primary btn-lg">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              <span>Download APK (27.1 MB)</span>
+            </a>
+
+            <a href="https://github.com/omkarnub/Kanri" class="btn btn-secondary btn-lg" target="_blank" rel="noopener noreferrer">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+              </svg>
+              <span>View on GitHub</span>
+            </a>
+          </div>
+
+          <div class="trust-strip">
+            <span><strong class="trust-tick">✓</strong> 100% On-Device</span>
+            <span>·</span>
+            <span><strong class="trust-tick">✓</strong> Zero Analytics</span>
+            <span>·</span>
+            <span><strong class="trust-tick">✓</strong> No Ads</span>
+            <span>·</span>
+            <span><strong class="trust-tick">✓</strong> Open Source (GPL-3.0)</span>
+            <span>·</span>
+            <span><strong class="trust-tick">✓</strong> SQLCipher AES-256</span>
+          </div>
+        </div>
+
+        <div class="hero-visual-wrapper">
+          <div class="hero-depth-card" id="hero-depth-card">
+            <div class="hero-depth-sheen" aria-hidden="true"></div>
+
+            <!-- Floating Monochrome Badges -->
+            <div class="hero-floating-badge hero-badge-top-left">
+              <div class="hero-badge-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                </svg>
+              </div>
+              <div>
+                <div class="hero-badge-text-primary">SQLCipher AES-256</div>
+                <div class="hero-badge-text-sub">Hardware Keystore Key</div>
+              </div>
+            </div>
+
+            <div class="hero-floating-badge hero-badge-bottom-right">
+              <div class="hero-badge-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                </svg>
+              </div>
+              <div>
+                <div class="hero-badge-text-primary">Dual-Engine Capture</div>
+                <div class="hero-badge-text-sub">0ms Local SMS Match</div>
+              </div>
+            </div>
+
+            <!-- Smartphone Hardware Frame -->
+            <div class="hero-phone-bezel">
+              <div class="hero-hardware-btn hero-btn-vol-up" aria-hidden="true"></div>
+              <div class="hero-hardware-btn hero-btn-vol-down" aria-hidden="true"></div>
+              <div class="hero-hardware-btn hero-btn-pwr" aria-hidden="true"></div>
+
+              <div class="hero-screen-inner">
+                <div class="hero-screen-glare" aria-hidden="true"></div>
+                <video autoplay loop muted playsinline poster="assets/media/poster.png">
+                  <source src="assets/media/kanri_loop_silent_1440.mp4" type="video/mp4">
+                  <source src="assets/media/kanri_loop.webm" type="video/webm">
+                  <img src="assets/media/poster.png" alt="Kanri interface preview">
+                </video>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Parallax Continuation Section -->
+    <section class="showcase-next-section">
+      <div class="container text-center">
+        <div class="section-header">
+          <span class="section-eyebrow">Zero Friction</span>
+          <h2>Smooth Parallax Continuation</h2>
+          <p>Scroll up and down to observe how the painted Shan Shui landscape, huge KANRI emblem, and UI depth planes glide seamlessly with Lenis-grade momentum damping.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="showcase-scroll-indicator">
+    <div class="showcase-scroll-mouse">
+      <div class="showcase-scroll-wheel"></div>
+    </div>
+    <span>Scroll to explore parallax depth</span>
+  </div>
+
+  <!-- Scripts -->
+  <script src="assets/js/theme.js"></script>
+  <script src="assets/js/living-bg.js"></script>
+  <script src="assets/js/smooth-parallax.js"></script>
+  <script src="assets/js/hero.js"></script>
+</body>
+</html>

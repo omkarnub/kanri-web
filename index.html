@@ -97,6 +97,33 @@
 </head>
 <body>
 
+  <!-- Xuan Bleed Capillary Ink Bleed Filter -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <filter id="xuan-bleed" x="-3%" y="-3%" width="106%" height="106%" color-interpolation-filters="sRGB">
+        <feTurbulence type="fractalNoise" baseFrequency="0.018 0.022" numOctaves="2" seed="17" result="n1"/>
+        <feTurbulence type="fractalNoise" baseFrequency="0.085 0.095" numOctaves="2" seed="42" result="n2"/>
+        <feBlend in="n1" in2="n2" mode="multiply" result="n"/>
+        <feDisplacementMap in="SourceGraphic" in2="n" scale="6" xChannelSelector="R" yChannelSelector="G" result="d"/>
+        <feGaussianBlur in="d" stdDeviation="0.45"/>
+      </filter>
+    </defs>
+  </svg>
+
+  <!-- Shan Shui Living Background Canvas Stack -->
+  <div id="bg" aria-hidden="true">
+    <canvas id="paper"></canvas>
+    <canvas id="wet"></canvas>
+    <canvas id="mist"></canvas>
+    <canvas id="dyn"></canvas>
+    <div id="land">
+      <canvas id="landBase"></canvas>
+      <canvas id="landFx"></canvas>
+    </div>
+    <canvas id="grain"></canvas>
+    <div id="vig"></div>
+  </div>
+
   <!-- Site Header -->
   <header class="site-header">
     <div class="container header-inner">
@@ -154,6 +181,18 @@
   <main>
     <!-- 1. Hero Section -->
     <section class="section hero-section">
+      <!-- Huge KANRI Emblem & Watermark Background Parallax Layer -->
+      <div class="hero-bg-emblem-wrap" id="hero-bg-emblem" aria-hidden="true">
+        <div class="hero-bg-emblem-inner">
+          <svg class="hero-bg-crest" viewBox="0 0 2048 2048" width="560" height="560">
+            <path d="M914,407L1134,407L1134,933L1024,823L914,933Z M914,1641L914,1115L1024,1225L1134,1115L1134,1641Z M197,617L499,617L894,1024L499,1431L197,1431L592,1024Z M1851,617L1549,617L1154,1024L1549,1431L1851,1431L1456,1024Z"/>
+          </svg>
+          <div class="hero-bg-brand-title">KANRI</div>
+          <div class="hero-bg-kanji-watermark">管理</div>
+          <div class="hero-bg-descriptor">OFFLINE FINANCIAL LEDGER</div>
+        </div>
+      </div>
+
       <div class="container hero-grid">
         <div class="hero-content">
           <div class="hero-badge-pill">
@@ -1169,6 +1208,8 @@
   <!-- Self-Hosted JavaScript Engine -->
   <script src="assets/js/config.js"></script>
   <script src="assets/js/theme.js"></script>
+  <script src="assets/js/living-bg.js"></script>
+  <script src="assets/js/smooth-parallax.js"></script>
   <script src="assets/js/hero.js"></script>
   <script src="assets/js/parser-demo.js"></script>
   <script src="assets/js/calculators.js"></script>
