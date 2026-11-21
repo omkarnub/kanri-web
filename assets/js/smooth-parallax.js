@@ -17,7 +17,7 @@
   let isTicking = false;
   const ease = 0.082; // Buttery smooth momentum dampening
 
-  const emblemEl = document.getElementById('hero-bg-emblem');
+  const emblemEl = document.getElementById('hero-brand-centerpiece') || document.getElementById('hero-bg-emblem');
   const heroSection = document.querySelector('.hero-section');
   const heroContent = document.querySelector('.hero-content');
   const heroVisual = document.querySelector('.hero-visual-wrapper');

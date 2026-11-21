@@ -36,7 +36,7 @@
   }
 
   let theme = getCurrentTheme();
-  let speed = 1.0;
+  let speed = 3.2; // Fast, lively painting speed
   const reduced = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // ---------------------------------------------------------------- palettes
@@ -202,7 +202,9 @@
   // ---------------------------------------------------------------- build
   function build() {
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    const cw = innerWidth, ch = innerHeight;
+    const bgEl = document.getElementById('bg');
+    const cw = bgEl ? (bgEl.clientWidth || innerWidth) : innerWidth;
+    const ch = bgEl ? (bgEl.clientHeight || innerHeight) : innerHeight;
     const k = Math.min(1, 2200 / (Math.max(cw, ch) * dpr));
     W = Math.max(2, Math.round(cw * dpr * k)); 
     H = Math.max(2, Math.round(ch * dpr * k));

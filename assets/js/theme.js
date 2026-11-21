@@ -6,14 +6,14 @@
   const STORAGE_KEY = 'kanri_theme_preference';
   
   function getSystemPreference() {
-    return window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    return 'light';
   }
   
   function getSavedTheme() {
     try {
-      return localStorage.getItem(STORAGE_KEY) || 'system';
+      return localStorage.getItem(STORAGE_KEY) || 'light';
     } catch (e) {
-      return 'system';
+      return 'light';
     }
   }
   

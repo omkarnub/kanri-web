@@ -143,11 +143,37 @@
 }
 
 /* --------------------------------------------------------------------------
-   2. Shan Shui Living Background & Hero Parallax
+   2. Shan Shui Living Background (Scoped Strictly to Hero Section)
    -------------------------------------------------------------------------- */
+.hero-section {
+  position: relative;
+  width: 100%;
+  min-height: 92vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 80px 24px;
+  background: var(--canvas);
+}
+
+.hero-section::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  background: linear-gradient(to bottom, transparent, var(--canvas));
+  pointer-events: none;
+  z-index: 2;
+}
+
 #bg {
-  position: fixed;
+  position: absolute;
   inset: 0;
+  width: 100%;
+  height: 100%;
   overflow: hidden;
   background: var(--canvas);
   z-index: 0;
@@ -206,95 +232,111 @@
   box-shadow: inset 0 0 130px rgba(0, 0, 0, 0.85);
 }
 
-/* Huge KANRI Emblem & Brand Watermark Parallax Layer */
-.hero-bg-emblem-wrap {
-  position: absolute;
-  top: 48%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  max-width: 1200px;
+/* --------------------------------------------------------------------------
+   3. Hero Brand Centerpiece: Big KANRI Text Logo with Emblem
+   -------------------------------------------------------------------------- */
+.hero-brand-centerpiece {
+  position: relative;
+  z-index: 10;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  z-index: 1;
-  pointer-events: none;
-  user-select: none;
-  will-change: transform, opacity;
-  transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.hero-bg-emblem-inner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   text-align: center;
-  position: relative;
+  padding: 40px 20px;
+  user-select: none;
+  will-change: transform;
 }
 
-.hero-bg-crest {
-  width: clamp(280px, 42vw, 620px);
-  height: auto;
-  fill: rgba(242, 242, 242, 0.05);
-  filter: drop-shadow(0 0 60px rgba(48, 164, 108, 0.12));
-  transition: fill 0.3s ease;
+.hero-brand-crest-wrap {
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-[data-theme="light"] .hero-bg-crest {
-  fill: rgba(20, 23, 27, 0.055);
-  filter: drop-shadow(0 0 60px rgba(0, 0, 0, 0.04));
+.hero-brand-crest {
+  width: clamp(160px, 22vw, 260px);
+  height: clamp(160px, 22vw, 260px);
+  fill: #14171B;
+  filter: drop-shadow(0 16px 36px rgba(20, 23, 27, 0.14));
+  transition: fill 0.3s ease, filter 0.3s ease;
 }
 
-.hero-bg-brand-title {
+[data-theme="light"] .hero-brand-crest {
+  fill: #14171B;
+  filter: drop-shadow(0 16px 36px rgba(20, 23, 27, 0.14));
+}
+
+[data-theme="dark"] .hero-brand-crest {
+  fill: #F2F2F2;
+  filter: drop-shadow(0 0 60px rgba(255, 255, 255, 0.18));
+}
+
+[data-theme="amoled"] .hero-brand-crest {
+  fill: #FFFFFF;
+  filter: drop-shadow(0 0 60px rgba(255, 255, 255, 0.24));
+}
+
+.hero-brand-title {
   font-family: var(--font-brand);
-  font-size: clamp(3.2rem, 9.5vw, 7.5rem);
-  font-weight: 700;
-  letter-spacing: 0.22em;
-  text-indent: 0.22em;
-  color: rgba(242, 242, 242, 0.075);
-  margin-top: -24px;
+  font-size: clamp(3.8rem, 12.5vw, 9rem);
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-indent: 0.18em;
+  line-height: 1;
+  margin: 0;
+  color: #14171B;
   text-transform: uppercase;
   transition: color 0.3s ease;
-  line-height: 1;
 }
 
-[data-theme="light"] .hero-bg-brand-title {
-  color: rgba(20, 23, 27, 0.07);
+[data-theme="light"] .hero-brand-title {
+  color: #14171B;
+  text-shadow: 0 4px 24px rgba(20, 23, 27, 0.08);
 }
 
-.hero-bg-kanji-watermark {
-  font-size: clamp(1.4rem, 3.2vw, 2.5rem);
-  letter-spacing: 0.4em;
-  text-indent: 0.4em;
-  color: var(--accent);
-  opacity: 0.32;
-  margin-top: 6px;
+[data-theme="dark"] .hero-brand-title {
+  color: #F2F2F2;
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.7);
+}
+
+[data-theme="amoled"] .hero-brand-title {
+  color: #FFFFFF;
+  text-shadow: 0 0 45px rgba(255, 255, 255, 0.28);
+}
+
+.hero-brand-kanji {
+  font-size: clamp(1.5rem, 3.8vw, 2.6rem);
+  letter-spacing: 0.45em;
+  text-indent: 0.45em;
+  color: #237A4B;
   font-weight: 600;
+  margin-top: 16px;
+  line-height: 1;
   font-family: var(--font-sans);
+  transition: color 0.3s ease;
 }
 
-.hero-bg-descriptor {
+[data-theme="light"] .hero-brand-kanji {
+  color: #237A4B;
+}
+
+[data-theme="dark"] .hero-brand-kanji,
+[data-theme="amoled"] .hero-brand-kanji {
+  color: #30A46C;
+}
+
+.hero-brand-tagline {
   font-family: var(--font-sans);
-  font-size: 0.75rem;
+  font-size: clamp(0.75rem, 1.4vw, 0.9375rem);
   font-weight: 700;
-  letter-spacing: 0.3em;
-  text-indent: 0.3em;
+  letter-spacing: 0.35em;
+  text-indent: 0.35em;
   color: var(--muted);
-  opacity: 0.45;
-  margin-top: 8px;
-}
-
-/* --------------------------------------------------------------------------
-   3. Hero Section Main Grid
-   -------------------------------------------------------------------------- */
-.hero-section {
-  padding: 80px 0 104px 0;
-  position: relative;
-  overflow: hidden;
-  min-height: 90vh;
-  display: flex;
-  align-items: center;
+  margin-top: 20px;
+  opacity: 0.8;
+  text-transform: uppercase;
 }
 
 .hero-grid {
