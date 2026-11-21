@@ -1,13 +1,15 @@
 /**
- * Multi-Layer Differential Parallax Engine for Kanri
- * Inspired by GSAP ScrollTrigger & Lenis multi-depth scrubbed architecture.
- * Orchestrates spatial depth planes without hijacking native browser scroll:
- *  - Layer 1: Sky & Paper Canvas (Fixed bedrock anchor, 0% travel)
- *  - Layer 2: Far Ink Wash Mountains & Mist (+260px drift / 65% depth retention)
+ * Instant Zero-Delay Multi-Layer Parallax & Dynamic Dark Mode Extension Engine
+ * Eliminates artificial lerp lag: syncs synchronously to scroll via requestAnimationFrame (scrub: 0 feel).
+ * 
+ * Orchestration:
+ *  - Layer 1: Sky & Paper Canvas (Fixed bedrock anchor)
+ *  - Layer 2: Far Ink Wash Mountains & Mist (+260px drift)
  *  - Layer 3: KANRI Brand Centerpiece (+190px float with optical 3D scale & fade)
- *  - Layer 4: Dynamic River, Gliding Boat & Birds (+110px travel)
- *  - Layer 5: Foreground Land, Boulders & Swaying Reeds (-130px rise into view)
- * Native scrolling remains 100% natural and fluid with zero resistance.
+ *  - Layer 4: Dynamic River, Gliding Sampan Boat & Swallows (+110px travel)
+ *  - Layer 5: Pitch-Black Land, Boulders & Reeds (-130px rise into view)
+ *  - Ground Extension: Pitch-black grass and earth at the bottom expands upward,
+ *    smoothly transitioning the entire page into black dark mode as user scrolls down.
  */
 (() => {
   'use strict';
@@ -22,15 +24,12 @@
   const mistCvs = document.getElementById('mist');
   const dynCvs = document.getElementById('dyn');
   const landEl = document.getElementById('land');
+  const blackExtEl = document.getElementById('hero-black-extension');
 
   // Check prefers-reduced-motion
   const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // Scroll interpolation state
-  let targetY = window.scrollY || document.documentElement.scrollTop || 0;
-  let currentY = targetY;
   let isTicking = false;
-  const lerpFactor = 0.12;
 
   function updateParallax(y) {
     if (!heroSection) return;
@@ -43,6 +42,7 @@
       if (mistCvs) mistCvs.style.transform = '';
       if (dynCvs) dynCvs.style.transform = '';
       if (landEl) landEl.style.transform = '';
+      if (blackExtEl) blackExtEl.style.transform = '';
       return;
     }
 
@@ -55,7 +55,7 @@
     if (emblemEl) {
       const emblemY = progress * 190;
       const emblemScale = Math.max(0.86, 1 - progress * 0.08);
-      const emblemOpacity = Math.max(0, 1 - progress * 1.18);
+      const emblemOpacity = Math.max(0, 1 - progress * 1.35);
 
       emblemEl.style.transform = `translate3d(0, ${emblemY.toFixed(2)}px, 0) scale(${emblemScale.toFixed(3)})`;
       emblemEl.style.opacity = emblemOpacity.toFixed(3);
@@ -67,45 +67,48 @@
       dynCvs.style.transform = `translate3d(0, ${dynY.toFixed(2)}px, 0)`;
     }
 
-    // 4. Foreground Land, Boulders & Swaying Reeds (Rises upward into view from the bottom)
+    // 4. Foreground Pitch-Black Land, Boulders & Reeds (Rises upward into view from the bottom)
     if (landEl) {
       const landY = -progress * 130;
       landEl.style.transform = `translate3d(0, ${landY.toFixed(2)}px, 0)`;
     }
-  }
 
-  // Smooth sub-pixel animation frame loop
-  function tick() {
-    if (prefersReduced) {
-      updateParallax(window.scrollY || 0);
-      isTicking = false;
-      return;
+    // 5. Black Ground Extension into Dark Mode:
+    // As the user scrolls down, the pitch-black grass/earth at the bottom extends upward smoothly.
+    const darkProgress = Math.min(1.0, Math.max(0, y / (heroH * 0.72)));
+    if (blackExtEl) {
+      const blackScale = Math.min(1.0, Math.pow(darkProgress, 1.25));
+      blackExtEl.style.transform = `scaleY(${blackScale.toFixed(4)})`;
     }
 
-    const diff = targetY - currentY;
-    if (Math.abs(diff) > 0.1) {
-      currentY += diff * lerpFactor;
-      updateParallax(currentY);
-      requestAnimationFrame(tick);
+    // Seamlessly transition the document theme state to dark mode as the black expands
+    if (darkProgress >= 0.5) {
+      if (document.documentElement.getAttribute('data-theme') !== 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
     } else {
-      currentY = targetY;
-      updateParallax(currentY);
-      isTicking = false;
+      if (document.documentElement.getAttribute('data-theme') !== 'light') {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
     }
   }
 
+  // Instant 1:1 requestAnimationFrame listener without artificial lerp drag/delay
   function onScroll() {
-    targetY = Math.max(0, window.scrollY || document.documentElement.scrollTop || 0);
     if (!isTicking) {
       isTicking = true;
-      requestAnimationFrame(tick);
+      requestAnimationFrame(() => {
+        const y = Math.max(0, window.scrollY || document.documentElement.scrollTop || 0);
+        updateParallax(y);
+        isTicking = false;
+      });
     }
   }
 
-  // Passive native scroll listener — zero resistance, full 120 FPS device performance
+  // Passive native scroll listener — zero resistance, instant response
   window.addEventListener('scroll', onScroll, { passive: true });
 
-  // Sync with Kanri Theme Switcher
+  // Sync with Kanri Theme Switcher if manual toggle occurs
   if (window.KanriTheme) {
     const notifyBgTheme = () => {
       const dt = document.documentElement.getAttribute('data-theme');
@@ -119,7 +122,7 @@
     themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
   }
 
-  // Initial trigger
+  // Initial trigger on page load
   document.addEventListener('DOMContentLoaded', () => {
     updateParallax(window.scrollY || 0);
   });

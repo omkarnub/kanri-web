@@ -344,35 +344,40 @@
     c.fillStyle = ms; c.fillRect(0, H * .94, W, H * .045);
 
     frontPts = ridge(P(FRONT), frontStep, 6, 811);
-    wash(c, frontPts, H * 1.15, pal.rockSlate, pal.rockUmber, pap, .5, 815);
+    // Deep pitch-black sumi ink wash for front land ridge extending to solid black base
+    wash(c, frontPts, H * 1.15, [14, 16, 20], [8, 10, 12], pap, .88, 815);
     const rightPts = frontPts.filter(p => p.x >= W * .66);
-    wash(c, rightPts, H * 1.1, pal.rockDark, pal.rockSlate, pap, .62, 818);
+    wash(c, rightPts, H * 1.1, [8, 10, 12], [4, 6, 8], pap, .95, 818);
     const fm = c.createLinearGradient(0, H * .955, 0, H * 1.0);
     fm.addColorStop(0, rgba(pap, 0)); fm.addColorStop(.35, rgba(pap, .32)); fm.addColorStop(1, rgba(pap, 0));
     c.fillStyle = fm; c.fillRect(0, H * .955, W * .7, H * .045);
+
+    // Deep rich black ground gradient filling the bottom land completely into solid black dark mode base
+    c.save();
+    const bgGrad = c.createLinearGradient(0, H * 0.96, 0, LH);
+    bgGrad.addColorStop(0, 'rgba(18, 18, 18, 0)');
+    bgGrad.addColorStop(0.25, 'rgba(18, 18, 18, 0.75)');
+    bgGrad.addColorStop(0.55, 'rgba(18, 18, 18, 0.96)');
+    bgGrad.addColorStop(1, 'rgba(18, 18, 18, 1)');
+    c.fillStyle = bgGrad;
+    c.fillRect(0, H * 0.96, W, LH - H * 0.96);
+    c.restore();
 
     // earth strata: dry-brush streaks only where land exists
     c.save(); c.globalCompositeOperation = 'source-atop'; c.lineCap = 'round';
     for (let i = 0; i < 40; i++) {
       const x = rng.range(-.05, 1.05) * W, y = H * rng.range(.972, 1.18), len = rng.range(80, 380) * S;
-      c.strokeStyle = rgba(i % 3 ? pal.rockSlate : pal.rockUmber, rng.range(.03, .09)); c.lineWidth = rng.range(1, 3.4) * S;
+      c.strokeStyle = 'rgba(28, 32, 38, 0.4)'; c.lineWidth = rng.range(1, 3.4) * S;
       c.beginPath(); c.moveTo(x, y); c.quadraticCurveTo(x + len * .5, y + rng.range(-5, 5) * S, x + len, y + rng.range(-3, 3) * S); c.stroke();
     }
     c.restore();
 
-    // boulders along the front edge
+    // boulders along the front edge: jet obsidian black
     for (let i = 0; i < 7; i++) {
       const x = (i < 4 ? rng.range(.7, .98) : rng.range(.05, .6)) * W, y = frontY(x) + rng.range(2, 10) * S, rw = rng.range(10, 30) * S, rh = rw * rng.range(.35, .55);
-      c.fillStyle = rgba(pal.rockDark, rng.range(.45, .7)); c.beginPath(); c.ellipse(x, y, rw, rh, rng.range(-.15, .15), 0, TAU); c.fill();
-      c.fillStyle = rgba(pal.rockSlate, .3); c.beginPath(); c.ellipse(x - rw * .2, y - rh * .35, rw * .55, rh * .4, -.1, 0, TAU); c.fill();
+      c.fillStyle = 'rgba(8, 10, 12, 0.96)'; c.beginPath(); c.ellipse(x, y, rw, rh, rng.range(-.15, .15), 0, TAU); c.fill();
+      c.fillStyle = 'rgba(28, 32, 38, 0.5)'; c.beginPath(); c.ellipse(x - rw * .2, y - rh * .35, rw * .55, rh * .4, -.1, 0, TAU); c.fill();
     }
-
-    // dissolve into the page toward the bottom
-    c.save(); c.globalCompositeOperation = 'destination-out';
-    const fd = c.createLinearGradient(0, H * 1.0, 0, H * 1.22);
-    fd.addColorStop(0, 'rgba(0,0,0,0)'); fd.addColorStop(1, 'rgba(0,0,0,1)');
-    c.fillStyle = fd; c.fillRect(0, H * .98, W, LH);
-    c.restore();
   }
 
   function makeActors(pal) {
@@ -574,7 +579,7 @@
       const sw = Math.sin(T * .9 + r.ph) * 7 * S * (r.len / (200 * S)) * (.5 + .5 * Math.sin(T * .3));
       const x1 = r.x0 + (r.x1 - r.x0) * g + sw * g, y1 = r.y0 + (r.y1 - r.y0) * g;
       const cx = r.x0 + (r.cx - r.x0) * g + sw * .4 * g, cy = r.y0 + (r.cy - r.y0) * g;
-      lf.fillStyle = rgba(r.dark ? pal.rockDark : pal.treeMid, r.dark ? .72 : .55);
+      lf.fillStyle = 'rgba(8, 10, 12, 0.96)'; // Rich pitch-black sumi reeds
       lf.beginPath(); lf.moveTo(r.x0 - r.w / 2, r.y0 + 3 * S);
       lf.quadraticCurveTo(cx - r.w * .3, cy, x1, y1);
       lf.quadraticCurveTo(cx + r.w * .3, cy, r.x0 + r.w / 2, r.y0 + 3 * S); lf.closePath(); lf.fill();
@@ -586,7 +591,7 @@
     const g = ph(11.8, 15.8);
     if (g > .01) grass.forEach(t => {
       const p = clamp((g - t.d) / .55, 0, 1); if (p <= .01) return;
-      lf.fillStyle = rgba(t.dark ? pal.rockDark : pal.treeMid, .6);
+      lf.fillStyle = 'rgba(10, 12, 14, 0.96)'; // Rich pitch-black sumi grass blades
       t.blades.forEach(b => {
         const sw = Math.sin(T * .9 + b.ph + t.x * .01) * 5 * S * (b.len / (60 * S)) * (.5 + .5 * Math.sin(T * .3));
         const x0 = t.x + b.ox, x1 = x0 + (b.lean + sw) * p, y1 = t.y - b.len * p, cx = x0 + (b.lean * .3 + sw * .35) * p, cy = t.y - b.len * .6 * p;
