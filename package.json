@@ -1,0 +1,32 @@
+{
+  "name": "kanri-web",
+  "version": "1.0.0",
+  "description": "Official website for Kanri, an offline-first personal finance app for Android.",
+  "main": "index.html",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "validate": "python3 scripts/validate_site.py"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/omkarnub/kanri-web.git"
+  },
+  "keywords": [
+    "kanri",
+    "expense-tracker",
+    "finance",
+    "android",
+    "website"
+  ],
+  "author": "Omkar Singh (@omkarnub)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/omkarnub/kanri-web/issues"
+  },
+  "homepage": "https://github.com/omkarnub/kanri-web#readme",
+  "dependencies": {
+    "@vercel/analytics": "^2.0.1"
+  }
+}
