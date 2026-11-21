@@ -42,30 +42,27 @@
       return;
     }
 
-    // 1. Far Mountains & Mist (gentle downward drift creating depth)
-    const mtY = progress * 240;
+    // 1. Far Mountains & Mist (downward drift creating deep background parallax)
+    const mtY = progress * 260;
     if (wetCvs) wetCvs.style.transform = `translate3d(0, ${mtY.toFixed(2)}px, 0)`;
     if (mistCvs) mistCvs.style.transform = `translate3d(0, ${mtY.toFixed(2)}px, 0)`;
 
-    // 2. KANRI Brand Centerpiece (Floats mid-depth with subtle 3D scale and gentle fade)
+    // 2. KANRI Brand Centerpiece: Kept completely static (no drift, zero fade)
+    // Acts as the rock-solid anchor plane, making background and foreground parallax motion pop
     if (emblemEl) {
-      const emblemY = progress * 160;
-      const emblemScale = Math.max(0.88, 1 - progress * 0.08);
-      const emblemOpacity = Math.max(0, 1 - progress * 1.3);
-
-      emblemEl.style.transform = `translate3d(0, ${emblemY.toFixed(2)}px, 0) scale(${emblemScale.toFixed(3)})`;
-      emblemEl.style.opacity = emblemOpacity.toFixed(3);
+      emblemEl.style.transform = '';
+      emblemEl.style.opacity = '1';
     }
 
-    // 3. Dynamic River, Gliding Sampan Boat & Swallows
+    // 3. Dynamic River, Gliding Sampan Boat & Swallows (mid-plane travel)
     if (dynCvs) {
-      const dynY = progress * 90;
+      const dynY = progress * 100;
       dynCvs.style.transform = `translate3d(0, ${dynY.toFixed(2)}px, 0)`;
     }
 
-    // 4. Foreground Pitch-Black Land & Reeds (rises slightly upward into view)
+    // 4. Foreground Pitch-Black Land & Reeds (upward counter-rise into view)
     if (landEl) {
-      const landY = -progress * 110;
+      const landY = -progress * 120;
       landEl.style.transform = `translate3d(0, ${landY.toFixed(2)}px, 0)`;
     }
   }

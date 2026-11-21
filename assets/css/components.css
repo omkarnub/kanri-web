@@ -261,7 +261,7 @@
   text-align: center;
   padding: 40px 20px;
   user-select: none;
-  will-change: transform, opacity;
+  opacity: 1;
   max-width: 100%;
 }
 
