@@ -1,5 +1,5 @@
 /**
- * Kanri Website Main Engine
+ * Kanri Website Main Script
  * Production monochrome interactive logic:
  * - Animated GitHub Star Counter with API hydration & easeOut animation
  * - Threat Model Continuous Stepper (4 stages, auto-playback, rail comet, dynamic scenes)
@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // =========================================================================
-  // 1B. APP SOVEREIGNTY STATS COUNTERS (useInView -100px, spring simulation)
+  // 1B. APP STATS COUNTERS (useInView -100px, spring simulation)
   // =========================================================================
   const statCounterEls = document.querySelectorAll('.stat-counter');
 
@@ -200,7 +200,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // =========================================================================
-  // 2. THREAT MODEL CONTINUOUS STEPPER ENGINE
+  // 2. THREAT MODEL CONTINUOUS STEPPER
   // =========================================================================
   const threatSection = document.getElementById('security');
   if (threatSection) {
@@ -217,7 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
         eyebrow: 'Stage 02 · Zero-Network Parsing',
         title: 'Local Regex Parser',
         desc: 'Deterministic precompiled regex engines extract amount, merchant, and UPI reference in < 2ms in memory. OTPs and sensitive authentication tokens are rejected automatically.',
-        pills: ['Deterministic Engine', '1.2ms Latency', 'In-Memory', 'OTP Discard']
+        pills: ['Deterministic Rules', '1.2ms Latency', 'In-Memory', 'OTP Discard']
       },
       {
         num: '03',

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Capture & Dedupe | Kanri Documentation</title>
-  <meta name="description" content="Technical guide to Kanri's dual-engine SMS and notification ingestion, 5-minute sliding window deduplication, and OTP filtering.">
+  <meta name="description" content="Technical guide to Kanri's SMS and notification ingestion, 5-minute sliding window deduplication, and OTP filtering.">
   <link rel="canonical" href="https://omkarnub.github.io/kanri-web/docs/capture-dedupe/">
   <link rel="icon" type="image/png" href="../../assets/images/kanri_app_icon_dark.png">
   <link rel="stylesheet" href="../../assets/css/typography.css">
@@ -98,12 +98,12 @@
         <span>2. Capture & Dedupe</span>
       </div>
 
-      <h1>2. Dual-Engine Capture & Deduplication</h1>
+      <h1>2. SMS & Notification Capture & Deduplication</h1>
       <p class="lead">
         An in-depth explanation of how Kanri ingests bank SMS alerts and UPI notification popups, executes 5-minute sliding-window deduplication, and discards OTP messages.
       </p>
 
-      <h2 id="dual-engine">1. The Dual-Engine Ingestion Pipeline</h2>
+      <h2 id="ingestion-pipeline">1. The Ingestion Pipeline</h2>
       <p>
         In modern Indian banking and UPI ecosystems, a single digital transaction generates two distinct signals on your Android phone:
       </p>
@@ -117,7 +117,7 @@
 
       <h2 id="sms-receiver">2. Priority 999 SMS Receiver</h2>
       <p>
-        The SMS engine is registered via <code>SmsReceiver.kt</code> with priority <code>999</code>:
+        The SMS receiver is registered via <code>SmsReceiver.kt</code> with priority <code>999</code>:
       </p>
       <pre><code>&lt;receiver android:name=".receiver.SmsReceiver"
     android:exported="true"
@@ -151,7 +151,7 @@
         Notifications from messaging apps (WhatsApp, Telegram, Signal) or social platforms are completely ignored at the Android binder boundary.
       </p>
 
-      <h2 id="dedupe-engine">4. The 5-Minute Sliding-Window Deduplication Algorithm</h2>
+      <h2 id="dedupe-algorithm">4. The 5-Minute Sliding-Window Deduplication Algorithm</h2>
       <p>
         Because SMS delivery times vary based on cellular network latency, an SMS may arrive 10 seconds before or 4 minutes after a UPI notification.
       </p>
@@ -159,7 +159,7 @@
         <code>NotificationDeduplicationHelper.kt</code> enforces a bi-directional 5-minute sliding window:
       </p>
       <ol>
-        <li>When a transaction arrives from either engine, Kanri queries the local Room database for matching candidates where <code>|t_incoming - t_existing| &lt; 300,000 ms (5 minutes)</code>.</li>
+        <li>When a transaction arrives from either source, Kanri queries the local Room database for matching candidates where <code>|t_incoming - t_existing| &lt; 300,000 ms (5 minutes)</code>.</li>
         <li><strong>UTR Match:</strong> If the 12-digit UPI reference / UTR matches, records are fused immediately.</li>
         <li><strong>Amount & Account Match:</strong> If the UTR is missing or delayed, Kanri matches identical amounts and account last-4 digits within the same time window.</li>
         <li><strong>Metadata Enrichment:</strong> The generic SMS counterparty (e.g. <code>UPI/432618920192/PAYMENT</code>) is automatically updated with the human-readable merchant name from the notification (e.g. <code>Swiggy</code>).</li>
@@ -186,10 +186,10 @@
     <aside class="docs-toc">
       <div class="docs-toc-title">On this page</div>
       <ul class="docs-toc-list">
-        <li><a href="#dual-engine">Dual-Engine Pipeline</a></li>
+        <li><a href="#ingestion-pipeline">Ingestion Pipeline</a></li>
         <li><a href="#sms-receiver">Priority 999 SMS Receiver</a></li>
         <li><a href="#notification-listener">Notification Listener Scoping</a></li>
-        <li><a href="#dedupe-engine">5-Minute Deduplication</a></li>
+        <li><a href="#dedupe-algorithm">5-Minute Deduplication</a></li>
         <li><a href="#floating-overlay">1-Tap Floating Overlay</a></li>
       </ul>
     </aside>

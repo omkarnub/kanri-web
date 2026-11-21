@@ -1,5 +1,5 @@
 /**
- * Kanri Website — How Kanri Works (Interactive Cinematic Theater Engine)
+ * Kanri Website — How Kanri Works (Interactive Walkthrough)
  * Self-hosted, 60fps canvas & SVG pipeline with zero external dependencies.
  */
 (function () {
@@ -16,7 +16,7 @@
     },
     {
       num: '02',
-      eyebrow: '02 · Dual-Engine Ingestion',
+      eyebrow: '02 · Dual Ingestion',
       title: 'SMS + Notification Fusion',
       desc: 'SMS messages provide authoritative amounts and bank balances, while UPI notifications provide rich merchant names and recipient VPA addresses. Kanri’s 5-minute sliding window deduplication engine correlates SMS and notification alerts using UTR references and timestamps, merging them into a single clean transaction with zero duplicate records.',
       pills: ['5-Min Sliding Window', 'UTR Correlation', 'Zero Duplication', 'Dual Ingestion'],
@@ -24,7 +24,7 @@
     },
     {
       num: '03',
-      eyebrow: '03 · Local Engine',
+      eyebrow: '03 · Local Processing',
       title: 'Instant On-Device Parse',
       desc: 'Local silicon regex detects transactional bank SMS and payment notifications in memory within 1.1ms. Zero network connection, 100% offline.',
       pills: ['Local Regex', 'In-Memory', '0 KB Network', '1.1ms'],
@@ -247,7 +247,7 @@
   }
 
   // =========================================================================
-  // SCENE 02 — DUAL-ENGINE INGESTION & 5-MINUTE DEDUPLICATION
+  // SCENE 02 — DUAL INGESTION & 5-MINUTE DEDUPLICATION
   // =========================================================================
   function updateFusionScene(stepProgress) {
     const cardGpay = document.getElementById('fusion-card-gpay');

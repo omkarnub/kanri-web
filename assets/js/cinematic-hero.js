@@ -1,5 +1,5 @@
 /**
- * Kanri Flagship Cinematic Hero Animation Engine
+ * Kanri Flagship Cinematic Hero Animation
  * Physical Skeuomorphic Materials, 3D Depth, High-Performance Mouse Interaction,
  * and Buttery-Smooth Scrubbed Scroll Timeline via GSAP & ScrollTrigger.
  */

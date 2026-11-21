@@ -108,7 +108,7 @@
         Standard Android applications store Room/SQLite databases in unencrypted plaintext inside the app's internal sandbox. On rooted devices or during ADB backups, unencrypted databases can be extracted trivially.
       </p>
       <p>
-        Kanri integrates the official <strong>SQLCipher</strong> database engine:
+        Kanri integrates the official <strong>SQLCipher</strong> database library:
       </p>
       <ul>
         <li>Every single database page (4,096 bytes) is encrypted individually using <strong>AES-256 in CBC mode</strong> with HMAC-SHA512 per-page integrity authentication.</li>

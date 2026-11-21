@@ -437,7 +437,7 @@ body.scrolled-past-hero .switch {
   transform: rotate(-45deg);
 }
 
-/* Adaptive Contrast Engine for .switch */
+/* Adaptive Contrast for .switch */
 /* Light Background (In Hero Canvas): DOTS ARE SOLID SUMI-E BLACK */
 body.header-theme-light .switch,
 body:not(.scrolled-past-hero) .switch {

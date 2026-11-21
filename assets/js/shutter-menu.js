@@ -1,5 +1,5 @@
 /**
- * Kanri Clean Navigation Menu & Shutter Drawer Engine
+ * Kanri Clean Navigation Menu & Shutter Drawer Navigation
  * Purpose-built for pure site navigation.
  * Zero AI slop, zero preview card bloat.
  *
@@ -27,7 +27,7 @@
     if (!shutterOverlay) return;
 
     // -------------------------------------------------------------------------
-    // 0. Header Scroll Visibility & Dynamic Black/White Contrast Engine
+    // 0. Header Scroll Visibility & Dynamic Black/White Contrast Controller
     // -------------------------------------------------------------------------
     function initHeaderScrollAndContrast() {
       const topHeader = document.querySelector('.top-header');

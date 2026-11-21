@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ------------------------------------------------------------------------
-  // 3. 4-Pillar Financial Health Score Engine (0–100)
+  // 3. 4-Pillar Financial Health Score Calculator (0–100)
   // Matching FinancialHealthCalculator.kt logic
   // ------------------------------------------------------------------------
   const sliderSavings = document.getElementById('score-savings');
@@ -123,7 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (totalScore >= 90) {
       grade = 'A+';
-      gradeLabel = 'Optimal Sovereignty';
+      gradeLabel = 'Strong Balance';
       gradeColor = 'var(--accent)';
     } else if (totalScore >= 75) {
       grade = 'A';

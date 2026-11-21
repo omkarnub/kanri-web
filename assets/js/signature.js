@@ -1,5 +1,5 @@
 /**
- * Kanri - Signature Animation Engine
+ * Kanri - Signature Animation
  * Inspired by the Signature React component using La Storia Bold glyph paths.
  * Renders and animates @Omkarnub's calligraphic signature with SVG path stroke reveal.
  */

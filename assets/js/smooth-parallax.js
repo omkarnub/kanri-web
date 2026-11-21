@@ -1,5 +1,5 @@
 /**
- * Instant Zero-Delay Multi-Layer Parallax Engine for Kanri
+ * Instant Zero-Delay Multi-Layer Parallax for Kanri
  * Synchronous 1:1 requestAnimationFrame scroll tracking with zero artificial lerp lag (scrub: 0 feel).
  * 
  * Orchestration:
@@ -12,7 +12,7 @@
 (() => {
   'use strict';
 
-  // Inform living background that parallax engine handles canvas transforms
+  // Inform living background that Parallax handles canvas transforms
   window.disableInternalBgParallax = true;
 
   // DOM Elements

@@ -100,7 +100,7 @@
 
       <h1>7. The Pixel DotTiles Widget System</h1>
       <p class="lead">
-        Learn how Kanri's 12 home screen widgets are rendered using a shared pure Canvas engine, custom Ndot57 dot-matrix typography, and zero-drain battery architectures.
+        Learn how Kanri's 12 home screen widgets are rendered using a shared pure Canvas renderer, custom Ndot57 dot-matrix typography, and zero-drain battery architectures.
       </p>
 
       <h2 id="dot-matrix-design">1. Dot-Matrix Design Language & Typography</h2>
@@ -109,7 +109,7 @@
       </p>
       <ul>
         <li><strong>Ndot57 Typography (<code>ndot57.otf</code>):</strong> Authentic tabular dot-matrix numerals and symbols.</li>
-        <li><strong>Zero Distortion Engine:</strong> Dynamically calculates <code>fitCenter</code> bounds to ensure dot circles and glyphs never stretch across varying launcher column widths.</li>
+        <li><strong>Aspect Ratio Scaling:</strong> Dynamically calculates <code>fitCenter</code> bounds to ensure dot circles and glyphs never stretch across varying launcher column widths.</li>
         <li><strong>Strict 3-Tier Grammar:</strong> (1) Top uppercase label · (2) Hero numeral metric · (3) Bottom visual primitive.</li>
       </ul>
 

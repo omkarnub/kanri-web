@@ -437,7 +437,7 @@
 }
 
 /* --------------------------------------------------------------------------
-   5. Scene 02 — Dual-Engine Ingestion & 5-Minute Deduplication Pipeline
+   5. Scene 02 — Dual Ingestion & 5-Minute Deduplication Pipeline
    -------------------------------------------------------------------------- */
 .fusion-pipeline {
   width: 100%;

@@ -1,5 +1,5 @@
 /**
- * Kanri Professional Presentation Engine — Entrance & Fade-in Animations
+ * Kanri Professional Presentation Styles — Entrance & Fade-in Animations
  * Smooth, choreographed initial page entrance & high-performance scroll reveals.
  */
 

@@ -1,5 +1,5 @@
 /**
- * Kanri Website Hero Interactive Depth & Sheen Engine
+ * Kanri Website Hero Interactive Depth & Sheen Controller
  * Handles dynamic mouse coordinates for radial sheen and smooth 3D perspective tilt.
  */
 document.addEventListener('DOMContentLoaded', () => {

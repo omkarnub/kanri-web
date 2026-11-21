@@ -1,5 +1,5 @@
 /**
- * Kanri Dynamic Releases Engine
+ * Kanri Dynamic Releases Feed
  * Automatically fetches the latest official releases from GitHub API (omkarnub/Kanri).
  * Whenever a new release or APK update is pushed on GitHub, it automatically renders
  * the new release with its direct Download APK button, file size, and release notes.

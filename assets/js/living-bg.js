@@ -1,7 +1,7 @@
 /**
- * Shan Shui Living Background Engine for Kanri
+ * Shan Shui Living Background for Kanri
  * Authentic procedural Japanese/Chinese ink wash (sumi-e) living canvas.
- * Integrated with Kanri's light/dark/amoled themes and smooth parallax engine.
+ * Integrated with Kanri's light/dark/amoled themes and smooth Parallax.
  */
 (() => {
   'use strict';

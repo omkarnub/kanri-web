@@ -1,5 +1,5 @@
 /**
- * Kanri Theme Engine
+ * Kanri Theme Controller
  * Whole site below hero is dark themed permanently (Dark Ink or AMOLED).
  * Hero Shan Shui painting stays isolated in authentic light mode.
  */

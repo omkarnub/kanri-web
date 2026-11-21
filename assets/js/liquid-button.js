@@ -1,5 +1,5 @@
 /**
- * Vanilla Liquid Ink Button Engine for Kanri
+ * Vanilla Liquid Ink Button Controller for Kanri
  * Fluid organic ink droplet expansion with SVG feTurbulence + feDisplacementMap filter,
  * inverted text clip-path layering, spring physics, and click ripple impulse.
  * Mirrors the LiquidButton React component for zero-dependency static production.
@@ -114,7 +114,7 @@
     invertedEl.innerHTML = contentEl.innerHTML;
     btn.appendChild(invertedEl);
 
-    // 3. State & Physics Engine
+    // 3. State & Physics Controller
     const state = {
       x: 0,
       y: 0,

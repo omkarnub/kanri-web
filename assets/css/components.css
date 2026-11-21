@@ -496,7 +496,7 @@
 }
 
 /* --------------------------------------------------------------------------
-   Liquid Ink Buttons (Vanilla Engine matching React LiquidButton)
+   Liquid Ink Buttons
    -------------------------------------------------------------------------- */
 .liquid-btn {
   position: relative;
@@ -2346,7 +2346,7 @@
 }
 
 /* --------------------------------------------------------------------------
-   App Sovereignty Stats Counter Section (Strict Monochrome)
+   App Stats Counter Section (Strict Monochrome)
    -------------------------------------------------------------------------- */
 .app-stats-section {
   position: relative;
@@ -2426,7 +2426,7 @@
   background: #15151A;
 }
 
-.stat-card-airgap {
+.stat-card-offline {
   border-color: rgba(255, 255, 255, 0.16);
   background: #131318;
 }

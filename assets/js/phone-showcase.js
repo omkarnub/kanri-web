@@ -1,5 +1,5 @@
 /**
- * Kanri Phone Showcase & Interactive Transaction Detection Animation Engine
+ * Kanri Phone Showcase & Interactive Transaction Detection Animation
  * Handles 3D hardware tilt, incoming bank SMS simulation, and 1-tap categorization overlay animation.
  */
 (() => {

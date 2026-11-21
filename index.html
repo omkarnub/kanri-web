@@ -82,7 +82,7 @@
             "name": "Is Kanri really offline?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Yes. Kanri's core ledger, SMS parsing engine, notification listener, budget calculators, and analytics run 100% locally on your device with no remote servers or telemetry. The only network feature is an optional client-side encrypted backup to your own personal Google Drive (scoped strictly to drive.file) and an in-app GitHub release update check."
+              "text": "Yes. Kanri's core ledger, SMS parser, notification listener, budget calculators, and analytics run 100% locally on your device with no remote servers or telemetry. The only network feature is an optional client-side encrypted backup to your own personal Google Drive (scoped strictly to drive.file) and an in-app GitHub release update check."
             }
           },
           {
@@ -90,7 +90,7 @@
             "name": "Does Kanri read my OTPs?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "No. Kanri's SMS engine explicitly detects and discards OTP and authentication messages in memory. OTPs are never logged, parsed, or stored in the database."
+              "text": "No. Kanri's SMS reader explicitly detects and discards OTP and authentication messages in memory. OTPs are never logged, parsed, or stored in the database."
             }
           },
           {
@@ -483,7 +483,7 @@
                       <div class="phone-widget phone-header-row">
                         <div class="phone-header-text">
                           <span class="phone-header-sub">OCTOBER 2026</span>
-                          <span class="phone-header-title">Safe-to-Spend</span>
+                          <span class="phone-header-title">Safe-to-Spend (what you can spend per day until payday)</span>
                         </div>
                         <div class="phone-avatar-badge">₹</div>
                       </div>
@@ -586,7 +586,7 @@
                             stroke-width="3">
                             <polyline points="20 6 9 17 4 12" />
                           </svg>
-                          <span>Logged & Safe-to-Spend Updated</span>
+                          <span>Logged & Safe-to-Spend (what you can spend per day until payday) Updated</span>
                         </div>
                       </div>
                     </div>
@@ -620,7 +620,7 @@
       </div>
     </section>
 
-    <!-- Real App Sovereignty Metrics (Live Stats Counter) -->
+    <!-- Real App Metrics (Live Stats Counter) -->
     <section class="section section-tight app-stats-section" id="stats">
       <div class="container">
         <div class="stats-counter-banner">
@@ -669,7 +669,7 @@
               </div>
               <div class="stat-info">
                 <strong class="stat-label">DotTiles Home Widgets</strong>
-                <span class="stat-desc">Tactile dot-matrix widgets rendered via shared Canvas engine</span>
+                <span class="stat-desc">Tactile dot-matrix widgets rendered via shared Canvas renderer</span>
               </div>
               <div class="stat-tag-wrap">
                 <span class="stat-badge">ZERO BATTERY DRAIN</span>
@@ -677,7 +677,7 @@
             </div>
 
             <!-- Metric 4: Third-Party Telemetry -->
-            <div class="stat-card stat-card-airgap">
+            <div class="stat-card stat-card-offline">
               <div class="stat-numeral-wrap">
                 <span class="stat-counter" data-value="0" data-duration="0.8">0</span>
               </div>
@@ -686,7 +686,7 @@
                 <span class="stat-desc">Zero telemetry SDKs, zero cloud tracking, zero remote servers</span>
               </div>
               <div class="stat-tag-wrap">
-                <span class="stat-badge stat-badge-highlight">ABSOLUTE AIRGAP</span>
+                <span class="stat-badge stat-badge-highlight">100% OFFLINE</span>
               </div>
             </div>
 
@@ -700,7 +700,7 @@
                 <span class="stat-desc">Database encrypted at rest with Android Keystore hardware keys</span>
               </div>
               <div class="stat-tag-wrap">
-                <span class="stat-badge">HARDWARE TEE SEALED</span>
+                <span class="stat-badge">ENCRYPTED ON-DEVICE</span>
               </div>
             </div>
 
@@ -728,7 +728,7 @@
         <!-- Section Header -->
         <div class="how-it-works-header">
           <div>
-            <span class="section-eyebrow">Zero Manual Friction</span>
+            <span class="section-eyebrow">Automated Tracking</span>
             <h2 class="how-it-works-title">How Kanri Works</h2>
             <p class="how-it-works-subtitle">Automatic expense logging designed for real Indian payments.</p>
           </div>
@@ -758,7 +758,7 @@
 
           <div class="rail-node-col" data-col="1">
             <button class="node-btn" data-step="1" role="tab" aria-selected="false">02</button>
-            <span class="node-label">Dual Fusion</span>
+            <span class="node-label">Capture &amp; Match</span>
           </div>
 
           <div class="rail-node-col" data-col="2">
@@ -808,13 +808,13 @@
               </div>
             </div>
 
-            <!-- Scene 02: Dual-Engine Ingestion & 5-Minute Deduplication -->
+            <!-- Scene 02: Dual Ingestion & 5-Minute Deduplication -->
             <div class="viz-scene" id="scene-fusion">
               <div class="fusion-pipeline">
                 <div class="pipeline-header">
                   <span class="pipeline-status">
                     <span class="pipeline-status-dot"></span>
-                    5-MINUTE SLIDING CORRELATION ENGINE
+                    5-MINUTE SLIDING WINDOW CORRELATION
                   </span>
                   <span class="pipeline-meta">UTR MATCH · 0 DUPES</span>
                 </div>
@@ -882,7 +882,7 @@
                 <div class="pipeline-header">
                   <span class="pipeline-status">
                     <span class="pipeline-status-dot"></span>
-                    LOCAL REGEX ENGINE
+                    LOCAL REGEX PARSER
                   </span>
                   <span class="pipeline-meta">0 KB NET · IN-MEMORY</span>
                 </div>
@@ -997,7 +997,7 @@
             <div class="motion-stage" id="motion-wallets-atm">
               <div class="motion-stage-header">
                 <span class="motion-badge-live">ATM Transfer Mode</span>
-                <span class="motion-stage-meta">60 FPS VECTOR SIMULATION</span>
+                <span class="motion-stage-meta">DAILY ALLOWANCE &amp; BUDGET</span>
               </div>
               <div class="atm-stage-grid">
                 <div class="wallet-console-box" id="atm-box-online">
@@ -1047,8 +1047,8 @@
           <div class="feature-visual">
             <div class="motion-stage" id="motion-split-bill">
               <div class="motion-stage-header">
-                <span class="motion-badge-live">Split Bill Motion Loop</span>
-                <span class="motion-stage-meta">REAL-TIME SETTLEMENT ENGINE</span>
+                <span class="motion-badge-live">Split Expenses</span>
+                <span class="motion-stage-meta">SETTLEMENT CALCULATION</span>
               </div>
               <div class="split-bill-canvas-wrap">
                 <canvas id="split-bill-canvas"></canvas>
@@ -1089,20 +1089,20 @@
         <div class="feature-row">
           <div class="feature-text">
             <span class="section-eyebrow">Dynamic Pacing</span>
-            <h3>Salary-Synced Budgets & Safe-to-Spend Daily Allowance</h3>
+            <h3>Salary-Synced Budgets & Safe-to-Spend (what you can spend per day until payday) Daily Allowance</h3>
             <p>
               Real paychecks don't start on the 1st. Choose any budget cycle start day between <strong>1st and
                 28th</strong> to align perfectly with your salary credit date.
             </p>
             <p>
-              Kanri calculates your real-time <strong>Safe-to-Spend daily allowance</strong>:
+              Kanri calculates your real-time <strong>Safe-to-Spend (what you can spend per day until payday) daily allowance</strong>:
               <code>(Remaining Budget ÷ Days Left)</code> so you know exactly how much you can spend today without
               running out before payday.
             </p>
           </div>
           <div class="feature-visual">
             <div class="calc-card">
-              <span class="section-eyebrow">Safe-to-Spend Calculator</span>
+              <span class="section-eyebrow">Safe-to-Spend (what you can spend per day until payday) Calculator</span>
               <div class="calc-control-group">
                 <div class="calc-label-row">
                   <span>Monthly Budget:</span>
@@ -1145,13 +1145,13 @@
               velocity vs. calendar day, burn-rate projections, month-over-month comparisons, and category recap cards.
             </p>
             <p>
-              All visualizations render with GPU-accelerated canvas routines and zero tracking telemetry.
+              All charts and summaries render directly on your phone with zero tracking.
             </p>
           </div>
           <div class="feature-visual">
             <div class="motion-stage" id="motion-insights">
               <div class="motion-stage-header">
-                <span class="motion-badge-live">Dynamic Analytics HUD</span>
+                <span class="motion-badge-live">Spending Analytics</span>
                 <span class="motion-stage-meta">365-DAY HEATMAP & VELOCITY</span>
               </div>
               <div class="insights-motion-container">
@@ -1174,7 +1174,7 @@
         <!-- Feature 6: 4-Pillar Financial Health Score -->
         <div class="feature-row reverse">
           <div class="feature-text">
-            <span class="section-eyebrow">Objective Evaluation</span>
+            <span class="section-eyebrow">Money Health Score</span>
             <h3>0–100 Financial Health Score</h3>
             <p>
               An objective, transparent health score built on four balanced 25-point pillars:
@@ -1231,7 +1231,7 @@
                   <span id="health-score-number" class="health-score-number">95</span>
                   <span style="font-size:0.75rem; color:var(--muted); text-transform:uppercase;">Score</span>
                 </div>
-                <div id="health-grade-text" class="health-score-grade">Grade A+ · Optimal Sovereignty</div>
+                <div id="health-grade-text" class="health-score-grade">Grade A+ · Strong Balance</div>
               </div>
             </div>
           </div>
@@ -1243,7 +1243,7 @@
     <section class="section" id="widgets" style="background-color: var(--surface-subtle);">
       <div class="container">
         <div class="section-header">
-          <span class="section-eyebrow">Tactile Glanceability</span>
+          <span class="section-eyebrow">Home Screen Widgets</span>
           <h2>12 Pixel DotTiles Widgets</h2>
           <p>
             Crafted with authentic dot-matrix typography (Ndot57 font) and midnight battery-safe resets. Your finances,
@@ -1268,7 +1268,7 @@
         <div class="threat-stepper-header">
           <div>
             <span class="section-eyebrow">Zero Telemetry Threat Model</span>
-            <h2 class="threat-stepper-title">Security &amp; Data Sovereignty</h2>
+            <h2 class="threat-stepper-title">Security &amp; Data Privacy</h2>
             <p class="threat-stepper-subtitle">
               Your financial data belongs exclusively to you. Sealed with Android Keystore hardware keys.
             </p>
@@ -1370,7 +1370,7 @@
                   <div class="threat-code-terminal">
                     <div class="terminal-line"><span class="t-dim">00:00.012</span> <span class="t-kw">INGRESS:</span> SMS BroadcastReceiver triggered</div>
                     <div class="terminal-line"><span class="t-dim">00:00.014</span> <span class="t-ok">VERIFIED:</span> Origin bank transactional SMS channel</div>
-                    <div class="terminal-line"><span class="t-dim">00:00.015</span> <span class="t-sec">AIRGAP:</span> 0 outbound sockets requested</div>
+                    <div class="terminal-line"><span class="t-dim">00:00.015</span> <span class="t-sec">OFFLINE:</span> 0 outbound sockets requested</div>
                     <div class="terminal-line"><span class="t-dim">00:00.016</span> <span class="t-ok">BUFFER:</span> Volatile heap array allocated (0 disk write)</div>
                   </div>
                 </div>
@@ -1381,7 +1381,7 @@
             <div class="threat-scene" id="threat-scene-1">
               <div class="threat-viz-card">
                 <div class="viz-card-topbar">
-                  <span class="viz-mono-tag"><span class="viz-pulse-dot"></span>DETERMINISTIC REGEX ENGINE</span>
+                  <span class="viz-mono-tag"><span class="viz-pulse-dot"></span>DETERMINISTIC REGEX PARSER</span>
                   <span class="viz-spec-tag">1.2ms LATENCY</span>
                 </div>
                 <div class="regex-parse-visualizer">
@@ -1685,7 +1685,7 @@
                   <span>Why Kanri Needs It</span>
                 </div>
                 <p>
-                  Protects app entry using fingerprint or face unlock hardware authentication.
+                  Protects app entry using fingerprint or biometric hardware authentication.
                 </p>
               </div>
               <div class="perm-col perm-never">
@@ -1829,7 +1829,7 @@
             <div class="battle-header">
               <span class="battle-tag battle-tag-kanri">THE SOVEREIGN LEDGER STANDARD</span>
               <h3 class="battle-title">Kanri</h3>
-              <p class="battle-sub">Pure client-side sovereignty. Sealed on-device with zero telemetry forever.</p>
+              <p class="battle-sub">Pure on-device privacy. Stored on your device with zero telemetry forever.</p>
             </div>
             <div class="battle-metrics">
               <div class="metric-item">
@@ -2072,7 +2072,7 @@ $ adb shell tcpdump -i any -n "dst not 127.0.0.1"
               <span class="pill-sub">NEOBANK</span>
             </div>
 
-            <!-- Clones for seamless infinite loop -->
+            <!-- Clones for smooth loop -->
             <div class="marquee-pill" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path d="M12.24 10.285V13.4h6.887C18.847 14.82 17.07 17.5 12.24 17.5c-4.14 0-7.5-3.36-7.5-7.5s3.36-7.5 7.5-7.5c2.35 0 3.93 1.01 4.83 1.87l2.42-2.33C17.93 2.1 15.34 1 12.24 1 6.03 1 1 6.03 1 12.24S6.03 23.48 12.24 23.48c6.49 0 10.8-4.56 10.8-10.99 0-.74-.08-1.46-.23-2.2H12.24z"/></svg>
               <strong>Google Pay (GPay)</strong>
@@ -2229,7 +2229,7 @@ $ adb shell tcpdump -i any -n "dst not 127.0.0.1"
               <span class="pill-sub">GLOBAL</span>
             </div>
 
-            <!-- Clones for seamless infinite loop -->
+            <!-- Clones for smooth loop -->
             <div class="marquee-pill" aria-hidden="true">
               <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="10" r="3.5" fill="#121215"/><rect x="10.5" y="10" width="3" height="10" fill="#121215"/></svg>
               <strong>State Bank of India (SBI)</strong>
@@ -2504,7 +2504,7 @@ $ adb shell tcpdump -i any -n "dst not 127.0.0.1"
           <details class="faq-item" open>
             <summary class="faq-question">Is Kanri really offline?</summary>
             <div class="faq-answer">
-              Yes. Kanri's core ledger, SMS parsing engine, notification listener, budget calculators, and analytics run
+              Yes. Kanri's core ledger, SMS parser, notification listener, budget calculators, and analytics run
               100% locally on your device with no remote servers or telemetry. The only network feature is an optional
               client-side encrypted backup to your own personal Google Drive (scoped strictly to
               <code>drive.file</code>) and an in-app GitHub release update check.

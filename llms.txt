@@ -14,7 +14,7 @@
 - **Distribution**: GitHub Releases & Orion Store (Not on Google Play Store)
 
 ## Key Technical Features
-1. **Dual-Engine Capture**:
+1. **Dual Capture (SMS & Notifications)**:
    - Ingests transactional SMS from 15+ Indian banks (SBI, HDFC, ICICI, Axis, Kotak, BOB, PNB, Canara, Union Bank, IDFC FIRST, IndusInd, Federal, etc.).
    - Captures incoming UPI notifications from payment apps (Google Pay, PhonePe, Paytm, CRED, FamPay, BHIM).
    - Bi-directional 5-minute sliding-window deduplication merges SMS and notification alerts using UTR references.
@@ -34,7 +34,7 @@
    - GitHub-style spending heatmaps, 365-day matrix, burn-rate projections.
    - 0–100 Financial Health Score based on 4 pillars of 25 points each (Savings Rate, Budget Adherence, Velocity vs. Calendar, Debt Ratio).
 6. **12 Pixel DotTiles Widgets**:
-   - Tactile dot-matrix widgets rendered via shared Canvas engine using Ndot57 font.
+   - Tactile dot-matrix widgets rendered via shared Canvas renderer using Ndot57 font.
    - Midnight resets via WorkManager with zero battery drain.
 7. **Security & Privacy**:
    - SQLCipher AES-256 database at rest, master key stored in Android Keystore (TEE/StrongBox).
