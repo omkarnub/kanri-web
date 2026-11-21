@@ -17,6 +17,7 @@ window.KANRI_CONFIG = {
   
   // URLs & Repositories
   GITHUB_REPO: "https://github.com/omkarnub/Kanri",
+  GITHUB_STARS: 9,
   GITHUB_RELEASES: "https://github.com/omkarnub/Kanri/releases",
   GITHUB_ISSUES: "https://github.com/omkarnub/Kanri/issues",
   GITHUB_SECURITY: "https://github.com/omkarnub/Kanri/security/advisories",

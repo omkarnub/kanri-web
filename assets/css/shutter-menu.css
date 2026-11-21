@@ -1,0 +1,730 @@
+/**
+ * Kanri Clean Navigation Menu & Shutter Drawer Styles
+ * Purpose-built for pure site navigation.
+ * Zero AI slop, zero preview card bloat.
+ *
+ * Strict Design System:
+ * - Fonts: Panchang (Brand), Google Sans (Interface), Ndot57 (Numerals/Mono)
+ * - Palette: Monochrome Sumi-e (#121212, #18181B, #FAF9F5, #F2F2F2)
+ * - 100% Self-Hosted, Zero External CDNs
+ */
+
+:root {
+  --shutter-ink: #121212;
+  --shutter-charcoal: #18181B;
+  --shutter-card: #141416;
+  --shutter-bone: #FAF9F5;
+  --shutter-cream: #FAF9F5;
+  --shutter-cream-light: #FFFFFF;
+  --shutter-muted: rgba(250, 249, 245, 0.6);
+  --shutter-line: rgba(255, 255, 255, 0.1);
+  --shutter-line-subtle: rgba(255, 255, 255, 0.06);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 72px;
+}
+
+/* --------------------------------------------------------------------------
+   1. Persistent Top Header Navigation (Adaptive Outline Buttons & Scroll-Reveal Nav)
+   -------------------------------------------------------------------------- */
+.top-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 850;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 2rem;
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-bottom: 1px solid transparent;
+  pointer-events: none;
+  transition: background-color 0.35s ease, border-color 0.35s ease, padding 0.3s ease;
+}
+
+@media (min-width: 1024px) {
+  .top-header {
+    padding: 1.5rem 2.75rem;
+  }
+}
+
+.top-header > * {
+  pointer-events: auto;
+}
+
+/* Scrolled Past Hero: Frosting & Header Polish */
+body.scrolled-past-hero .top-header {
+  background: rgba(8, 8, 10, 0.85);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+  padding-top: 0.85rem;
+  padding-bottom: 0.85rem;
+}
+
+/* Clean Desktop Navigation Bar - HIDDEN IN HERO SECTION, REVEALS ON SCROLL */
+.top-nav {
+  display: none;
+  align-items: center;
+  gap: 1.75rem;
+  background: transparent !important;
+  border: none !important;
+  padding: 0;
+  margin: 0;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-8px);
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (min-width: 1024px) {
+  .top-nav {
+    display: flex;
+  }
+
+  body.scrolled-past-hero .top-nav,
+  .top-nav.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+}
+
+@media (min-width: 1280px) {
+  .top-nav {
+    gap: 2.25rem;
+  }
+}
+
+.top-nav-link {
+  position: relative;
+  color: rgba(250, 249, 245, 0.7);
+  text-decoration: none;
+  font-family: var(--font-sans, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  padding: 0.25rem 0;
+  background: transparent !important;
+  border: none !important;
+  transition: color 0.25s cubic-bezier(0.16, 1, 0.3, 1), text-shadow 0.25s ease;
+  white-space: nowrap;
+}
+
+.top-nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: #FAF9F5;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  opacity: 0.95;
+}
+
+.top-nav-link:hover {
+  color: #FFFFFF;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.25);
+}
+
+.top-nav-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Top Header Right Actions (GitHub Star + Menu Trigger) */
+.top-header-right {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-left: auto;
+}
+
+/* ==========================================================================
+   GITHUB STAR COUNTER - BARE TEXT + SVG WITH UPWARD ROLLING DIGITS (NO OUTLINE)
+   ========================================================================== */
+.github-star-pill {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.45rem !important;
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  padding: 0.25rem 0.2rem !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  user-select: none !important;
+  font-family: var(--font-sans, sans-serif) !important;
+  font-size: 0.8125rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.03em !important;
+  transition: opacity 0.25s ease, transform 0.2s ease !important;
+}
+
+.github-star-pill svg {
+  display: block;
+  flex-shrink: 0;
+  width: 15px;
+  height: 15px;
+  transition: fill 0.25s ease, color 0.25s ease, transform 0.2s ease;
+}
+
+.github-star-pill:hover svg {
+  transform: scale(1.1);
+}
+
+.github-star-pill .star-count,
+.github-star-pill #github-star-count,
+.github-star-pill .star-count.odometer-mode {
+  display: inline-flex !important;
+  align-items: center !important;
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  height: 1.25em !important;
+  line-height: 1.25em !important;
+  overflow: hidden !important;
+  font-family: var(--font-mono, monospace) !important;
+  font-size: 0.8125rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.04em !important;
+  font-variant-numeric: tabular-nums !important;
+  border-radius: 0 !important;
+}
+
+/* Upward Rolling Digit Reels */
+.reel-digit {
+  display: inline-block;
+  height: 1.25em;
+  overflow: hidden;
+  position: relative;
+  width: 0.65em;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.reel-track {
+  display: flex;
+  flex-direction: column;
+  transform: translateY(0%);
+  transition: transform 1.25s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.reel-number {
+  display: block;
+  height: 1.25em;
+  line-height: 1.25em;
+  text-align: center;
+  color: inherit !important;
+}
+
+.reel-char {
+  display: inline-block;
+  height: 1.25em;
+  line-height: 1.25em;
+  vertical-align: middle;
+  color: inherit !important;
+}
+
+/* STATE A: Light Background (Hero canvas / light theme) -> CRISP SOLID BLACK */
+body.header-theme-light .github-star-pill,
+body:not(.scrolled-past-hero) .github-star-pill {
+  color: #121212 !important;
+}
+
+body.header-theme-light .github-star-pill svg,
+body:not(.scrolled-past-hero) .github-star-pill svg {
+  color: #121212 !important;
+  fill: #121212 !important;
+}
+
+body.header-theme-light .github-star-pill .star-count,
+body:not(.scrolled-past-hero) .github-star-pill .star-count,
+body.header-theme-light .github-star-pill .reel-number,
+body:not(.scrolled-past-hero) .github-star-pill .reel-number,
+body.header-theme-light .github-star-pill .reel-char,
+body:not(.scrolled-past-hero) .github-star-pill .reel-char {
+  color: #121212 !important;
+}
+
+body.header-theme-light .github-star-pill:hover,
+body:not(.scrolled-past-hero) .github-star-pill:hover {
+  opacity: 0.72;
+  transform: translateY(-1px);
+}
+
+/* STATE B: Dark Background (Scrolled below hero) -> CRISP SOLID WHITE */
+body.header-theme-dark .github-star-pill,
+body.scrolled-past-hero .github-star-pill {
+  color: #FAF9F5 !important;
+}
+
+body.header-theme-dark .github-star-pill svg,
+body.scrolled-past-hero .github-star-pill svg {
+  color: #FAF9F5 !important;
+  fill: #FAF9F5 !important;
+}
+
+body.header-theme-dark .github-star-pill .star-count,
+body.scrolled-past-hero .github-star-pill .star-count,
+body.header-theme-dark .github-star-pill .reel-number,
+body.scrolled-past-hero .github-star-pill .reel-number,
+body.header-theme-dark .github-star-pill .reel-char,
+body.scrolled-past-hero .github-star-pill .reel-char {
+  color: #FAF9F5 !important;
+}
+
+body.header-theme-dark .github-star-pill:hover,
+body.scrolled-past-hero .github-star-pill:hover {
+  opacity: 0.85;
+  transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   UIVERSE.IO BY VINODJANGID07 - 9-DOT TO 'X' MORPHING MENU SWITCH
+   ========================================================================== */
+.switch {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  padding: 0;
+  margin: 0;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.2s ease;
+}
+
+.switch,
+.switch:active,
+.switch:focus,
+.switch:hover,
+body.header-theme-light .switch,
+body.header-theme-dark .switch,
+body.menu-open .switch,
+body:not(.scrolled-past-hero) .switch,
+body.scrolled-past-hero .switch {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.switch:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+.switch input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  pointer-events: none;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.switch .wrapper {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.switch:hover .wrapper {
+  transform: scale(1.12);
+}
+
+.switch .row {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+}
+
+.switch .row.row-bottom {
+  top: auto;
+  bottom: 0;
+}
+
+.switch .row-vertical {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  transform-origin: center center;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+.switch .row-horizontal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  transform-origin: center center;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+.switch .dot {
+  width: 3.5px;
+  height: 3.5px;
+  border-radius: 50%;
+  background-color: currentColor;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.28s ease,
+              background-color 0.25s ease;
+  will-change: transform, opacity;
+  flex-shrink: 0;
+}
+
+/* Checked State: 4 Corner Dots Shrink & Disappear, Horizontal & Vertical Bars Rotate into 'X' */
+.switch input:checked + .wrapper .row .dot,
+.switch input:checked + .wrapper .row-bottom .dot {
+  opacity: 0;
+  transform: scale(0);
+}
+
+.switch input:checked + .wrapper .row-vertical {
+  transform: rotate(45deg);
+}
+
+.switch input:checked + .wrapper .row-horizontal {
+  transform: rotate(-45deg);
+}
+
+/* Adaptive Contrast Engine for .switch */
+/* Light Background (In Hero Canvas): DOTS ARE SOLID SUMI-E BLACK */
+body.header-theme-light .switch,
+body:not(.scrolled-past-hero) .switch {
+  color: #121212 !important;
+}
+
+body.header-theme-light .switch .dot,
+body:not(.scrolled-past-hero) .switch .dot {
+  background-color: #121212 !important;
+}
+
+/* Dark Background (Scrolled Below Hero): DOTS TURN SOLID SUMI-BONE WHITE */
+body.header-theme-dark .switch,
+body.scrolled-past-hero .switch {
+  color: #FAF9F5 !important;
+}
+
+body.header-theme-dark .switch .dot,
+body.scrolled-past-hero .switch .dot {
+  background-color: #FAF9F5 !important;
+}
+
+/* Menu Open State: ONLY DOTS REMAIN CRISP WHITE OVER DARK SHUTTER BLINDS, CONTAINER STAYS 100% TRANSPARENT */
+body.menu-open .switch {
+  color: #FAF9F5 !important;
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+body.menu-open .switch .dot {
+  background-color: #FAF9F5 !important;
+}
+
+/* --------------------------------------------------------------------------
+   2. Full-Viewport Shutter Navigation Drawer Overlay
+   -------------------------------------------------------------------------- */
+#shutter-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 800;
+  visibility: hidden;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+#shutter-overlay.is-interactive {
+  pointer-events: auto;
+}
+
+/* 5 Alternating Vertical Shutter Blinds */
+.shutter-columns {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.shutter-col {
+  background: #0E0E10;
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  transform: scaleY(0);
+  will-change: transform;
+}
+
+.shutter-col:last-child {
+  border-right: none;
+}
+
+.shutter-col:nth-child(odd) {
+  transform-origin: top center;
+}
+
+.shutter-col:nth-child(even) {
+  transform-origin: bottom center;
+}
+
+/* Drawer Shell */
+.drawer-shell {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  color: var(--shutter-bone);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 5.5rem 1.75rem 2rem 1.75rem;
+  overflow-y: auto;
+  scrollbar-width: none;
+  font-family: 'Google Sans', var(--font-sans), sans-serif;
+}
+
+.drawer-shell::-webkit-scrollbar {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .drawer-shell {
+    padding: 6.5rem 3rem 2.5rem 3rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   3. Pure Navigation Layout (Google Sans Interface Typography)
+   -------------------------------------------------------------------------- */
+.drawer-nav-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  max-width: 1080px;
+  width: 100%;
+  margin: auto;
+  padding: 1.5rem 0;
+  font-family: 'Google Sans', var(--font-sans), sans-serif;
+}
+
+@media (min-width: 768px) {
+  .drawer-nav-container {
+    grid-template-columns: 1fr 1fr;
+    gap: 4.5rem;
+  }
+}
+
+.drawer-nav-group {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Google Sans', var(--font-sans), sans-serif;
+}
+
+.drawer-group-label {
+  font-family: 'Google Sans', var(--font-sans), sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #FAF9F5;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--shutter-line);
+}
+
+.drawer-links-list {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Google Sans', var(--font-sans), sans-serif;
+}
+
+.drawer-nav-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.15rem 0.6rem;
+  border-bottom: 1px solid var(--shutter-line-subtle);
+  color: var(--shutter-bone);
+  text-decoration: none;
+  font-family: 'Google Sans', var(--font-sans), sans-serif;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.drawer-nav-item::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(250, 249, 245, 0.08);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.28s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.drawer-nav-item:hover::before {
+  transform: scaleX(1);
+}
+
+.drawer-nav-item:hover {
+  color: #FFFFFF;
+  padding-left: 1.15rem;
+}
+
+.drawer-nav-item-left {
+  display: flex;
+  align-items: baseline;
+  gap: 1.25rem;
+  z-index: 1;
+  font-family: 'Google Sans', var(--font-sans), sans-serif;
+}
+
+.nav-item-num {
+  font-family: 'Google Sans', var(--font-sans), sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--shutter-muted);
+  transition: color 0.25s ease;
+  min-width: 1.5rem;
+}
+
+.drawer-nav-item:hover .nav-item-num {
+  color: #FFFFFF;
+}
+
+.nav-item-title {
+  font-family: 'Google Sans', var(--font-sans), sans-serif;
+  font-size: clamp(1.2rem, 1.9vw, 1.55rem);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  transition: color 0.25s ease;
+}
+
+.drawer-nav-item:hover .nav-item-title {
+  color: #FAF9F5;
+}
+
+.nav-item-arrow {
+  font-family: 'Google Sans', var(--font-sans), sans-serif;
+  font-size: 1.15rem;
+  color: var(--shutter-muted);
+  opacity: 0.4;
+  transform: translateX(-4px);
+  transition: transform 0.25s ease, opacity 0.25s ease, color 0.25s ease;
+  z-index: 1;
+}
+
+.drawer-nav-item:hover .nav-item-arrow {
+  opacity: 1;
+  color: #FAF9F5;
+  transform: translateX(0);
+}
+
+/* --------------------------------------------------------------------------
+   4. Drawer Bottom Strip
+   -------------------------------------------------------------------------- */
+.drawer-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--shutter-line);
+  font-family: var(--font-sans, sans-serif);
+  font-size: 0.75rem;
+  color: var(--shutter-muted);
+  max-width: 1080px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.footer-links-group {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+}
+
+.footer-link {
+  background: transparent;
+  border: none;
+  color: var(--shutter-muted);
+  text-decoration: none;
+  cursor: pointer;
+  font-family: var(--font-sans, sans-serif);
+  font-size: 0.78rem;
+  transition: color 0.2s ease;
+}
+
+.footer-link:hover {
+  color: #FAF9F5;
+}
+
+.shortcut-hint {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.6875rem;
+  letter-spacing: 0.05em;
+  opacity: 0.65;
+}
+
+.shortcut-hint span {
+  color: #FFFFFF;
+  padding: 1px 5px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}

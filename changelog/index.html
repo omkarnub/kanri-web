@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Changelog | Kanri — Offline Expense Tracker</title>
-  <meta name="description" content="Release history and version changelog for Kanri offline-first personal finance ledger. Newest versions first with APK links.">
-  <link rel="canonical" href="https://omkarnub.github.io/kanri-web/changelog/">
+  <title>Releases | Kanri — Offline Expense Tracker</title>
+  <meta name="description" content="Official Kanri Android releases, version history, and direct APK downloads. Automatically synced with GitHub Releases.">
+  <link rel="canonical" href="https://omkarnub.github.io/kanri-web/releases/">
   <link rel="icon" type="image/png" href="../assets/images/kanri_app_icon_dark.png">
   <link rel="stylesheet" href="../assets/css/typography.css">
   <link rel="stylesheet" href="../assets/css/main.css">
@@ -25,11 +25,21 @@
         <a href="../index.html#features" class="nav-link">Features</a>
         <a href="../index.html#widgets" class="nav-link">Widgets</a>
         <a href="../docs/index.html" class="nav-link">Docs</a>
-        <a href="index.html" class="nav-link active">Changelog</a>
+        <a href="../releases/index.html" class="nav-link active">Releases</a>
         <a href="../faq/index.html" class="nav-link">FAQ</a>
       </nav>
 
       <div class="header-actions">
+        <a href="https://github.com/omkarnub/Kanri" class="github-btn" target="_blank" rel="noopener noreferrer" title="Star Kanri on GitHub (9 stars)" aria-label="Star Kanri on GitHub (9 stars)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+          </svg>
+          <span>Star</span>
+          <svg class="top-github-star-icon" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+          </svg>
+          <span class="star-count github-star-count">9</span>
+        </a>
         <button id="theme-toggle-btn" class="theme-toggle-btn" aria-label="Toggle theme">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <circle cx="12" cy="12" r="5"></circle>
@@ -37,7 +47,7 @@
             <line x1="12" y1="21" x2="12" y2="23"></line>
           </svg>
         </button>
-        <a href="../download/index.html" class="btn btn-primary btn-sm">Download APK</a>
+        <a href="https://github.com/omkarnub/Kanri/releases/latest" class="btn btn-primary btn-sm">Download APK</a>
       </div>
     </div>
   </header>
@@ -47,135 +57,215 @@
       <div class="docs-breadcrumbs">
         <a href="../index.html">Home</a>
         <span>/</span>
-        <span>Changelog</span>
+        <span>Releases</span>
       </div>
 
-      <h1 style="font-size:2.5rem; margin-bottom:8px;">Release Changelog</h1>
-      <p style="color:var(--muted); font-size:1.0625rem; margin-bottom:48px;">
-        All notable changes, bug fixes, and architectural enhancements across Kanri releases (Semantic Versioning).
+      <div style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:16px; margin-bottom:8px;">
+        <h1 style="font-size:2.5rem; margin-bottom:0;">Releases</h1>
+        <div id="releases-sync-status" style="font-family:var(--font-mono); font-size:0.8125rem; color:var(--muted); display:flex; align-items:center;">
+          <span class="live-dot" style="display:inline-block; width:7px; height:7px; border-radius:999px; background:#30A46C; margin-right:6px; box-shadow:0 0 8px #30A46C;"></span>
+          <span>Auto-sync active · Real-time GitHub integration</span>
+        </div>
+      </div>
+
+      <p style="color:var(--muted); font-size:1.0625rem; margin-bottom:44px;">
+        All official releases, changelog history, and direct signed APK downloads for Kanri. When a new update is published on GitHub, it automatically populates here.
       </p>
 
-      <!-- Release 1.19.8 -->
-      <div class="card" style="margin-bottom:32px;">
-        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:16px;">
-          <div>
-            <span class="badge badge-accent" style="margin-right:8px;">Latest Release</span>
-            <strong style="font-size:1.5rem; color:var(--text);">v1.19.8</strong>
-            <span class="text-mono" style="font-size:0.875rem; color:var(--muted); margin-left:8px;">Build 75</span>
+      <!-- Releases Container (Auto-populated and updated via releases.js) -->
+      <div id="releases-container">
+
+        <!-- Release 1.19.8 -->
+        <div class="card release-card" data-release-tag="v1.19.8" style="margin-bottom:32px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:16px;">
+            <div>
+              <span class="badge badge-accent" style="margin-right:8px;">Latest Release</span>
+              <strong style="font-size:1.5rem; color:var(--text); font-family:var(--font-sans);">v1.19.8</strong>
+              <span class="text-mono" style="font-size:0.875rem; color:var(--muted); margin-left:8px;">Build 75</span>
+            </div>
+            <span style="font-size:0.875rem; color:var(--muted); font-family:var(--font-sans);">November 21, 2026</span>
           </div>
-          <span style="font-size:0.875rem; color:var(--muted);">November 21, 2026</span>
-        </div>
 
-        <h4 style="font-size:1rem; margin-bottom:8px; color:var(--text);">Highlights:</h4>
-        <ul style="color:var(--text-secondary); font-size:0.9375rem; line-height:1.7; margin-left:20px; margin-bottom:20px;">
-          <li><strong>Fluid Motion &amp; 120Hz Refresh Rate:</strong> Requests device peak display refresh rate (e.g. 90Hz / 120Hz) on high-refresh panels.</li>
-          <li><strong>Background Power Saver:</strong> Pauses canvas and shader animation loops during Android Power Saver mode or screen-off states.</li>
-          <li><strong>Master Architecture Documentation:</strong> Comprehensive technical documentation manual authored in <code>docs/APP_DOCUMENTATION.md</code>.</li>
-        </ul>
+          <h4 style="font-size:1rem; margin-bottom:8px; color:var(--text);">Highlights:</h4>
+          <ul style="color:var(--text-secondary); font-size:0.9375rem; line-height:1.7; margin-left:20px; margin-bottom:20px;">
+            <li><strong>Fluid Motion &amp; 120Hz Refresh Rate:</strong> Requests device peak display refresh rate (e.g. 90Hz / 120Hz) on high-refresh panels.</li>
+            <li><strong>Background Power Saver:</strong> Pauses canvas and shader animation loops during Android Power Saver mode or screen-off states.</li>
+            <li><strong>Master Architecture Documentation:</strong> Comprehensive technical documentation manual authored in <code>docs/APP_DOCUMENTATION.md</code>.</li>
+          </ul>
 
-        <div style="display:flex; gap:12px; flex-wrap:wrap;">
-          <a href="https://github.com/omkarnub/Kanri/releases/download/v1.19.8/Kanri-v1.19.8-release.apk" class="btn btn-primary btn-sm">
-            Download APK (27.1 MB)
-          </a>
-          <a href="https://github.com/omkarnub/Kanri/releases/tag/v1.19.8" class="btn btn-outline btn-sm" target="_blank" rel="noopener noreferrer">
-            GitHub Release Notes →
-          </a>
-        </div>
-      </div>
-
-      <!-- Release 1.19.7 -->
-      <div class="card" style="margin-bottom:32px;">
-        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:16px;">
-          <div>
-            <strong style="font-size:1.375rem; color:var(--text);">v1.19.7</strong>
-            <span class="text-mono" style="font-size:0.875rem; color:var(--muted); margin-left:8px;">Build 74</span>
+          <div style="display:flex; gap:12px; flex-wrap:wrap;">
+            <a href="https://github.com/omkarnub/Kanri/releases/download/v1.19.8/Kanri-v1.19.8-release.apk" class="btn btn-primary btn-sm release-download-btn" style="display:inline-flex; align-items:center;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="margin-right:6px;">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="7 10 12 15 17 10"/>
+                <line x1="12" y1="15" x2="12" y2="3"/>
+              </svg>
+              <span>Download APK (27.1 MB)</span>
+            </a>
+            <a href="https://github.com/omkarnub/Kanri/releases/tag/v1.19.8" class="btn btn-outline btn-sm" target="_blank" rel="noopener noreferrer">
+              GitHub Release Notes →
+            </a>
           </div>
-          <span style="font-size:0.875rem; color:var(--muted);">November 21, 2026</span>
         </div>
 
-        <h4 style="font-size:1rem; margin-bottom:8px; color:var(--text);">Highlights:</h4>
-        <ul style="color:var(--text-secondary); font-size:0.9375rem; line-height:1.7; margin-left:20px; margin-bottom:20px;">
-          <li><strong>Restored HTML/WebGL Backdrops:</strong> Restored authentic background artwork files (<code>aurora.html</code>, <code>sumi_e_mist.html</code>).</li>
-          <li><strong>Memory Safety:</strong> Scaled canvas rendering to 540×960, slashing bitmap RAM usage from 66 MB to 16 MB to prevent render process OOM.</li>
-        </ul>
-
-        <div style="display:flex; gap:12px; flex-wrap:wrap;">
-          <a href="https://github.com/omkarnub/Kanri/releases/tag/v1.19.7" class="btn btn-outline btn-sm" target="_blank" rel="noopener noreferrer">
-            GitHub Release Notes →
-          </a>
-        </div>
-      </div>
-
-      <!-- Release 1.19.6 -->
-      <div class="card" style="margin-bottom:32px;">
-        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:16px;">
-          <div>
-            <strong style="font-size:1.375rem; color:var(--text);">v1.19.6</strong>
-            <span class="text-mono" style="font-size:0.875rem; color:var(--muted); margin-left:8px;">Build 73</span>
+        <!-- Release 1.19.7 -->
+        <div class="card release-card" data-release-tag="v1.19.7" style="margin-bottom:32px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:16px;">
+            <div>
+              <strong style="font-size:1.375rem; color:var(--text); font-family:var(--font-sans);">v1.19.7</strong>
+              <span class="text-mono" style="font-size:0.875rem; color:var(--muted); margin-left:8px;">Build 74</span>
+            </div>
+            <span style="font-size:0.875rem; color:var(--muted); font-family:var(--font-sans);">November 21, 2026</span>
           </div>
-          <span style="font-size:0.875rem; color:var(--muted);">November 21, 2026</span>
-        </div>
 
-        <h4 style="font-size:1rem; margin-bottom:8px; color:var(--text);">Highlights:</h4>
-        <ul style="color:var(--text-secondary); font-size:0.9375rem; line-height:1.7; margin-left:20px; margin-bottom:20px;">
-          <li><strong>Mali GPU AGSL Optimization:</strong> Converted shader arithmetic to 16-bit <code>half</code> precision, doubling ALU throughput.</li>
-          <li><strong>Uniform Hoisting:</strong> Hoisted aspect ratio out of pixel loops, eliminating 650,000 divisions per frame.</li>
-          <li><strong>Eliminated In-List Blur Avalanche:</strong> Restricted GPU blur strictly to floating overlays for butter-smooth list scrolling.</li>
-        </ul>
+          <h4 style="font-size:1rem; margin-bottom:8px; color:var(--text);">Highlights:</h4>
+          <ul style="color:var(--text-secondary); font-size:0.9375rem; line-height:1.7; margin-left:20px; margin-bottom:20px;">
+            <li><strong>Restored HTML/WebGL Backdrops:</strong> Restored authentic background artwork files (<code>aurora.html</code>, <code>sumi_e_mist.html</code>).</li>
+            <li><strong>Memory Safety:</strong> Scaled canvas rendering to 540×960, slashing bitmap RAM usage from 66 MB to 16 MB to prevent render process OOM.</li>
+          </ul>
 
-        <div style="display:flex; gap:12px; flex-wrap:wrap;">
-          <a href="https://github.com/omkarnub/Kanri/releases/tag/v1.19.6" class="btn btn-outline btn-sm" target="_blank" rel="noopener noreferrer">
-            GitHub Release Notes →
-          </a>
-        </div>
-      </div>
-
-      <!-- Release 1.19.5 -->
-      <div class="card" style="margin-bottom:32px;">
-        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:16px;">
-          <div>
-            <strong style="font-size:1.375rem; color:var(--text);">v1.19.5</strong>
-            <span class="text-mono" style="font-size:0.875rem; color:var(--muted); margin-left:8px;">Build 72</span>
+          <div style="display:flex; gap:12px; flex-wrap:wrap;">
+            <a href="https://github.com/omkarnub/Kanri/releases/download/v1.19.7/Kanri-v1.19.7.apk" class="btn btn-primary btn-sm release-download-btn" style="display:inline-flex; align-items:center;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="margin-right:6px;">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="7 10 12 15 17 10"/>
+                <line x1="12" y1="15" x2="12" y2="3"/>
+              </svg>
+              <span>Download APK (27.1 MB)</span>
+            </a>
+            <a href="https://github.com/omkarnub/Kanri/releases/tag/v1.19.7" class="btn btn-outline btn-sm" target="_blank" rel="noopener noreferrer">
+              GitHub Release Notes →
+            </a>
           </div>
-          <span style="font-size:0.875rem; color:var(--muted);">November 18, 2026</span>
         </div>
 
-        <h4 style="font-size:1rem; margin-bottom:8px; color:var(--text);">Highlights:</h4>
-        <ul style="color:var(--text-secondary); font-size:0.9375rem; line-height:1.7; margin-left:20px; margin-bottom:20px;">
-          <li><strong>Authentic Brand Splash:</strong> Kinetic Panchang KANRI intro letters with theme-adaptive contrast.</li>
-          <li><strong>Widget Quick Entry Glass Blur:</strong> Added frosted glass blur and specular lighting to the widget numpad sheet in Glass theme.</li>
-          <li><strong>Touch-Pause Cadence:</strong> Pauses shader redraws during screen touch and flings, locking UI scrolling to 120 FPS.</li>
-        </ul>
-
-        <div style="display:flex; gap:12px; flex-wrap:wrap;">
-          <a href="https://github.com/omkarnub/Kanri/releases/tag/v1.19.5" class="btn btn-outline btn-sm" target="_blank" rel="noopener noreferrer">
-            GitHub Release Notes →
-          </a>
-        </div>
-      </div>
-
-      <!-- Release 1.19.0 -->
-      <div class="card" style="margin-bottom:32px;">
-        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:16px;">
-          <div>
-            <strong style="font-size:1.375rem; color:var(--text);">v1.19.0</strong>
-            <span class="text-mono" style="font-size:0.875rem; color:var(--muted); margin-left:8px;">Build 67</span>
+        <!-- Release 1.19.6 -->
+        <div class="card release-card" data-release-tag="v1.19.6" style="margin-bottom:32px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:16px;">
+            <div>
+              <strong style="font-size:1.375rem; color:var(--text); font-family:var(--font-sans);">v1.19.6</strong>
+              <span class="text-mono" style="font-size:0.875rem; color:var(--muted); margin-left:8px;">Build 73</span>
+            </div>
+            <span style="font-size:0.875rem; color:var(--muted); font-family:var(--font-sans);">November 21, 2026</span>
           </div>
-          <span style="font-size:0.875rem; color:var(--muted);">November 12, 2026</span>
+
+          <h4 style="font-size:1rem; margin-bottom:8px; color:var(--text);">Highlights:</h4>
+          <ul style="color:var(--text-secondary); font-size:0.9375rem; line-height:1.7; margin-left:20px; margin-bottom:20px;">
+            <li><strong>Mali GPU AGSL Optimization:</strong> Converted shader arithmetic to 16-bit <code>half</code> precision, doubling ALU throughput.</li>
+            <li><strong>Uniform Hoisting:</strong> Hoisted aspect ratio out of pixel loops, eliminating 650,000 divisions per frame.</li>
+            <li><strong>Eliminated In-List Blur Avalanche:</strong> Restricted GPU blur strictly to floating overlays for butter-smooth list scrolling.</li>
+          </ul>
+
+          <div style="display:flex; gap:12px; flex-wrap:wrap;">
+            <a href="https://github.com/omkarnub/Kanri/releases/download/v1.19.6/Kanri-v1.19.6.apk" class="btn btn-primary btn-sm release-download-btn" style="display:inline-flex; align-items:center;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="margin-right:6px;">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="7 10 12 15 17 10"/>
+                <line x1="12" y1="15" x2="12" y2="3"/>
+              </svg>
+              <span>Download APK (27.1 MB)</span>
+            </a>
+            <a href="https://github.com/omkarnub/Kanri/releases/tag/v1.19.6" class="btn btn-outline btn-sm" target="_blank" rel="noopener noreferrer">
+              GitHub Release Notes →
+            </a>
+          </div>
         </div>
 
-        <h4 style="font-size:1rem; margin-bottom:8px; color:var(--text);">Highlights:</h4>
-        <ul style="color:var(--text-secondary); font-size:0.9375rem; line-height:1.7; margin-left:20px; margin-bottom:20px;">
-          <li><strong>12 Pixel DotTiles Widgets:</strong> Complete launch of the Nothing-inspired dot-matrix widget collection with Ndot57 numerals.</li>
-          <li><strong>Shared Canvas Engine:</strong> 1:1 pixel parity between home screen RemoteViews and in-app Compose preview cards.</li>
-          <li><strong>Midnight Reset Engine:</strong> Battery-safe 00:00 resets via scheduled WorkManager.</li>
-        </ul>
+        <!-- Release 1.19.5 -->
+        <div class="card release-card" data-release-tag="v1.19.5" style="margin-bottom:32px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:16px;">
+            <div>
+              <strong style="font-size:1.375rem; color:var(--text); font-family:var(--font-sans);">v1.19.5</strong>
+              <span class="text-mono" style="font-size:0.875rem; color:var(--muted); margin-left:8px;">Build 72</span>
+            </div>
+            <span style="font-size:0.875rem; color:var(--muted); font-family:var(--font-sans);">November 18, 2026</span>
+          </div>
 
-        <div style="display:flex; gap:12px; flex-wrap:wrap;">
-          <a href="https://github.com/omkarnub/Kanri/releases/tag/v1.19.0" class="btn btn-outline btn-sm" target="_blank" rel="noopener noreferrer">
-            GitHub Release Notes →
-          </a>
+          <h4 style="font-size:1rem; margin-bottom:8px; color:var(--text);">Highlights:</h4>
+          <ul style="color:var(--text-secondary); font-size:0.9375rem; line-height:1.7; margin-left:20px; margin-bottom:20px;">
+            <li><strong>Authentic Brand Splash:</strong> Kinetic Panchang KANRI intro letters with theme-adaptive contrast.</li>
+            <li><strong>Widget Quick Entry Glass Blur:</strong> Added frosted glass blur and specular lighting to the widget numpad sheet in Glass theme.</li>
+            <li><strong>Touch-Pause Cadence:</strong> Pauses shader redraws during screen touch and flings, locking UI scrolling to 120 FPS.</li>
+          </ul>
+
+          <div style="display:flex; gap:12px; flex-wrap:wrap;">
+            <a href="https://github.com/omkarnub/Kanri/releases/download/v1.19.5/Kanri-v1.19.5.apk" class="btn btn-primary btn-sm release-download-btn" style="display:inline-flex; align-items:center;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="margin-right:6px;">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="7 10 12 15 17 10"/>
+                <line x1="12" y1="15" x2="12" y2="3"/>
+              </svg>
+              <span>Download APK (27.0 MB)</span>
+            </a>
+            <a href="https://github.com/omkarnub/Kanri/releases/tag/v1.19.5" class="btn btn-outline btn-sm" target="_blank" rel="noopener noreferrer">
+              GitHub Release Notes →
+            </a>
+          </div>
         </div>
+
+        <!-- Release 1.19.0 -->
+        <div class="card release-card" data-release-tag="v1.19.0" style="margin-bottom:32px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:16px;">
+            <div>
+              <strong style="font-size:1.375rem; color:var(--text); font-family:var(--font-sans);">v1.19.0</strong>
+              <span class="text-mono" style="font-size:0.875rem; color:var(--muted); margin-left:8px;">Build 67</span>
+            </div>
+            <span style="font-size:0.875rem; color:var(--muted); font-family:var(--font-sans);">November 12, 2026</span>
+          </div>
+
+          <h4 style="font-size:1rem; margin-bottom:8px; color:var(--text);">Highlights:</h4>
+          <ul style="color:var(--text-secondary); font-size:0.9375rem; line-height:1.7; margin-left:20px; margin-bottom:20px;">
+            <li><strong>12 Pixel DotTiles Widgets:</strong> Complete launch of the Nothing-inspired dot-matrix widget collection with Ndot57 numerals.</li>
+            <li><strong>Shared Canvas Engine:</strong> 1:1 pixel parity between home screen RemoteViews and in-app Compose preview cards.</li>
+            <li><strong>Midnight Reset Engine:</strong> Battery-safe 00:00 resets via scheduled WorkManager.</li>
+          </ul>
+
+          <div style="display:flex; gap:12px; flex-wrap:wrap;">
+            <a href="https://github.com/omkarnub/Kanri/releases/download/v1.19.0/Kanri-v1.19.0.apk" class="btn btn-primary btn-sm release-download-btn" style="display:inline-flex; align-items:center;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="margin-right:6px;">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="7 10 12 15 17 10"/>
+                <line x1="12" y1="15" x2="12" y2="3"/>
+              </svg>
+              <span>Download APK (27.1 MB)</span>
+            </a>
+            <a href="https://github.com/omkarnub/Kanri/releases/tag/v1.19.0" class="btn btn-outline btn-sm" target="_blank" rel="noopener noreferrer">
+              GitHub Release Notes →
+            </a>
+          </div>
+        </div>
+
+        <!-- Release 1.0.2 -->
+        <div class="card release-card" data-release-tag="v1.0.2" style="margin-bottom:32px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:16px;">
+            <div>
+              <strong style="font-size:1.375rem; color:var(--text); font-family:var(--font-sans);">v1.0.2</strong>
+              <span class="text-mono" style="font-size:0.875rem; color:var(--muted); margin-left:8px;">Build 52</span>
+            </div>
+            <span style="font-size:0.875rem; color:var(--muted); font-family:var(--font-sans);">October 11, 2026</span>
+          </div>
+
+          <h4 style="font-size:1rem; margin-bottom:8px; color:var(--text);">Highlights:</h4>
+          <ul style="color:var(--text-secondary); font-size:0.9375rem; line-height:1.7; margin-left:20px; margin-bottom:20px;">
+            <li><strong>Live SMS Morphing Simulator:</strong> Interactive first-run onboarding demonstrating real-time transaction extraction.</li>
+            <li><strong>Animated Mini-Gauge Reaction:</strong> Live radial gauge filling and pulsing to visualize balance shifts.</li>
+          </ul>
+
+          <div style="display:flex; gap:12px; flex-wrap:wrap;">
+            <a href="https://github.com/omkarnub/Kanri/releases/download/v1.0.2/Kanri-v1.0.2.apk" class="btn btn-primary btn-sm release-download-btn" style="display:inline-flex; align-items:center;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="margin-right:6px;">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="7 10 12 15 17 10"/>
+                <line x1="12" y1="15" x2="12" y2="3"/>
+              </svg>
+              <span>Download APK (25.0 MB)</span>
+            </a>
+            <a href="https://github.com/omkarnub/Kanri/releases/tag/v1.0.2" class="btn btn-outline btn-sm" target="_blank" rel="noopener noreferrer">
+              GitHub Release Notes →
+            </a>
+          </div>
+        </div>
+
       </div>
     </div>
   </main>
@@ -187,5 +277,6 @@
   </footer>
 
   <script src="../assets/js/theme.js"></script>
+  <script src="../assets/js/releases.js"></script>
 </body>
 </html>

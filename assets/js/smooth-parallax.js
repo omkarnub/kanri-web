@@ -22,6 +22,7 @@
   const mistCvs = document.getElementById('mist');
   const dynCvs = document.getElementById('dyn');
   const landEl = document.getElementById('land');
+  const topStarLink = document.querySelector('.top-github-link, .top-github-star-btn');
 
   // Check prefers-reduced-motion
   const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -64,6 +65,15 @@
     if (landEl) {
       const landY = -progress * 120;
       landEl.style.transform = `translate3d(0, ${landY.toFixed(2)}px, 0)`;
+    }
+
+    // 5. Dynamic Theme Contrast for Top Right GitHub Stars Link
+    if (topStarLink) {
+      if (y > heroH - 80) {
+        topStarLink.classList.add('on-dark');
+      } else {
+        topStarLink.classList.remove('on-dark');
+      }
     }
   }
 

@@ -7,6 +7,8 @@
   <link rel="stylesheet" href="assets/css/typography.css">
   <link rel="stylesheet" href="assets/css/main.css">
   <link rel="stylesheet" href="assets/css/components.css">
+  <link rel="stylesheet" href="assets/css/cinematic-hero.css">
+  <link rel="stylesheet" href="assets/css/shutter-menu.css">
   <style>
     /* Showcase specific overrides */
     body {
@@ -83,11 +85,182 @@
     </defs>
   </svg>
 
+  <!-- Persistent Top Header & Clean Navigation (Bare Text/SVG - No Ribbon, No Brand Mark) -->
+  <header class="top-header" role="banner">
+    <!-- Clean Desktop Navigation Bar -->
+    <nav class="top-nav" aria-label="Main Navigation">
+      <a href="index.html#features" class="top-nav-link">Features</a>
+      <a href="index.html#how-it-works" class="top-nav-link">How It Works</a>
+      <a href="index.html#security" class="top-nav-link">Security</a>
+      <a href="index.html#comparison" class="top-nav-link">Why Kanri</a>
+      <a href="index.html#widgets" class="top-nav-link">Widgets</a>
+      <a href="docs/index.html" class="top-nav-link">Docs</a>
+      <a href="releases/index.html" class="top-nav-link">Releases</a>
+      <a href="index.html#download" class="top-nav-link">Download</a>
+    </nav>
+
+    <div class="top-header-right">
+      <!-- GitHub Star Link with Just GitHub SVG and Animated Upward Rolling Digit Count (No Outline) -->
+      <a href="https://github.com/omkarnub/Kanri" target="_blank" rel="noopener noreferrer" class="github-star-pill"
+        title="Kanri on GitHub" aria-label="Kanri on GitHub">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path fill-rule="evenodd" clip-rule="evenodd"
+            d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+        </svg>
+        <span class="star-count" id="github-star-count" data-target="9">
+          <span class="reel-digit" data-digit="9">
+            <span class="reel-track" style="transform: translateY(-95%);">
+              <span class="reel-number">0</span><span class="reel-number">1</span><span class="reel-number">2</span><span class="reel-number">3</span><span class="reel-number">4</span><span class="reel-number">5</span><span class="reel-number">6</span><span class="reel-number">7</span><span class="reel-number">8</span><span class="reel-number">9</span><span class="reel-number">0</span><span class="reel-number">1</span><span class="reel-number">2</span><span class="reel-number">3</span><span class="reel-number">4</span><span class="reel-number">5</span><span class="reel-number">6</span><span class="reel-number">7</span><span class="reel-number">8</span><span class="reel-number">9</span>
+            </span>
+          </span>
+        </span>
+      </a>
+
+      <!-- From Uiverse.io by vinodjangid07 --> 
+      <label class="switch" id="menu-switch" aria-label="Toggle site navigation menu">
+        <input type="checkbox" id="menu-checkbox" aria-label="Toggle site navigation menu" />
+        <span class="wrapper">
+          <span class="row">
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </span>
+          <span class="row row-bottom">
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </span>
+          <span class="row-vertical">
+            <span class="dot"></span>
+            <span class="dot middle-dot"></span>
+            <span class="dot"></span>
+          </span>
+          <span class="row-horizontal">
+            <span class="dot"></span>
+            <span class="dot middle-dot-horizontal"></span>
+            <span class="dot"></span>
+          </span>
+        </span>
+      </label>
+    </div>
+  </header>
+
+  <!-- Full-Viewport Shutter Navigation Drawer Overlay -->
+  <section id="shutter-overlay" aria-label="Site navigation" aria-hidden="true">
+    <div class="shutter-columns" aria-hidden="true">
+      <div class="shutter-col"></div>
+      <div class="shutter-col"></div>
+      <div class="shutter-col"></div>
+      <div class="shutter-col"></div>
+      <div class="shutter-col"></div>
+    </div>
+
+    <div class="drawer-shell">
+      <div class="drawer-nav-container">
+        <!-- Group 1: Page Navigation -->
+        <div class="drawer-nav-group">
+          <div class="drawer-group-label">Navigation</div>
+          <nav class="drawer-links-list" aria-label="Primary Navigation">
+            <a href="#cinematic-showcase" class="drawer-nav-item">
+              <div class="drawer-nav-item-left">
+                <span class="nav-item-num">01</span>
+                <span class="nav-item-title">Showcase</span>
+              </div>
+              <span class="nav-item-arrow" aria-hidden="true">→</span>
+            </a>
+            <a href="index.html#features" class="drawer-nav-item">
+              <div class="drawer-nav-item-left">
+                <span class="nav-item-num">02</span>
+                <span class="nav-item-title">Features</span>
+              </div>
+              <span class="nav-item-arrow" aria-hidden="true">→</span>
+            </a>
+            <a href="index.html#how-it-works" class="drawer-nav-item">
+              <div class="drawer-nav-item-left">
+                <span class="nav-item-num">03</span>
+                <span class="nav-item-title">How It Works</span>
+              </div>
+              <span class="nav-item-arrow" aria-hidden="true">→</span>
+            </a>
+            <a href="index.html#demo" class="drawer-nav-item">
+              <div class="drawer-nav-item-left">
+                <span class="nav-item-num">04</span>
+                <span class="nav-item-title">SMS Parser Demo</span>
+              </div>
+              <span class="nav-item-arrow" aria-hidden="true">→</span>
+            </a>
+            <a href="index.html#widgets" class="drawer-nav-item">
+              <div class="drawer-nav-item-left">
+                <span class="nav-item-num">05</span>
+                <span class="nav-item-title">Widgets Gallery</span>
+              </div>
+              <span class="nav-item-arrow" aria-hidden="true">→</span>
+            </a>
+          </nav>
+        </div>
+
+        <!-- Group 2: Resources & Releases -->
+        <div class="drawer-nav-group">
+          <div class="drawer-group-label">Resources & Releases</div>
+          <nav class="drawer-links-list" aria-label="Resources Navigation">
+            <a href="docs/index.html" class="drawer-nav-item">
+              <div class="drawer-nav-item-left">
+                <span class="nav-item-num">06</span>
+                <span class="nav-item-title">Documentation Hub</span>
+              </div>
+              <span class="nav-item-arrow" aria-hidden="true">↗</span>
+            </a>
+            <a href="releases/index.html" class="drawer-nav-item">
+              <div class="drawer-nav-item-left">
+                <span class="nav-item-num">07</span>
+                <span class="nav-item-title">Releases</span>
+              </div>
+              <span class="nav-item-arrow" aria-hidden="true">↗</span>
+            </a>
+            <a href="faq/index.html" class="drawer-nav-item">
+              <div class="drawer-nav-item-left">
+                <span class="nav-item-num">08</span>
+                <span class="nav-item-title">FAQ</span>
+              </div>
+              <span class="nav-item-arrow" aria-hidden="true">→</span>
+            </a>
+            <a href="https://github.com/omkarnub/Kanri/releases/latest" class="drawer-nav-item" target="_blank" rel="noopener noreferrer">
+              <div class="drawer-nav-item-left">
+                <span class="nav-item-num">09</span>
+                <span class="nav-item-title">Download APK</span>
+              </div>
+              <span class="nav-item-arrow" aria-hidden="true">↓</span>
+            </a>
+            <a href="https://github.com/omkarnub/Kanri" class="drawer-nav-item" target="_blank" rel="noopener noreferrer">
+              <div class="drawer-nav-item-left">
+                <span class="nav-item-num">10</span>
+                <span class="nav-item-title">GitHub (GPL-3.0)</span>
+              </div>
+              <span class="nav-item-arrow" aria-hidden="true">↗</span>
+            </a>
+          </nav>
+        </div>
+      </div>
+
+      <!-- Bottom Strip -->
+      <div class="drawer-bottom" id="drawer-bottom">
+        <div class="footer-links-group">
+          <a href="privacy/index.html" class="footer-link">Privacy Policy</a>
+          <a href="terms/index.html" class="footer-link">Terms of Service</a>
+          <a href="security/index.html" class="footer-link">Security Model</a>
+          <a href="press/index.html" class="footer-link">Press Kit</a>
+          <a href="https://github.com/omkarnub/Kanri/issues" target="_blank" rel="noopener noreferrer" class="footer-link">Issues & Feedback</a>
+        </div>
+        <div class="shortcut-hint">
+          Press <span>ESC</span> or <span>M</span> to close
+        </div>
+      </div>
+    </div>
+  </section>
+
 
 
 
   <main>
-    <!-- Flagship Hero Section (Living Background + Centered Emblem & KANRI Text Logo) -->
+    <!-- 1. Hero Section (Animated Living Shan Shui Background + Centered Emblem & KANRI Text Logo) -->
     <section class="section hero-section" id="hero">
       <!-- Shan Shui Living Background Canvas Stack (Scoped Strictly to Hero Section) -->
       <div id="bg" aria-hidden="true">
@@ -145,6 +318,240 @@
       </div>
     </section>
 
+    <!-- 2. Flagship Cinematic Scroll Showcase (Physical Skeuomorphic 3D Materials & GSAP Timeline) -->
+    <section class="cinematic-hero-container" id="cinematic-showcase">
+      <div class="film-grain" aria-hidden="true"></div>
+      <div class="bg-grid-theme" aria-hidden="true"></div>
+
+      <!-- BACKGROUND LAYER 1: Hero Headlines -->
+      <div class="hero-text-wrapper">
+        <h1 class="text-track gsap-reveal text-3d-matte">
+          Track every rupee,
+        </h1>
+        <h1 class="text-days gsap-reveal text-silver-matte">
+          not your privacy.
+        </h1>
+      </div>
+
+      <!-- BACKGROUND LAYER 2: Tactile CTA Buttons (Revealed on Card Pullback) -->
+      <div class="cta-wrapper gsap-reveal">
+        <h2 class="text-silver-matte cta-heading">
+          Take control of your money.
+        </h2>
+        <p class="cta-description">
+          Join thousands who track daily expenses with zero telemetry, zero bank logins, and 100% on-device privacy.
+        </p>
+        <div class="cta-btn-group">
+          <!-- Download APK Button -->
+          <a href="https://github.com/omkarnub/Kanri/releases/latest" class="btn-modern-light"
+            aria-label="Download Kanri APK on GitHub Releases">
+            <svg class="cta-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="7 10 12 15 17 10" />
+              <line x1="12" y1="15" x2="12" y2="3" />
+            </svg>
+            <div class="cta-btn-text">
+              <span class="cta-btn-sub">GET FOR ANDROID</span>
+              <span class="cta-btn-main">Download APK</span>
+            </div>
+          </a>
+          <!-- GitHub Source Button -->
+          <a href="https://github.com/omkarnub/Kanri" target="_blank" rel="noopener noreferrer" class="btn-modern-dark"
+            aria-label="View Kanri Source on GitHub">
+            <svg class="cta-icon" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+            </svg>
+            <div class="cta-btn-text">
+              <span class="cta-btn-sub">OPEN SOURCE · GPL-3.0</span>
+              <span class="cta-btn-main">GitHub Repo</span>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- FOREGROUND LAYER: The Physical Deep Midnight Blue / Obsidian Card -->
+      <div class="main-card-viewport-wrapper">
+        <div class="main-card premium-depth-card gsap-reveal" id="main-hero-card">
+          <div class="card-sheen" aria-hidden="true"></div>
+
+          <div class="card-inner-grid">
+            <!-- 1. Left (Desktop) / Bottom (Mobile): Value Proposition -->
+            <div class="card-left-text gsap-reveal">
+              <h3 class="card-lead-heading">Private finance, redefined.</h3>
+              <p class="card-lead-desc">
+                <strong class="text-white">Kanri</strong> empowers you with structured expense tracking, automated
+                on-device SMS parsing, and zero cloud telemetry. Your financial records stay sealed on your device.
+              </p>
+              <div class="card-trust-row">
+                <span class="trust-pill"><span>✓</span> 100% Offline</span>
+                <span class="trust-pill"><span>✓</span> Zero OTP Access</span>
+                <span class="trust-pill"><span>✓</span> No Account Needed</span>
+              </div>
+            </div>
+
+            <!-- 2. Center (Desktop) / Middle (Mobile): 3D Phone Mockup -->
+            <div class="mockup-scroll-wrapper">
+              <div class="mockup-scale-box">
+                <div class="iphone-bezel" id="cinematic-mockup">
+                  <!-- Hardware Buttons -->
+                  <div class="hardware-btn hw-mute" aria-hidden="true"></div>
+                  <div class="hardware-btn hw-vol-up" aria-hidden="true"></div>
+                  <div class="hardware-btn hw-vol-down" aria-hidden="true"></div>
+                  <div class="hardware-btn hw-power" aria-hidden="true"></div>
+
+                  <!-- Inner Screen Container -->
+                  <div class="inner-screen-container">
+                    <div class="screen-glare" aria-hidden="true"></div>
+
+                    <!-- Dynamic Island Notch -->
+                    <div class="dynamic-island">
+                      <div class="dynamic-island-dot"></div>
+                    </div>
+
+                    <!-- In-App Interface -->
+                    <div class="app-interface-layout">
+                      <div class="phone-widget phone-header-row">
+                        <div class="phone-header-text">
+                          <span class="phone-header-sub">OCTOBER 2026</span>
+                          <span class="phone-header-title">Safe-to-Spend</span>
+                        </div>
+                        <div class="phone-avatar-badge">₹</div>
+                      </div>
+
+                      <!-- Dial & Counter -->
+                      <div class="phone-widget dial-hero-widget">
+                        <svg class="dial-svg-ring" viewBox="0 0 176 176" aria-hidden="true">
+                          <circle cx="88" cy="88" r="64" fill="none" stroke="rgba(255,255,255,0.06)"
+                            stroke-width="12" />
+                          <circle class="progress-ring" id="hero-progress-ring" cx="88" cy="88" r="64" fill="none"
+                            stroke="#EDEDED" stroke-width="12" />
+                        </svg>
+                        <div class="dial-center-counter">
+                          <span class="counter-currency">₹</span>
+                          <span class="counter-val" id="hero-counter-val">0</span>
+                          <span class="counter-label">DAILY BUDGET</span>
+                        </div>
+                      </div>
+
+                      <!-- App Widgets -->
+                      <div class="phone-widgets-stack">
+                        <div class="phone-widget widget-depth widget-balance-row">
+                          <div class="widget-icon-box widget-icon-bank">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                              stroke-width="2">
+                              <rect x="2" y="5" width="20" height="14" rx="2" />
+                              <line x1="2" y1="10" x2="22" y2="10" />
+                            </svg>
+                          </div>
+                          <div class="widget-details">
+                            <span class="widget-name">Primary Bank</span>
+                            <span class="widget-sub">HDFC · UPI Linked</span>
+                          </div>
+                          <span class="widget-amount">₹24,850</span>
+                        </div>
+
+                        <div class="phone-widget widget-depth widget-balance-row">
+                          <div class="widget-icon-box widget-icon-cash">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                              stroke-width="2">
+                              <circle cx="12" cy="12" r="10" />
+                              <path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8" />
+                              <path d="M12 6v2m0 8v2" />
+                            </svg>
+                          </div>
+                          <div class="widget-details">
+                            <span class="widget-name">Cash Wallet</span>
+                            <span class="widget-sub">Safe Physical Cash</span>
+                          </div>
+                          <span class="widget-amount">₹3,400</span>
+                        </div>
+                      </div>
+
+                      <!-- Lockscreen Home Bar -->
+                      <div class="phone-bottom-home-bar"></div>
+                    </div>
+
+                    <!-- Floating Transaction Detected Live Popup (Inside Phone) -->
+                    <div class="tx-popup-overlay">
+                      <div class="incoming-sms-toast" id="incoming-sms-toast">
+                        <div class="sms-toast-header">
+                          <div class="sms-toast-sender">
+                            <span class="sms-badge">BANK SMS</span>
+                            <span class="sms-sender-name" id="sms-toast-sender">VK-HDFCBK</span>
+                          </div>
+                          <span class="sms-time">Just now</span>
+                        </div>
+                        <p class="sms-toast-body" id="sms-toast-body">Sent Rs.420.00 from HDFC Bank A/c 4091 to SWIGGY
+                          via UPI. Avl Bal: Rs.24,850.</p>
+                      </div>
+
+                      <div class="tx-detected-card" id="tx-detected-card">
+                        <div class="tx-detected-header">
+                          <div class="tx-pulse-indicator">
+                            <span class="tx-pulse-glow"></span>
+                            <span class="tx-pulse-dot"></span>
+                          </div>
+                          <span class="tx-detected-badge">TRANSACTION DETECTED</span>
+                          <span class="tx-detected-time">NOW</span>
+                        </div>
+                        <div class="tx-detected-body">
+                          <div class="tx-detected-amount" id="popup-tx-amount">-₹420.00</div>
+                          <div class="tx-detected-merchant-row">
+                            <span class="tx-merchant-badge" id="popup-tx-icon">🍔</span>
+                            <span class="tx-detected-merchant" id="popup-tx-merchant">Swiggy</span>
+                          </div>
+                          <div class="tx-detected-meta" id="popup-tx-meta">HDFC Bank · UPI/432618920192</div>
+                        </div>
+                        <div class="tx-category-select-section">
+                          <div class="tx-category-title">1-Tap Categorization</div>
+                          <div class="tx-category-chips">
+                            <span class="tx-chip active" id="chip-dining"><span class="chip-tick">✓</span> Food &
+                              Dining</span>
+                            <span class="tx-chip">Quick Bites</span>
+                            <span class="tx-chip">Personal</span>
+                          </div>
+                        </div>
+                        <div class="tx-logged-status" id="tx-logged-status">
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="3">
+                            <polyline points="20 6 9 17 4 12" />
+                          </svg>
+                          <span>Logged & Safe-to-Spend Updated</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Floating Glass Badges Flanking the Phone -->
+                <div class="floating-badge badge-streak">
+                  <div class="badge-icon-wrap icon-flame">
+                    <span>🔥</span>
+                  </div>
+                  <div>
+                    <p class="badge-title">100% Offline</p>
+                    <p class="badge-sub">Zero Cloud Latency</p>
+                  </div>
+                </div>
+
+                <div class="floating-badge badge-sponsor">
+                  <div class="badge-icon-wrap icon-shield">
+                    <span>🔒</span>
+                  </div>
+                  <div>
+                    <p class="badge-title">Local Regex</p>
+                    <p class="badge-sub">Zero SMS Telemetry</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Parallax Continuation Section -->
     <section class="showcase-next-section">
       <div class="container text-center">
@@ -166,9 +573,13 @@
 
   <!-- Scripts -->
   <script src="assets/js/theme.js"></script>
+  <script src="assets/js/gsap.min.js"></script>
+  <script src="assets/js/ScrollTrigger.min.js"></script>
+  <script src="assets/js/cinematic-hero.js"></script>
   <script src="assets/js/living-bg.js"></script>
   <script src="assets/js/smooth-parallax.js"></script>
   <script src="assets/js/liquid-button.js"></script>
   <script src="assets/js/hero.js"></script>
+  <script src="assets/js/shutter-menu.js"></script>
 </body>
 </html>

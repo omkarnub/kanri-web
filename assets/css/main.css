@@ -81,6 +81,15 @@ html {
   -moz-osx-font-smoothing: grayscale;
 }
 
+@keyframes pageEntrance {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 body {
   font-family: var(--font-sans);
   background-color: var(--canvas);
@@ -94,6 +103,7 @@ body {
   background-size: 24px 24px;
   background-position: 0 0;
   transition: background-color var(--transition-spring), color var(--transition-spring);
+  animation: pageEntrance 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 /* Accessibility Focus States */
@@ -175,12 +185,100 @@ p.lead {
 }
 
 .btn-primary {
-  background-color: var(--accent);
-  color: #FFFFFF;
+  background-color: #FFFFFF;
+  color: #0E0E10 !important;
+  font-weight: 700;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
 }
 
 .btn-primary:hover {
-  background-color: var(--accent-hover);
+  background-color: #E4E4E7;
+  color: #000000 !important;
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.btn-primary,
+.btn-primary *,
+.btn-primary span {
+  color: #0E0E10 !important;
+}
+
+.btn-primary:hover,
+.btn-primary:hover *,
+.btn-primary:hover span {
+  color: #000000 !important;
+}
+
+.btn-primary svg,
+.btn-primary svg * {
+  stroke: #0E0E10 !important;
+}
+
+.btn-primary:hover svg,
+.btn-primary:hover svg * {
+  stroke: #000000 !important;
+}
+
+/* Specific styling for Release Download APK buttons */
+.release-download-btn {
+  background-color: #FFFFFF !important;
+  color: #0E0E10 !important;
+  font-weight: 700 !important;
+}
+
+.release-download-btn,
+.release-download-btn *,
+.release-download-btn span {
+  color: #0E0E10 !important;
+}
+
+.release-download-btn svg,
+.release-download-btn svg * {
+  stroke: #0E0E10 !important;
+}
+
+.release-download-btn:hover {
+  background-color: #E4E4E7 !important;
+  color: #000000 !important;
+}
+
+.release-download-btn:hover,
+.release-download-btn:hover *,
+.release-download-btn:hover span {
+  color: #000000 !important;
+}
+
+.release-download-btn:hover svg,
+.release-download-btn:hover svg * {
+  stroke: #000000 !important;
+}
+
+[data-theme="light"] .btn-primary,
+[data-theme="light"] .release-download-btn {
+  background-color: #121212 !important;
+  color: #FFFFFF !important;
+  border-color: #121212 !important;
+}
+
+[data-theme="light"] .btn-primary:hover,
+[data-theme="light"] .release-download-btn:hover {
+  background-color: #262626 !important;
+  color: #FFFFFF !important;
+}
+
+[data-theme="light"] .btn-primary *,
+[data-theme="light"] .btn-primary span,
+[data-theme="light"] .release-download-btn *,
+[data-theme="light"] .release-download-btn span {
+  color: #FFFFFF !important;
+}
+
+[data-theme="light"] .btn-primary svg,
+[data-theme="light"] .btn-primary svg *,
+[data-theme="light"] .release-download-btn svg,
+[data-theme="light"] .release-download-btn svg * {
+  stroke: #FFFFFF !important;
 }
 
 .btn-secondary {

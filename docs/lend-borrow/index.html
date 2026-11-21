@@ -1,169 +1,178 @@
-<!DOCTYPE html>
-<html lang="en" data-theme="dark">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lend, Borrow & Split | Kanri Documentation</title>
-  <meta name="description" content="Technical guide to Kanri's peer-to-peer debt ledger, partial repayment tracking, WhatsApp reminders, and bill splitting.">
-  <link rel="canonical" href="https://omkarnub.github.io/kanri-web/docs/lend-borrow/">
-  <link rel="icon" type="image/png" href="../../assets/images/kanri_app_icon_dark.png">
-  <link rel="stylesheet" href="../../assets/css/typography.css">
-  <link rel="stylesheet" href="../../assets/css/main.css">
-  <link rel="stylesheet" href="../../assets/css/components.css">
-  <link rel="stylesheet" href="../../assets/css/docs.css">
-</head>
-<body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <a href="../../index.html" class="brand-link">
-        <img src="../../assets/images/kanri_app_icon_dark.png" alt="Kanri Logo" class="brand-icon">
-        <span class="brand-name">KANRI</span>
-        <span class="brand-kanji">管理</span>
-      </a>
-
-      <nav class="main-nav">
-        <a href="../../index.html#features" class="nav-link">Features</a>
-        <a href="../../index.html#widgets" class="nav-link">Widgets</a>
-        <a href="../index.html" class="nav-link active">Docs</a>
-        <a href="../../changelog/index.html" class="nav-link">Changelog</a>
-        <a href="../../faq/index.html" class="nav-link">FAQ</a>
-      </nav>
-
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lend, Borrow & Split | Kanri Documentation</title>
+  <meta name="description" content="Technical guide to Kanri's peer-to-peer debt ledger, partial repayment tracking, WhatsApp reminders, and bill splitting.">
+  <link rel="canonical" href="https://omkarnub.github.io/kanri-web/docs/lend-borrow/">
+  <link rel="icon" type="image/png" href="../../assets/images/kanri_app_icon_dark.png">
+  <link rel="stylesheet" href="../../assets/css/typography.css">
+  <link rel="stylesheet" href="../../assets/css/main.css">
+  <link rel="stylesheet" href="../../assets/css/components.css">
+  <link rel="stylesheet" href="../../assets/css/docs.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="../../index.html" class="brand-link">
+        <img src="../../assets/images/kanri_app_icon_dark.png" alt="Kanri Logo" class="brand-icon">
+        <span class="brand-name">KANRI</span>
+        <span class="brand-kanji">??</span>
+      </a>
+
+      <nav class="main-nav">
+        <a href="../../index.html#features" class="nav-link">Features</a>
+        <a href="../../index.html#widgets" class="nav-link">Widgets</a>
+        <a href="../index.html" class="nav-link active">Docs</a>
+        <a href="../../changelog/index.html" class="nav-link">Changelog</a>
+        <a href="../../faq/index.html" class="nav-link">FAQ</a>
+      </nav>
       <div class="header-actions">
-        <button id="theme-toggle-btn" class="theme-toggle-btn" aria-label="Toggle theme">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="5"></circle>
-            <line x1="12" y1="1" x2="12" y2="3"></line>
-            <line x1="12" y1="21" x2="12" y2="23"></line>
+        <a href="https://github.com/omkarnub/Kanri" class="github-btn" target="_blank" rel="noopener noreferrer" title="Star Kanri on GitHub (9 stars)" aria-label="Star Kanri on GitHub (9 stars)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
           </svg>
-        </button>
-        <a href="../../index.html#download" class="btn btn-primary btn-sm">Download APK</a>
-      </div>
-    </div>
-  </header>
-
-  <div class="container docs-layout">
-    <!-- Sidebar -->
-    <aside class="docs-sidebar">
-      <input type="search" id="docs-search-input" class="docs-search-input" placeholder="Search documentation..." aria-label="Search documentation">
-
-      <div class="docs-nav-group">
-        <div class="docs-nav-title">Core Systems</div>
-        <ul class="docs-nav-list">
-          <li><a href="../index.html" class="docs-nav-link">Overview</a></li>
-          <li><a href="../getting-started/index.html" class="docs-nav-link">1. Getting Started</a></li>
-          <li><a href="../capture-dedupe/index.html" class="docs-nav-link">2. Capture & Dedupe</a></li>
-          <li><a href="../wallets/index.html" class="docs-nav-link">3. Cash & Online Wallets</a></li>
-        </ul>
-      </div>
-
-      <div class="docs-nav-group">
-        <div class="docs-nav-title">Ledger & Analytics</div>
-        <ul class="docs-nav-list">
-          <li><a href="index.html" class="docs-nav-link active">4. Lend, Borrow & Split</a></li>
-          <li><a href="../budgets-goals/index.html" class="docs-nav-link">5. Budgets & Goals</a></li>
-          <li><a href="../insights-health-score/index.html" class="docs-nav-link">6. Insights & Health Score</a></li>
-        </ul>
-      </div>
-
-      <div class="docs-nav-group">
-        <div class="docs-nav-title">Visuals & Security</div>
-        <ul class="docs-nav-list">
-          <li><a href="../widgets/index.html" class="docs-nav-link">7. 12 Pixel DotTiles Widgets</a></li>
-          <li><a href="../themes/index.html" class="docs-nav-link">8. Themes & Backdrops</a></li>
-          <li><a href="../backup-restore/index.html" class="docs-nav-link">9. Backup & Restore</a></li>
-          <li><a href="../security-model/index.html" class="docs-nav-link">10. Security Architecture</a></li>
-          <li><a href="../troubleshooting/index.html" class="docs-nav-link">11. Troubleshooting & OEMs</a></li>
-        </ul>
-      </div>
-    </aside>
-
-    <!-- Main Content -->
-    <article class="docs-content">
-      <div class="docs-breadcrumbs">
-        <a href="../../index.html">Home</a>
-        <span>/</span>
-        <a href="../index.html">Docs</a>
-        <span>/</span>
-        <span>4. Lend, Borrow & Split</span>
-      </div>
-
-      <h1>4. Lend & Borrow Hub & Bill Splitting</h1>
-      <p class="lead">
-        Keep track of personal debts, partial repayments, settlement reminders, and group bill splits with zero cloud servers.
-      </p>
-
-      <h2 id="p2p-tracking">1. Peer-to-Peer Debt Tracking</h2>
-      <p>
-        Kanri's <code>LendingEntity.kt</code> tracks money lent to or borrowed from contacts:
-      </p>
-      <ul>
-        <li><strong>Receivables (Lent):</strong> Money someone owes you. Displayed in Mint Green (<code>+₹</code>) and counted as an asset in your Net Worth calculation.</li>
-        <li><strong>Payables (Borrowed):</strong> Money you owe someone. Displayed in Coral Red (<code>-₹</code>) and counted as a liability.</li>
-      </ul>
-
-      <h2 id="partial-repayments">2. Partial Repayments & Settlement History</h2>
-      <p>
-        Real-world loans are rarely repaid in a single lump sum. When a friend returns ₹500 out of a ₹2,000 loan:
-      </p>
-      <ol>
-        <li>Kanri records a <code>LendingRepaymentEntity</code> timestamped event.</li>
-        <li>The remaining balance is updated to ₹1,500.</li>
-        <li>The ₹500 returned is credited directly into your Cash or Online wallet.</li>
-        <li>A complete historical audit trail of every partial installment is preserved.</li>
-      </ol>
-
-      <h2 id="reminders-settlement">3. One-Tap WhatsApp Reminders & UPI Deep Links</h2>
-      <p>
-        Kanri eliminates awkward debt conversations by generating clean, polite payment reminders:
-      </p>
-      <ul>
-        <li><strong>1-Tap WhatsApp Reminder:</strong> Opens a pre-filled WhatsApp message to the contact: <em>"Hey Rahul, a friendly reminder about the ₹1,500 balance for the weekend trip."</em></li>
-        <li><strong>Prefilled UPI Deep Links:</strong> Kanri can generate standard <code>upi://pay?pa=...&amp;am=1500&amp;tn=KanriSettlement</code> URIs, allowing your friend to launch GPay, PhonePe, or Paytm with the amount and payee pre-filled.</li>
-      </ul>
-
-      <h2 id="bill-splitting">4. Group Bill Splitting (2 to 20 People)</h2>
-      <p>
-        When you pay for a group dinner or shared cab:
-      </p>
-      <ol>
-        <li>Enter the total amount paid (e.g. ₹1,950).</li>
-        <li>Select the number of people sharing the bill (2 to 20).</li>
-        <li>Choose <strong>Equal Split</strong> (e.g. ₹487.50 / person) or <strong>Custom Split</strong> with individual per-person itemization.</li>
-        <li>Your own share is logged as an expense; the remaining portions can be transferred directly to the Lend & Borrow ledger under each contact's name with one tap.</li>
-      </ol>
-
-      <div class="docs-pagination">
-        <a href="../wallets/index.html" class="docs-page-btn">
-          <span class="docs-page-label">Previous</span>
-          <span class="docs-page-title">← 3. Cash & Online Wallets</span>
+          <span>Star</span>
+          <svg class="top-github-star-icon" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+          </svg>
+          <span class="star-count github-star-count">9</span>
         </a>
-        <a href="../budgets-goals/index.html" class="docs-page-btn next">
-          <span class="docs-page-label">Next Chapter</span>
-          <span class="docs-page-title">5. Budgets & Goals →</span>
-        </a>
-      </div>
-    </article>
-
-    <!-- Table of Contents -->
-    <aside class="docs-toc">
-      <div class="docs-toc-title">On this page</div>
-      <ul class="docs-toc-list">
-        <li><a href="#p2p-tracking">Peer-to-Peer Debt Tracking</a></li>
-        <li><a href="#partial-repayments">Partial Repayments</a></li>
-        <li><a href="#reminders-settlement">WhatsApp & UPI Links</a></li>
-        <li><a href="#bill-splitting">Group Bill Splitting</a></li>
-      </ul>
-    </aside>
-  </div>
-
-  <footer class="site-footer">
-    <div class="container" style="text-align:center; font-size:0.875rem; color:var(--muted);">
-      <p>© 2026 Kanri · Licensed under GNU GPL-3.0 · <a href="../../index.html" style="color:var(--text);">Home</a> · <a href="../../privacy/index.html" style="color:var(--text);">Privacy Policy</a></p>
-    </div>
-  </footer>
-
-  <script src="../../assets/js/theme.js"></script>
-  <script src="../../assets/js/search.js"></script>
-</body>
-</html>
+        <button id="theme-toggle-btn" class="theme-toggle-btn" aria-label="Toggle theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+          </svg>
+        </button>
+        <a href="../../index.html#download" class="btn btn-primary btn-sm">Download APK</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="container docs-layout">
+    <!-- Sidebar -->
+    <aside class="docs-sidebar">
+      <input type="search" id="docs-search-input" class="docs-search-input" placeholder="Search documentation..." aria-label="Search documentation">
+
+      <div class="docs-nav-group">
+        <div class="docs-nav-title">Core Systems</div>
+        <ul class="docs-nav-list">
+          <li><a href="../index.html" class="docs-nav-link">Overview</a></li>
+          <li><a href="../getting-started/index.html" class="docs-nav-link">1. Getting Started</a></li>
+          <li><a href="../capture-dedupe/index.html" class="docs-nav-link">2. Capture & Dedupe</a></li>
+          <li><a href="../wallets/index.html" class="docs-nav-link">3. Cash & Online Wallets</a></li>
+        </ul>
+      </div>
+
+      <div class="docs-nav-group">
+        <div class="docs-nav-title">Ledger & Analytics</div>
+        <ul class="docs-nav-list">
+          <li><a href="index.html" class="docs-nav-link active">4. Lend, Borrow & Split</a></li>
+          <li><a href="../budgets-goals/index.html" class="docs-nav-link">5. Budgets & Goals</a></li>
+          <li><a href="../insights-health-score/index.html" class="docs-nav-link">6. Insights & Health Score</a></li>
+        </ul>
+      </div>
+
+      <div class="docs-nav-group">
+        <div class="docs-nav-title">Visuals & Security</div>
+        <ul class="docs-nav-list">
+          <li><a href="../widgets/index.html" class="docs-nav-link">7. 12 Pixel DotTiles Widgets</a></li>
+          <li><a href="../themes/index.html" class="docs-nav-link">8. Themes & Backdrops</a></li>
+          <li><a href="../backup-restore/index.html" class="docs-nav-link">9. Backup & Restore</a></li>
+          <li><a href="../security-model/index.html" class="docs-nav-link">10. Security Architecture</a></li>
+          <li><a href="../troubleshooting/index.html" class="docs-nav-link">11. Troubleshooting & OEMs</a></li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <article class="docs-content">
+      <div class="docs-breadcrumbs">
+        <a href="../../index.html">Home</a>
+        <span>/</span>
+        <a href="../index.html">Docs</a>
+        <span>/</span>
+        <span>4. Lend, Borrow & Split</span>
+      </div>
+
+      <h1>4. Lend & Borrow Hub & Bill Splitting</h1>
+      <p class="lead">
+        Keep track of personal debts, partial repayments, settlement reminders, and group bill splits with zero cloud servers.
+      </p>
+
+      <h2 id="p2p-tracking">1. Peer-to-Peer Debt Tracking</h2>
+      <p>
+        Kanri's <code>LendingEntity.kt</code> tracks money lent to or borrowed from contacts:
+      </p>
+      <ul>
+        <li><strong>Receivables (Lent):</strong> Money someone owes you. Displayed in Cream White (<code>+₹</code>) and counted as an asset in your Net Worth calculation.</li>
+        <li><strong>Payables (Borrowed):</strong> Money you owe someone. Displayed in Coral Red (<code>-?</code>) and counted as a liability.</li>
+      </ul>
+
+      <h2 id="partial-repayments">2. Partial Repayments & Settlement History</h2>
+      <p>
+        Real-world loans are rarely repaid in a single lump sum. When a friend returns ?500 out of a ?2,000 loan:
+      </p>
+      <ol>
+        <li>Kanri records a <code>LendingRepaymentEntity</code> timestamped event.</li>
+        <li>The remaining balance is updated to ?1,500.</li>
+        <li>The ?500 returned is credited directly into your Cash or Online wallet.</li>
+        <li>A complete historical audit trail of every partial installment is preserved.</li>
+      </ol>
+
+      <h2 id="reminders-settlement">3. One-Tap WhatsApp Reminders & UPI Deep Links</h2>
+      <p>
+        Kanri eliminates awkward debt conversations by generating clean, polite payment reminders:
+      </p>
+      <ul>
+        <li><strong>1-Tap WhatsApp Reminder:</strong> Opens a pre-filled WhatsApp message to the contact: <em>"Hey Rahul, a friendly reminder about the ?1,500 balance for the weekend trip."</em></li>
+        <li><strong>Prefilled UPI Deep Links:</strong> Kanri can generate standard <code>upi://pay?pa=...&amp;am=1500&amp;tn=KanriSettlement</code> URIs, allowing your friend to launch GPay, PhonePe, or Paytm with the amount and payee pre-filled.</li>
+      </ul>
+
+      <h2 id="bill-splitting">4. Group Bill Splitting (2 to 20 People)</h2>
+      <p>
+        When you pay for a group dinner or shared cab:
+      </p>
+      <ol>
+        <li>Enter the total amount paid (e.g. ?1,950).</li>
+        <li>Select the number of people sharing the bill (2 to 20).</li>
+        <li>Choose <strong>Equal Split</strong> (e.g. ?487.50 / person) or <strong>Custom Split</strong> with individual per-person itemization.</li>
+        <li>Your own share is logged as an expense; the remaining portions can be transferred directly to the Lend & Borrow ledger under each contact's name with one tap.</li>
+      </ol>
+
+      <div class="docs-pagination">
+        <a href="../wallets/index.html" class="docs-page-btn">
+          <span class="docs-page-label">Previous</span>
+          <span class="docs-page-title">? 3. Cash & Online Wallets</span>
+        </a>
+        <a href="../budgets-goals/index.html" class="docs-page-btn next">
+          <span class="docs-page-label">Next Chapter</span>
+          <span class="docs-page-title">5. Budgets & Goals ?</span>
+        </a>
+      </div>
+    </article>
+
+    <!-- Table of Contents -->
+    <aside class="docs-toc">
+      <div class="docs-toc-title">On this page</div>
+      <ul class="docs-toc-list">
+        <li><a href="#p2p-tracking">Peer-to-Peer Debt Tracking</a></li>
+        <li><a href="#partial-repayments">Partial Repayments</a></li>
+        <li><a href="#reminders-settlement">WhatsApp & UPI Links</a></li>
+        <li><a href="#bill-splitting">Group Bill Splitting</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container" style="text-align:center; font-size:0.875rem; color:var(--muted);">
+      <p>&copy; 2026 Kanri · Licensed under GNU GPL-3.0 · <a href="../../index.html" style="color:var(--text);">Home</a> · <a href="../../privacy/index.html" style="color:var(--text);">Privacy Policy</a></p>
+    </div>
+  </footer>
+
+  <script src="../../assets/js/theme.js"></script>
+  <script src="../../assets/js/search.js"></script>
+</body>
+</html>

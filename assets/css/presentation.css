@@ -1,0 +1,174 @@
+/* ==========================================================================
+   Kanri Professional Presentation Engine — Entrance & Fade-in Animations
+   Sumi-e & Cream Aesthetic | Hardware-Accelerated 60fps | High-End Easing
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Initial Page Entrance (Website Start)
+   -------------------------------------------------------------------------- */
+@keyframes pageEntrance {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+body {
+  animation: pageEntrance 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* --------------------------------------------------------------------------
+   2. Top Header Presentation Entrance
+   -------------------------------------------------------------------------- */
+.top-header {
+  opacity: 0;
+  transform: translateY(-16px);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.3s ease,
+              padding 0.3s ease;
+  will-change: opacity, transform;
+}
+
+.top-header.header-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --------------------------------------------------------------------------
+   3. Hero Section Choreographed Entrance
+   -------------------------------------------------------------------------- */
+#bg {
+  opacity: 0;
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity;
+}
+
+#bg.bg-revealed {
+  opacity: 1;
+}
+
+.hero-brand-row,
+.hero-brand-meta,
+.hero-brand-caption,
+.hero-brand-actions {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.hero-revealed .hero-brand-row {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.12s;
+}
+
+.hero-revealed .hero-brand-meta {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.28s;
+}
+
+.hero-revealed .hero-brand-caption {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.44s;
+}
+
+.hero-revealed .hero-brand-actions {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.60s;
+}
+
+/* --------------------------------------------------------------------------
+   4. Universal Scroll & Section In-View Reveals
+   -------------------------------------------------------------------------- */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-on-scroll.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Subtle Scale & Rise for Feature Cards, Stat Boxes & Media */
+.reveal-scale {
+  opacity: 0;
+  transform: translateY(22px) scale(0.975);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-scale.is-revealed {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Pure Smooth Fade without Shift (Banners, Backgrounds, Dividers) */
+.reveal-fade {
+  opacity: 0;
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity;
+}
+
+.reveal-fade.is-revealed {
+  opacity: 1;
+}
+
+/* --------------------------------------------------------------------------
+   5. Stagger Delay Sequence Utilities
+   -------------------------------------------------------------------------- */
+.stagger-1 { transition-delay: 0.07s !important; }
+.stagger-2 { transition-delay: 0.14s !important; }
+.stagger-3 { transition-delay: 0.21s !important; }
+.stagger-4 { transition-delay: 0.28s !important; }
+.stagger-5 { transition-delay: 0.35s !important; }
+.stagger-6 { transition-delay: 0.42s !important; }
+.stagger-7 { transition-delay: 0.49s !important; }
+.stagger-8 { transition-delay: 0.56s !important; }
+
+/* --------------------------------------------------------------------------
+   6. Progressive Enhancement (No-JS) & Accessibility (Reduced Motion)
+   -------------------------------------------------------------------------- */
+html:not(.js-enabled) .top-header,
+html:not(.js-enabled) #bg,
+html:not(.js-enabled) .hero-brand-row,
+html:not(.js-enabled) .hero-brand-meta,
+html:not(.js-enabled) .hero-brand-caption,
+html:not(.js-enabled) .hero-brand-actions,
+html:not(.js-enabled) .reveal-on-scroll,
+html:not(.js-enabled) .reveal-scale,
+html:not(.js-enabled) .reveal-fade {
+  opacity: 1 !important;
+  transform: none !important;
+  transition: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body,
+  .top-header,
+  #bg,
+  .hero-brand-row,
+  .hero-brand-meta,
+  .hero-brand-caption,
+  .hero-brand-actions,
+  .reveal-on-scroll,
+  .reveal-scale,
+  .reveal-fade {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}

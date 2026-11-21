@@ -1,0 +1,980 @@
+/**
+ * Kanri Flagship Cinematic Hero Styles
+ * Physical Skeuomorphic Materials, 3D Depth, Film Grain, Dynamic Card Sheen,
+ * Realistic Hardware iPhone Mockup, Floating Frosted Badges, and Tactile Buttons.
+ * 
+ * Strict Design System Conformance:
+ * - Fonts: Panchang (Brand), Google Sans (Interface), Ndot57 (Numerals)
+ * - Palette: Monochrome Sumi Ink (#121212, #181818, #FAF9F5, #F2F2F2).
+ * - Zero blue tints.
+ */
+
+/* Initial GSAP Hidden State to Prevent FOUC */
+.gsap-reveal {
+  visibility: hidden;
+}
+
+/* --------------------------------------------------------------------------
+   1. Environment Overlays (Film Grain & Radial Grid)
+   -------------------------------------------------------------------------- */
+.film-grain {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 50;
+  opacity: 0.04;
+  mix-blend-mode: overlay;
+  background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noiseFilter)"/></svg>');
+}
+
+.bg-grid-theme {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.35;
+  background-size: 60px 60px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%);
+}
+
+/* --------------------------------------------------------------------------
+   2. Physical Skeuomorphic Materials (Restored 3D Depth & Metallic Typography)
+   -------------------------------------------------------------------------- */
+
+/* OUTSIDE THE CARD: Theme-aware text with soft 3D text shadow */
+.text-3d-matte {
+  font-family: var(--font-sans);
+  color: var(--text, #F2F2F2);
+  text-shadow: 
+    0 10px 30px rgba(255, 255, 255, 0.15), 
+    0 2px 4px rgba(255, 255, 255, 0.08);
+}
+
+.text-silver-matte {
+  font-family: var(--font-sans);
+  background: linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0.65) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* INSIDE THE CARD: Hardcoded Silver/White for dark background, deep rich shadows */
+.text-card-silver-matte {
+  font-family: var(--font-sans);
+  background: linear-gradient(180deg, #FFFFFF 0%, #D4D4D4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* --------------------------------------------------------------------------
+   3. Deep Physical Card with Dynamic Mouse Lighting (Monochrome Obsidian)
+   -------------------------------------------------------------------------- */
+.premium-depth-card {
+  background: linear-gradient(145deg, #181818 0%, #101010 100%);
+  box-shadow: 
+    0 40px 100px -20px rgba(0, 0, 0, 0.95),
+    0 20px 40px -20px rgba(0, 0, 0, 0.85),
+    inset 0 1px 2px rgba(255, 255, 255, 0.12),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  position: relative;
+  will-change: transform, width, height, border-radius;
+}
+
+.card-sheen {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 50;
+  background: radial-gradient(800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 255, 255, 0.06) 0%, transparent 40%);
+  mix-blend-mode: screen;
+  transition: opacity 0.3s ease;
+}
+
+/* --------------------------------------------------------------------------
+   4. Realistic iPhone Hardware Mockup Chassis
+   -------------------------------------------------------------------------- */
+.iphone-bezel {
+  position: relative;
+  width: 290px;
+  height: 590px;
+  border-radius: 48px;
+  background-color: #121212;
+  box-shadow: 
+    inset 0 0 0 2px #2E2E2E, 
+    inset 0 0 0 7px #000000, 
+    0 40px 80px -15px rgba(0, 0, 0, 0.95),
+    0 15px 25px -5px rgba(0, 0, 0, 0.75);
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+/* Hardware Buttons */
+.hardware-btn {
+  position: absolute;
+  background: linear-gradient(90deg, #2E2E2E 0%, #161616 100%);
+  box-shadow: 
+    -2px 0 5px rgba(0, 0, 0, 0.8),
+    inset -1px 0 1px rgba(255, 255, 255, 0.12),
+    inset 1px 0 2px rgba(0, 0, 0, 0.8);
+  border-left: 1px solid rgba(255, 255, 255, 0.05);
+  z-index: 0;
+}
+
+.hardware-btn.hw-mute {
+  top: 110px;
+  left: -3px;
+  width: 3px;
+  height: 24px;
+  border-radius: 3px 0 0 3px;
+}
+
+.hardware-btn.hw-vol-up {
+  top: 150px;
+  left: -3px;
+  width: 3px;
+  height: 46px;
+  border-radius: 3px 0 0 3px;
+}
+
+.hardware-btn.hw-vol-down {
+  top: 210px;
+  left: -3px;
+  width: 3px;
+  height: 46px;
+  border-radius: 3px 0 0 3px;
+}
+
+.hardware-btn.hw-power {
+  top: 160px;
+  right: -3px;
+  width: 3px;
+  height: 72px;
+  border-radius: 0 3px 3px 0;
+  transform: scaleX(-1);
+}
+
+/* Screen Display */
+.inner-screen-container {
+  position: absolute;
+  inset: 7px;
+  background: #121212;
+  border-radius: 42px;
+  overflow: hidden;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+  color: #FFFFFF;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+}
+
+.screen-glare {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 40;
+  background: linear-gradient(110deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0) 45%);
+}
+
+/* Dynamic Island Notch */
+.dynamic-island {
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 104px;
+  height: 28px;
+  background: #000000;
+  border-radius: 9999px;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 12px;
+  box-shadow: inset 0 -1px 2px rgba(255, 255, 255, 0.1);
+}
+
+.dynamic-island-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #FAF9F5;
+  box-shadow: 0 0 8px rgba(250, 249, 245, 0.8);
+  animation: islandPulse 2s infinite ease-in-out;
+}
+
+@keyframes islandPulse {
+  0%, 100% { opacity: 0.6; transform: scale(0.9); }
+  50% { opacity: 1; transform: scale(1.15); }
+}
+
+/* App Interface Layout inside screen */
+.app-interface-layout {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 46px 18px 18px 18px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.phone-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.phone-header-sub {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 0.625rem;
+  color: var(--muted, #A6A6A6);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.phone-header-title {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 1.1875rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #FFFFFF;
+}
+
+.phone-avatar-badge {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  color: #E5E5E5;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Dial Hero Widget */
+.dial-hero-widget {
+  position: relative;
+  width: 176px;
+  height: 176px;
+  margin: 0 auto 16px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.8));
+}
+
+.dial-svg-ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.progress-ring {
+  transform: rotate(-90deg);
+  transform-origin: center;
+  stroke-dasharray: 402;
+  stroke-dashoffset: 402;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dial-center-counter {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.counter-currency {
+  font-size: 0.875rem;
+  font-family: var(--font-mono);
+  color: var(--muted, #A6A6A6);
+  line-height: 1;
+}
+
+.counter-val {
+  font-size: 2.35rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: #FFFFFF;
+  line-height: 1.05;
+  font-family: var(--font-mono);
+}
+
+.counter-label {
+  font-family: var(--font-sans);
+  font-size: 0.53125rem;
+  color: var(--muted, #A6A6A6);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-weight: 700;
+  margin-top: 3px;
+}
+
+/* Tactile Widget Panels inside Phone */
+.widget-depth {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%);
+  box-shadow: 
+    0 10px 20px rgba(0, 0, 0, 0.3),
+    inset 0 1px 1px rgba(255, 255, 255, 0.05),
+    inset 0 -1px 1px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.phone-widgets-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+.widget-balance-row {
+  border-radius: 16px;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.widget-icon-box {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 12px;
+  flex-shrink: 0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.15);
+}
+
+.widget-icon-bank {
+  background: rgba(255, 255, 255, 0.07);
+  color: #E0E0E0;
+}
+
+.widget-icon-cash {
+  background: rgba(250, 249, 245, 0.12);
+  color: #FAF9F5;
+}
+
+.widget-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.widget-name {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #F5F5F5;
+  line-height: 1.2;
+}
+
+.widget-sub {
+  font-family: var(--font-sans);
+  font-size: 0.625rem;
+  color: var(--muted, #A6A6A6);
+  margin-top: 1px;
+}
+
+.widget-amount {
+  font-size: 0.8125rem;
+  font-weight: 400;
+  font-family: var(--font-mono);
+  letter-spacing: 0.02em;
+  color: #FFFFFF;
+}
+
+.phone-bottom-home-bar {
+  width: 100px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 9999px;
+  margin: 10px auto 0 auto;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* --------------------------------------------------------------------------
+   5. Floating Glassmorphic Badges
+   -------------------------------------------------------------------------- */
+.floating-badge {
+  position: absolute;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 18px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(24, 24, 24, 0.9) 0%, rgba(18, 18, 18, 0.88) 100%);
+  backdrop-filter: blur(24px); 
+  -webkit-backdrop-filter: blur(24px);
+  box-shadow: 
+    0 0 0 1px rgba(255, 255, 255, 0.1),
+    0 25px 50px -12px rgba(0, 0, 0, 0.85),
+    inset 0 1px 1px rgba(255, 255, 255, 0.15),
+    inset 0 -1px 1px rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+}
+
+.floating-badge.badge-streak {
+  top: 36px;
+  left: -85px;
+}
+
+.floating-badge.badge-sponsor {
+  bottom: 50px;
+  right: -85px;
+}
+
+@media (max-width: 1200px) {
+  .floating-badge.badge-streak {
+    left: -50px;
+  }
+  .floating-badge.badge-sponsor {
+    right: -50px;
+  }
+}
+
+@media (max-width: 992px) {
+  .floating-badge {
+    display: none !important;
+  }
+}
+
+.badge-icon-wrap {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.125rem;
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  flex-shrink: 0;
+}
+
+.badge-icon-wrap.icon-flame {
+  background: rgba(245, 158, 11, 0.12);
+  border-color: rgba(245, 158, 11, 0.25);
+  color: #F59E0B;
+}
+
+.badge-icon-wrap.icon-shield {
+  background: rgba(250, 249, 245, 0.1);
+  border-color: rgba(250, 249, 245, 0.2);
+  color: #FAF9F5;
+}
+
+.badge-title {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.badge-sub {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: var(--muted, #A6A6A6);
+  line-height: 1.2;
+  margin: 2px 0 0 0;
+}
+
+/* --------------------------------------------------------------------------
+   6. Tactile Physical Buttons (.btn-modern-light & .btn-modern-dark)
+   -------------------------------------------------------------------------- */
+.btn-modern-light, .btn-modern-dark {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 28px;
+  border-radius: 20px;
+  font-family: var(--font-sans);
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  user-select: none;
+}
+
+.btn-modern-light {
+  background: linear-gradient(180deg, #FFFFFF 0%, #EDEDED 100%);
+  color: #0C0C0E !important;
+  box-shadow: 
+    0 0 0 1px rgba(0, 0, 0, 0.08), 
+    0 2px 4px rgba(0, 0, 0, 0.1), 
+    0 12px 24px -4px rgba(0, 0, 0, 0.35), 
+    inset 0 1px 1px #FFFFFF, 
+    inset 0 -3px 6px rgba(0, 0, 0, 0.08);
+}
+
+.btn-modern-light,
+.btn-modern-light *,
+.btn-modern-light .cta-btn-main {
+  color: #0C0C0E !important;
+}
+
+.btn-modern-light .cta-btn-sub {
+  color: #4B4B52 !important;
+}
+
+.btn-modern-light svg,
+.btn-modern-light svg *,
+.btn-modern-light .cta-icon {
+  stroke: #0C0C0E !important;
+}
+
+.btn-modern-dark,
+.btn-modern-dark *,
+.btn-modern-dark .cta-btn-main {
+  color: #FFFFFF !important;
+}
+
+.btn-modern-dark .cta-btn-sub {
+  color: #A1A1AA !important;
+}
+
+.btn-modern-dark svg,
+.btn-modern-dark svg *,
+.btn-modern-dark .cta-icon {
+  stroke: #FFFFFF !important;
+  fill: currentColor;
+}
+
+.btn-modern-light:hover {
+  transform: translateY(-3px);
+  box-shadow: 
+    0 0 0 1px rgba(0, 0, 0, 0.08), 
+    0 6px 12px -2px rgba(0, 0, 0, 0.18), 
+    0 20px 32px -6px rgba(0, 0, 0, 0.45), 
+    inset 0 1px 1px #FFFFFF, 
+    inset 0 -3px 6px rgba(0, 0, 0, 0.08);
+}
+
+.btn-modern-light:active {
+  transform: translateY(1px);
+  background: linear-gradient(180deg, #E5E5E5 0%, #D4D4D4 100%);
+  box-shadow: 
+    0 0 0 1px rgba(0, 0, 0, 0.15), 
+    0 1px 2px rgba(0, 0, 0, 0.1), 
+    inset 0 3px 6px rgba(0, 0, 0, 0.12), 
+    inset 0 0 0 1px rgba(0, 0, 0, 0.04);
+}
+
+.btn-modern-dark {
+  background: linear-gradient(180deg, #222222 0%, #161616 100%);
+  color: #FFFFFF !important;
+  box-shadow: 
+    0 0 0 1px rgba(255, 255, 255, 0.12), 
+    0 2px 4px rgba(0, 0, 0, 0.6), 
+    0 12px 24px -4px rgba(0, 0, 0, 0.9), 
+    inset 0 1px 1px rgba(255, 255, 255, 0.16), 
+    inset 0 -3px 6px rgba(0, 0, 0, 0.85);
+}
+
+.btn-modern-dark:hover {
+  transform: translateY(-3px);
+  background: linear-gradient(180deg, #2A2A2A 0%, #1A1A1A 100%);
+  box-shadow: 
+    0 0 0 1px rgba(255, 255, 255, 0.18), 
+    0 6px 12px -2px rgba(0, 0, 0, 0.7), 
+    0 20px 32px -6px rgba(0, 0, 0, 1), 
+    inset 0 1px 1px rgba(255, 255, 255, 0.22), 
+    inset 0 -3px 6px rgba(0, 0, 0, 0.85);
+}
+
+.btn-modern-dark:active {
+  transform: translateY(1px);
+  background: #141414;
+  box-shadow: 
+    0 0 0 1px rgba(255, 255, 255, 0.08), 
+    inset 0 3px 8px rgba(0, 0, 0, 0.9), 
+    inset 0 0 0 1px rgba(0, 0, 0, 0.5);
+}
+
+.cta-icon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.btn-modern-light:hover .cta-icon,
+.btn-modern-dark:hover .cta-icon {
+  transform: scale(1.1);
+}
+
+.cta-btn-text {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.cta-btn-sub {
+  font-family: var(--font-sans);
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.65;
+  margin-bottom: -1px;
+}
+
+.cta-btn-main {
+  font-family: var(--font-sans);
+  font-size: 1.125rem;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+/* --------------------------------------------------------------------------
+   7. Cinematic Viewport Container & Pinned Layers
+   -------------------------------------------------------------------------- */
+.cinematic-hero-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--canvas, #121212);
+  color: var(--text, #F2F2F2);
+  font-family: var(--font-sans);
+  perspective: 1500px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Top atmospheric blend transition */
+.cinematic-hero-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 180px;
+  background: linear-gradient(180deg, rgba(18, 18, 18, 0.8) 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* Background Layer 1: Hero Headlines (Behind Card at Z: 0) */
+.hero-text-wrapper {
+  position: absolute;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  padding: 0 20px;
+  will-change: transform, opacity;
+  transform: translate3d(0, 0, 0);
+  pointer-events: none;
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+.text-track {
+  font-family: var(--font-sans);
+  font-size: clamp(2.4rem, 6.5vw, 5.5rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0 0 4px 0;
+  line-height: 1.1;
+  -webkit-font-smoothing: antialiased;
+}
+
+.text-days {
+  font-family: var(--font-sans);
+  font-size: clamp(2.4rem, 6.5vw, 5.5rem);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  margin: 0;
+  line-height: 1.1;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Background Layer 2: Tactile CTA Outro Buttons */
+.cta-wrapper {
+  position: absolute;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  max-width: 800px;
+  padding: 0 24px;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  will-change: transform, opacity;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+.cta-heading {
+  font-family: var(--font-sans);
+  font-size: clamp(2rem, 5vw, 4.25rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0 0 16px 0;
+  line-height: 1.15;
+}
+
+.cta-description {
+  font-family: var(--font-sans);
+  font-size: clamp(1rem, 1.8vw, 1.25rem);
+  color: var(--muted, #A6A6A6);
+  margin: 0 auto 36px auto;
+  max-width: 540px;
+  line-height: 1.6;
+}
+
+.cta-btn-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Foreground Layer: Main Card Viewport Wrapper (Positioned at Z: 20px) */
+.main-card-viewport-wrapper {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  transform: translateZ(20px);
+}
+
+.main-card {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+  width: 85vw;
+  height: 85vh;
+  border-radius: 40px;
+}
+
+@media (max-width: 768px) {
+  .main-card {
+    width: 92vw;
+    height: 92vh;
+    border-radius: 32px;
+  }
+}
+
+/* Dynamic Responsive Grid Inside Main Card - Phone Centered */
+.card-inner-grid {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  z-index: 10;
+}
+
+@media (max-width: 1024px) {
+  .card-inner-grid {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 24px 16px;
+    gap: 20px;
+  }
+}
+
+/* 1. Left (Desktop) / Bottom (Mobile): Value Proposition */
+.card-left-text {
+  grid-column: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+  max-width: 360px;
+  z-index: 20;
+}
+
+@media (max-width: 1024px) {
+  .card-left-text {
+    order: 2;
+    text-align: center;
+    align-items: center;
+    max-width: 100%;
+  }
+}
+
+.card-lead-heading {
+  font-family: var(--font-sans);
+  font-size: clamp(1.6rem, 2.8vw, 2.5rem);
+  font-weight: 700;
+  color: var(--text, #FFFFFF);
+  margin: 0 0 16px 0;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.card-lead-desc {
+  font-family: var(--font-sans);
+  font-size: clamp(0.875rem, 1.2vw, 1.0625rem);
+  color: var(--muted, #A6A6A6);
+  line-height: 1.65;
+  margin: 0 0 20px 0;
+  max-width: 440px;
+}
+
+@media (max-width: 768px) {
+  .card-lead-desc {
+    display: none; /* Hidden on mobile to maintain clean balance */
+  }
+}
+
+.card-trust-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+@media (max-width: 1024px) {
+  .card-trust-row {
+    justify-content: center;
+  }
+}
+
+.trust-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #E2E8F0;
+}
+
+.trust-pill span {
+  color: #FAF9F5;
+  font-weight: 800;
+}
+
+/* 2. Center (Desktop) / Top (Mobile): 3D Phone Mockup Wrapper */
+.mockup-scroll-wrapper {
+  grid-column: 2;
+  position: relative;
+  width: 340px;
+  height: 590px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  perspective: 1000px;
+  will-change: transform, opacity;
+}
+
+@media (max-width: 1024px) {
+  .mockup-scroll-wrapper {
+    order: 1;
+    height: 440px;
+    width: 100%;
+  }
+}
+
+.mockup-scale-box {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: scale(0.95);
+}
+
+@media (max-width: 1024px) {
+  .mockup-scale-box {
+    transform: scale(0.72);
+  }
+}
+
+@media (max-width: 480px) {
+  .mockup-scale-box {
+    transform: scale(0.62);
+  }
+}
+
+/* 3. Right (Desktop) / Top (Mobile): Giant Metallic Brand Typography */
+.card-right-text {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  z-index: 20;
+}
+
+@media (max-width: 1024px) {
+  .card-right-text {
+    order: 1;
+    justify-content: center;
+  }
+}
+
+.brand-monolith-text {
+  font-family: var(--font-brand);
+  font-size: clamp(3.2rem, 7vw, 7rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin: 0;
+  line-height: 0.95;
+  user-select: none;
+}

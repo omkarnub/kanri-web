@@ -750,7 +750,7 @@
     });
   }
 
-  // ---- Kanri Calligraphy (管理) + Emerald Seal
+  // ---- Kanri Calligraphy (管理) + Monogram Seal
   // Glyphs: 管 (Kuan / Control) & 理 (Li / Logic & Ledger)
   const glyphs = [
     (c) => { 
@@ -787,7 +787,7 @@
       dc.globalAlpha = Math.min(1, gp * 1.6); fn(dc); dc.restore();
     });
     
-    // Kanri Emerald Mon Monogram Seal (管理)
+    // Kanri Mon Monogram Seal (管理)
     const sp = clamp((g - .72) / .28, 0, 1);
     if (sp > .01) {
       const sz = 28 * gs, sx = cx - sz / 2, sy = y0 + 85 * gs, [sr, pr] = [pal.sealRed, pal.paperRgb];
